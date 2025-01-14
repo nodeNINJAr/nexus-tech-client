@@ -1,7 +1,8 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import TopNavbar from "../shared/TopNavbar";
-import MainFooter from "../shared/MainFooter";
+import TopNavbar from "../components/shared/TopNavbar";
+import MainFooter from "../components/shared/MainFooter";
+
 
 const Layouts = () => {
   return (

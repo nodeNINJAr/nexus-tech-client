@@ -41,6 +41,9 @@ const TopNavbar = () => {
           <NavLink to="/about">About</NavLink>
         </Navbar.Link>
         <Navbar.Link>
+          <NavLink to="/dashboard">Services</NavLink>
+        </Navbar.Link>
+        <Navbar.Link>
           <NavLink to="/dashboard">Dashboard</NavLink>
         </Navbar.Link>
         <Navbar.Link>
