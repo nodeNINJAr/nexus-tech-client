@@ -1,8 +1,26 @@
 import React from "react";
 ("use client");
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import { LuLayoutDashboard } from "react-icons/lu";
+import { CgProfile } from "react-icons/cg";
+import { FaSignOutAlt } from "react-icons/fa";
+import { IoLogInOutline } from "react-icons/io5";
+
+// 
 const TopNavbar = () => {
+  // user from auth
+  const { user, userSignOut } = useAuth();
+  // user sign out
+  const handleSignOut = () => {
+    // function call
+    userSignOut()
+      .then(() => {})
+      .catch(() => {});
+  };
+
+  //
   return (
     <Navbar fluid rounded className="sticky top-0">
       <Navbar.Brand>
@@ -15,40 +33,44 @@ const TopNavbar = () => {
           NexusTech
         </span>
       </Navbar.Brand>
-      <div className="flex md:order-2">
+      <div className="flex md:order-2 text-xl font-normal text-gray-800">
         {/* dropdown on profile click */}
-        <Dropdown arrowIcon={false} inline label={<Avatar rounded />}>
+        <Dropdown
+          arrowIcon={false}
+          inline
+          label={
+            user ? <Avatar className="mr-2 md:mr-0" img={user?.photoURL} rounded /> : <Avatar rounded />
+          }
+        >
           <Dropdown.Header>
-            <span className="block text-sm">Bonnie Green</span>
+            <span className="block text-sm font-exo2">{user?.displayName}</span>
             <span className="block truncate text-sm font-medium">
-              name@flowbite.com
+              {user?.email}
             </span>
           </Dropdown.Header>
-          <Dropdown.Item>Dashboard</Dropdown.Item>
-          <Dropdown.Item>Settings</Dropdown.Item>
-          <Dropdown.Item>Earnings</Dropdown.Item>
+          <Dropdown.Item as={Link} to={'/dashboard'} className="flex justify-start items-center gap-1 text-sm font-normal font-roboto"><LuLayoutDashboard />Dashboard</Dropdown.Item>
+          <Dropdown.Item as={Link} to={'/profile'} className="flex justify-start items-center gap-1 text-sm font-normal font-roboto"><CgProfile />Profile</Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item>Sign out</Dropdown.Item>
+          {user ? (
+            <Dropdown.Item onClick={handleSignOut} className="font-medium flex justify-start items-center  gap-[5px] text-lg font-exo2">
+              Sign out <FaSignOutAlt />
+            </Dropdown.Item>
+          ) : (
+            <Dropdown.Item>
+              <Link to="/login" className="font-medium flex justify-start items-center gap-[2px] text-lg font-exo2">
+                LogIn <IoLogInOutline />
+              </Link>
+            </Dropdown.Item>
+          )}
         </Dropdown>
         <Navbar.Toggle />
       </div>
       {/* Navlinks */}
       <Navbar.Collapse>
-        <Navbar.Link>
-          <NavLink to="/">Home</NavLink>
-        </Navbar.Link>
-        <Navbar.Link>
-          <NavLink to="/about">About</NavLink>
-        </Navbar.Link>
-        <Navbar.Link>
-          <NavLink to="/dashboard">Services</NavLink>
-        </Navbar.Link>
-        <Navbar.Link>
-          <NavLink to="/dashboard">Dashboard</NavLink>
-        </Navbar.Link>
-        <Navbar.Link>
-          <NavLink to="/contact">Contact</NavLink>
-        </Navbar.Link>
+        <Navbar.Link as={NavLink} to="/">Home</Navbar.Link>
+        <Navbar.Link as={NavLink}  to="/about">About</Navbar.Link>
+        <Navbar.Link as={NavLink}  to="/services">Services</Navbar.Link>
+        <Navbar.Link as={NavLink}  to="/contact">Contact</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   );

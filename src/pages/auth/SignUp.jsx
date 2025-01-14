@@ -11,9 +11,15 @@ import {
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import SocialLogin from "./socialLogin/SocialLogin";
+import useAuth from "../../components/hooks/useAuth";
+
 // sign up from
 const SignUp = () => {
-    // show hide pass
+  // auth
+  const{ userSignUp, userProfileUpdate} = useAuth();
+
+  // show hide pass
   const [showPass, setShowPass] = useState(true);
   const [showRepeatPass, setShowRepeatPass] = useState(true);
   // collect from data
@@ -26,16 +32,28 @@ const SignUp = () => {
   const onSubmit = (data) => {
     setFromData(data);
     console.log(data);
+
+    // userSignUp on fireBase
+    userSignUp(data?.userEmail , data?.userPass)
+    .then(res=>{
+      console.log(res);
+      // profileUpdate
+      userProfileUpdate(data?.userName, null)
+      .then(()=>{
+      
+      })
+      .catch(err=>{
+        console.log(err);
+      })
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+
   };
 
 
-
-
-
-
-
-
-//  
+  //
   return (
     <div className="container mx-auto py-10">
       <div className="w-11/12 mx-auto flex flex-col md:flex-row justify-between items-center gap-6  font-roboto">
@@ -102,9 +120,9 @@ const SignUp = () => {
                 <FileInput
                   id="file"
                   type="file"
-                  {...register("image", { required: true })}
+                  {...register("userImage", { required: true })}
                 />
-                {errors.image?.type === "required" && (
+                {errors.userImage?.type === "required" && (
                   <p role="alert" className="text-sm text-red-600 font-roboto">
                     Image is required
                   </p>
@@ -165,7 +183,8 @@ const SignUp = () => {
                 </div>
                 {/* error message */}
                 <p role="alert" className="text-sm text-red-600 font-roboto">
-                  {errors?.userPass?.type === "pattern" && "Password must be at least 6 characters long, include at least one uppercase letter, and one special character."}
+                  {errors?.userPass?.type === "pattern" &&
+                    "Password must be at least 6 characters long, include at least one uppercase letter, and one special character."}
                   {errors?.userPass?.type === "required" &&
                     " Password is required"}
                 </p>
@@ -179,7 +198,7 @@ const SignUp = () => {
                   <TextInput
                     {...register("repeatPassword", { required: true })}
                     id="repeat-password"
-                    type={showRepeatPass?"password":"text"}
+                    type={showRepeatPass ? "password" : "text"}
                     shadow
                   />
                   {/* pass and hide */}
@@ -224,8 +243,13 @@ const SignUp = () => {
             <Button type="submit">Register new account</Button>
           </form>
           <p className="text-xl text-black font-normal mt-4">
-            Already Registered? <Link className="text-blue-600" to="/login">Login</Link>
+            Already Registered?{" "}
+            <Link className="text-blue-600" to="/login">
+              Login
+            </Link>
           </p>
+          {/* social login */}
+          <SocialLogin />
         </div>
       </div>
     </div>

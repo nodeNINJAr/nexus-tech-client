@@ -3,10 +3,29 @@ import React, { useState } from "react";
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import SocialLogin from "./socialLogin/SocialLogin";
+import useAuth from "../../components/hooks/useAuth";
 
 const Login = () => {
+  // auth
+  const {userSignIn} = useAuth();
   // show hide pass
   const [showPass, setShowPass] = useState(true);
+ 
+  // sign in
+  const handleUserSignIn=(e)=>{
+    e.preventDefault();
+    const userEmail = e.target.userEmail.value;
+    const userPass = e.target.userPass.value;
+    // call the function
+    userSignIn(userEmail, userPass)
+    .then(()=>{
+
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }
 
   //
   return (
@@ -25,12 +44,13 @@ const Login = () => {
             Sign Up
           </Link>
         </p>
-        <form className="flex max-w-md flex-col gap-4">
+        <form onSubmit={handleUserSignIn} className="flex flex-col gap-4">
           <div>
             <div className="mb-2 block">
               <Label htmlFor="email2" value="Your email" />
             </div>
             <TextInput
+            name="userEmail"
               id="email2"
               type="email"
               placeholder="example@gmail.com"
@@ -45,7 +65,7 @@ const Login = () => {
             </div>
             {/* pass show hide */}
             <div className="relative w-full">
-              <TextInput type={!showPass ? "text" : "password"} shadow placeholder="Write your password" />
+              <TextInput name="userPass" type={!showPass ? "text" : "password"} shadow placeholder="Write your password" />
               {showPass ? (
                 <FaEye
                   onClick={() => setShowPass(!showPass)}
@@ -71,6 +91,8 @@ const Login = () => {
           {/*  */}
           <Button type="submit">Login</Button>
         </form>
+        {/* social login */}
+         <SocialLogin/>
       </div>
     </div>
   );
