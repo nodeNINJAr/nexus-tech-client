@@ -6,6 +6,7 @@ import {
   FileInput,
   Label,
   Select,
+  Spinner,
   TextInput,
 } from "flowbite-react";
 import { Link } from "react-router-dom";
@@ -13,15 +14,17 @@ import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import SocialLogin from "./socialLogin/SocialLogin";
 import useAuth from "../../components/hooks/useAuth";
+import { imageUpload } from "../../utilitis/utilitis";
 
 // sign up from
 const SignUp = () => {
   // auth
-  const{ userSignUp, userProfileUpdate} = useAuth();
+  const { userSignUp, userProfileUpdate } = useAuth();
 
   // show hide pass
   const [showPass, setShowPass] = useState(true);
   const [showRepeatPass, setShowRepeatPass] = useState(true);
+  const [loading, setLoading] = useState(true);
   // collect from data
   const [fromData, setFromData] = useState({});
   const {
@@ -29,29 +32,22 @@ const SignUp = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async(data) => {
+    setLoading(!loading);
     setFromData(data);
-    console.log(data);
-
+    // when function work finished then run userSignUp
+    const photoURL = await imageUpload({image:data?.userImage[0]});
     // userSignUp on fireBase
-    userSignUp(data?.userEmail , data?.userPass)
-    .then(res=>{
-      console.log(res);
-      // profileUpdate
-      userProfileUpdate(data?.userName, null)
-      .then(()=>{
-      
-      })
-      .catch(err=>{
-        console.log(err);
-      })
-    })
-    .catch(err=>{
-      console.log(err);
-    })
-
+       try{
+        await userSignUp(data?.userEmail, data?.userPass)
+        await userProfileUpdate(data?.userName, photoURL);
+       }
+       catch(err){
+           console.log(err);
+       }finally{
+        setLoading(loading);
+       }
   };
-
 
   //
   return (
@@ -240,7 +236,13 @@ const SignUp = () => {
                 </Link>
               </Label>
             </div>
-            <Button type="submit">Register new account</Button>
+            <Button type="submit">
+              {" "}
+              {!loading && (
+                <Spinner aria-label="Spinner button example" size="sm" />
+              )}
+              <span className="pl-3"> Register new account</span>
+            </Button>
           </form>
           <p className="text-xl text-black font-normal mt-4">
             Already Registered?{" "}

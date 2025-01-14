@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Button, Checkbox, Label, TextInput } from "flowbite-react";
+import { Button, Checkbox, Label, Spinner, TextInput } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import SocialLogin from "./socialLogin/SocialLogin";
@@ -8,24 +8,25 @@ import useAuth from "../../components/hooks/useAuth";
 
 const Login = () => {
   // auth
-  const {userSignIn} = useAuth();
+  const {userSignIn } = useAuth();
   // show hide pass
   const [showPass, setShowPass] = useState(true);
- 
+  const [loading , setLoading] = useState(true)
   // sign in
-  const handleUserSignIn=(e)=>{
+  const handleUserSignIn = (e) => {
+    setLoading(!loading)
     e.preventDefault();
     const userEmail = e.target.userEmail.value;
     const userPass = e.target.userPass.value;
     // call the function
     userSignIn(userEmail, userPass)
-    .then(()=>{
-
-    })
-    .catch(err=>{
-      console.log(err);
-    })
-  }
+      .then(() => {
+        setLoading(loading)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   //
   return (
@@ -50,7 +51,7 @@ const Login = () => {
               <Label htmlFor="email2" value="Your email" />
             </div>
             <TextInput
-            name="userEmail"
+              name="userEmail"
               id="email2"
               type="email"
               placeholder="example@gmail.com"
@@ -65,7 +66,12 @@ const Login = () => {
             </div>
             {/* pass show hide */}
             <div className="relative w-full">
-              <TextInput name="userPass" type={!showPass ? "text" : "password"} shadow placeholder="Write your password" />
+              <TextInput
+                name="userPass"
+                type={!showPass ? "text" : "password"}
+                shadow
+                placeholder="Write your password"
+              />
               {showPass ? (
                 <FaEye
                   onClick={() => setShowPass(!showPass)}
@@ -83,16 +89,21 @@ const Login = () => {
             <div className="flex items-center gap-2">
               <Checkbox id="accept" defaultChecked />
               <Label htmlFor="accept" className="flex">
-                 Remember me
+                Remember me
               </Label>
             </div>
-             <p className="text-blue-600 font-medium text-sm hover:underline cursor-pointer">Forgot Password</p>
+            <p className="text-blue-600 font-medium text-sm hover:underline cursor-pointer">
+              Forgot Password
+            </p>
           </div>
           {/*  */}
-          <Button type="submit">Login</Button>
+          <Button type="submit">
+            {!loading && <Spinner aria-label="Spinner button example" size="sm" />}
+            <span className="pl-3"> Login</span>
+          </Button>
         </form>
         {/* social login */}
-         <SocialLogin/>
+        <SocialLogin />
       </div>
     </div>
   );
