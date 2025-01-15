@@ -11,14 +11,15 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase/firebaseInit";
+import { axiosSecure } from "../components/hooks/useAxiosSecure";
 
 //
 export const AuthContext = createContext(null);
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
   // store user data
   const [user, setUser] = useState(null);
-  console.log('current user ---->' , user);
-  // when user is unvailable  
+  console.log("current user ---->", user);
+  // when user is unvailable
   const [loading, setLoading] = useState(true);
 
   // create user by email and pass
@@ -27,10 +28,13 @@ const AuthProvider = ({children}) => {
   };
   // user profile update
   const userProfileUpdate = (name, photoURL) => {
-    return updateProfile(auth?.currentUser,{displayName:name,photoURL:photoURL});
+    return updateProfile(auth?.currentUser, {
+      displayName: name,
+      photoURL: photoURL,
+    });
   };
   // create user by email and pass
-  const userSignIn = (email,pass) => {
+  const userSignIn = (email, pass) => {
     return signInWithEmailAndPassword(auth, email, pass);
   };
   // user sign in by google
@@ -49,26 +53,35 @@ const AuthProvider = ({children}) => {
     return signOut(auth);
   };
 
-
-
-
-
   // observer for checking current login
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
         setLoading(false);
+        try {
+          const { data } = await axiosSecure.post("/login", {
+            email: currentUser?.email,
+          });
+          console.log(data?.message);
+        } catch (err) {
+          console.log(err);
+        }
       } else {
         setUser("");
         setLoading(false);
+        try {
+          const { data } = await axiosSecure.post("/logout")
+          console.log(data?.message);
+        } catch (err) {
+          console.log(err);
+        }
       }
     });
 
     return () => unsubscribe();
   }, []);
 
-  
   // transporter
   const authInfo = {
     userSignUp,
