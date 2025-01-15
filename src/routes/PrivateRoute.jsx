@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useAuth from '../components/hooks/useAuth';
-import { Spinner } from 'flowbite-react';
 import { Navigate, useLocation } from 'react-router-dom';
+import Spinner from '../components/shared/loader/Spinner';
 
 const PrivateRoute = ({children}) => {
    const {user, loading} = useAuth();
