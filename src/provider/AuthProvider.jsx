@@ -11,11 +11,13 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase/firebaseInit";
-import { axiosSecure } from "../components/hooks/useAxiosSecure";
+import useAxiosSecure from "../components/hooks/useAxiosSecure";
 
 //
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
+  //
+  const axiosSecure = useAxiosSecure();
   // store user data
   const [user, setUser] = useState(null);
   console.log("current user ---->", user);
@@ -71,7 +73,7 @@ const AuthProvider = ({ children }) => {
         setUser("");
         setLoading(false);
         try {
-          const { data } = await axiosSecure.post("/logout")
+          const { data } = await axiosSecure.post("/logout");
           console.log(data?.message);
         } catch (err) {
           console.log(err);
