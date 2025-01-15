@@ -12,6 +12,8 @@ import EmployeeList from "../pages/private/hr/EmployeeList";
 import EmployeeDetails from "../pages/private/hr/EmployeeDetails";
 import EmployeeProgress from "../pages/private/hr/EmployeeProgress";
 import PrivateRoute from "./PrivateRoute";
+import Profile from "../pages/profile/Profile";
+import EmployeePrivate from "./EmployeePrivate";
 
 //
 const Router = () => {
@@ -24,10 +26,11 @@ const Router = () => {
         <Route path="/contact" element={<Contact />} />
       </Route>
       {/* private layouts */}
-      <Route path="/dashboard" element={<PrivateRoute><DashBoard /></PrivateRoute>}>
+      <Route path="dashboard" element={<PrivateRoute><DashBoard /></PrivateRoute>}>
+        <Route path="profile" element={<Profile />} />
        {/*employee privet routes  */}
-        <Route path="work-sheet" element={<WorkSheet />} />
-        <Route path="payment-history" element={<PaymentHistory />} />
+        <Route path="work-sheet" element={<EmployeePrivate><WorkSheet /></EmployeePrivate>} />
+        <Route path="payment-history" element={<EmployeePrivate><PaymentHistory /></EmployeePrivate>} />
         {/* hr private routes */}
         <Route path="employee-list" element={<EmployeeList />} />
         <Route path="details/:slug" element={<EmployeeDetails />} />

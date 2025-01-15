@@ -11,7 +11,6 @@ import { Button, Layout, Menu, theme } from "antd";
 import { Link, Outlet } from "react-router-dom";
 import { BiSpreadsheet } from "react-icons/bi";
 import { MdManageHistory } from "react-icons/md";
-import { ImProfile } from "react-icons/im";
 
 // import from layouts
 const { Header, Sider, Content } = Layout;
@@ -28,7 +27,7 @@ const DashBoard = () => {
   } = theme.useToken();
   //
   return (
-    <Layout>
+    <Layout className="container mx-auto">
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className=" bg-slate-300">
           <h1 className="text-2xl py-4 font-orbitron truncate">NexusTech</h1>
@@ -86,29 +85,31 @@ const DashBoard = () => {
           />
         )}
         {/* menu for employee */}
-        <Menu
-          className="pt-6"
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          items={[
-            {
-              key: "1",
-              icon: <BiSpreadsheet style={{ color: "red", fontSize: "22px" }}/>,
-              label: <Link to="/dashboard/work-sheet">Worksheet</Link>,
-            },
-            {
-              key: "2",
-              icon: <MdManageHistory style={{ color: "red", fontSize: "20px" }} />,
-              label:<Link to="/dashboard/payment-history">Payment history</Link>,
-            },
-            {
-              key: "3",
-              icon: <ImProfile style={{ color: "red", fontSize: "18px" }} />,
-              label:<Link to="/dashboard/profile">Profile</Link>,
-            },
-          ]}
-        />
+         {userRole === "employee" &&
+           <Menu
+           className="pt-6"
+           theme="dark"
+           mode="inline"
+           defaultSelectedKeys={["1"]}
+           items={[
+             {
+               key: "1",
+               icon: <BiSpreadsheet style={{fontSize:"16px"}}/>,
+               label: <Link to="/dashboard/work-sheet">Worksheet</Link>,
+             },
+             {
+               key: "2",
+               icon: <MdManageHistory style={{fontSize:"16px"}}/>,
+               label:<Link to="/dashboard/payment-history">Payment history</Link>,
+             },
+             {
+               key: "3",
+               icon: <UserOutlined style={{fontSize:"16px"}} />,
+               label:<Link to="/dashboard/profile">Profile</Link>,
+             },
+           ]}
+         />
+         }
       </Sider>
 
 

@@ -1,13 +1,15 @@
 import React from 'react';
-import useAuth from '../components/hooks/useAuth';
+import PropTypes from 'prop-types';
+import Spinner from '../components/shared/loader/Spinner';
+import { Navigate, useLocation } from 'react-router-dom';
+import useRole from '../components/hooks/useRole';
 
 const EmployeePrivate = ({children}) => {
-    const {user, loading} = useAuth();
+    const [userRole, isLoading] = useRole();
+    console.log(userRole);
     const location = useLocation();
- 
- 
-    if(loading) return <Spinner/>
-    if(user) return children
+    if(isLoading) return <Spinner/>
+    if(userRole ==="employee") return children;
     return <Navigate to="/login" state={{from:location}} replace='true'/>
  
  };

@@ -9,3 +9,51 @@
 .font-exo2{
     font-family: "Exo 2", serif;
 }
+
+
+
+/* work submit */
+/*for select input */
+.custom-select .ant-select-selector {
+    background-color: #f0f8ff; /* Light blue background */
+    color: #007acc;          /* Blue text */
+    border: 1px solid #007acc;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  
+  .custom-select .ant-select-selection-item {
+    color: #007acc; /* Style the selected item text */
+    font-weight: bold;
+  }
+  
+  .custom-select:hover .ant-select-selector {
+    border-color: #005bb5;
+  }
+/* for date input */
+  .custom-date .ant-picker-input input {
+    color: #388e3c;   
+    font-weight: bold;       
+  }
+  .custom-date:hover{
+    border-color: #388e3c; 
+  }
+  /* for number input */
+  .custom-input-number .ant-input-number-input {
+    color: #f57c00;        
+    font-weight: bold;
+  }
+  .custom-input-number:hover{
+    border-color: #f57c00;
+  }
+  /* for button */
+  .custom-button {
+    background-color: #4caf50; /* Green button */
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  
+  .custom-button:hover {
+    background-color: #388e3c; /* Darker green on hover */
+  }
