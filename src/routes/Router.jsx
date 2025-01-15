@@ -6,6 +6,12 @@ import About from "../pages/public/About";
 import Contact from "../pages/public/Contact";
 import Login from "../pages/auth/Login";
 import SignUp from "../pages/auth/SignUp";
+import WorkSheet from "../pages/private/employee/WorkSheet";
+import PaymentHistory from "../pages/private/employee/PaymentHistory";
+import EmployeeList from "../pages/private/hr/EmployeeList";
+import EmployeeDetails from "../pages/private/hr/EmployeeDetails";
+import EmployeeProgress from "../pages/private/hr/EmployeeProgress";
+import PrivateRoute from "./PrivateRoute";
 
 //
 const Router = () => {
@@ -18,7 +24,16 @@ const Router = () => {
         <Route path="/contact" element={<Contact />} />
       </Route>
       {/* private layouts */}
-      <Route path="/dashboard" element={<DashBoard />}></Route>
+      <Route path="/dashboard" element={<PrivateRoute><DashBoard /></PrivateRoute>}>
+       {/*employee privet routes  */}
+        <Route path="work-sheet" element={<WorkSheet />} />
+        <Route path="payment-history" element={<PaymentHistory />} />
+        {/* hr private routes */}
+        <Route path="employee-list" element={<EmployeeList />} />
+        <Route path="details/:slug" element={<EmployeeDetails />} />
+        <Route path="progress" element={<EmployeeProgress />} />
+        {/* admin-private routes */}
+      </Route>
       {/* auth */}
       <Route path="/login" element={<Login />} />
       <Route path="/signUp" element={<SignUp />} />
