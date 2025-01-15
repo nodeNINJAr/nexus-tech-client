@@ -42,7 +42,8 @@ const TopNavbar = () => {
             user ? <Avatar className="mr-2 md:mr-0" img={user?.photoURL} rounded /> : <Avatar rounded />
           }
         >
-          <Dropdown.Header>
+          {user ? <>
+            <Dropdown.Header>
             <span className="block text-sm font-exo2">{user?.displayName}</span>
             <span className="block truncate text-sm font-medium">
               {user?.email}
@@ -51,11 +52,12 @@ const TopNavbar = () => {
           <Dropdown.Item as={Link} to={'/dashboard'} className="flex justify-start items-center gap-1 text-sm font-normal font-roboto"><LuLayoutDashboard />Dashboard</Dropdown.Item>
           <Dropdown.Item as={Link} to={'/profile'} className="flex justify-start items-center gap-1 text-sm font-normal font-roboto"><CgProfile />Profile</Dropdown.Item>
           <Dropdown.Divider />
-          {user ? (
+          
             <Dropdown.Item onClick={handleSignOut} className="font-medium flex justify-start items-center  gap-[5px] text-lg font-exo2">
               Sign out <FaSignOutAlt />
             </Dropdown.Item>
-          ) : (
+          </>
+           : (
             <Dropdown.Item>
               <Link to="/login" className="font-medium flex justify-start items-center gap-[2px] text-lg font-exo2">
                 LogIn <IoLogInOutline />

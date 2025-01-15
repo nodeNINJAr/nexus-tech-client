@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import SocialLogin from "./socialLogin/SocialLogin";
 import useAuth from "../../components/hooks/useAuth";
-import { imageUpload } from "../../utilitis/utilitis";
+import { imageUpload, userInfoSaveToDb } from "../../utilitis/utilitis";
 
 // sign up from
 const SignUp = () => {
@@ -25,28 +25,37 @@ const SignUp = () => {
   const [showPass, setShowPass] = useState(true);
   const [showRepeatPass, setShowRepeatPass] = useState(true);
   const [loading, setLoading] = useState(true);
-  // collect from data
-  const [fromData, setFromData] = useState({});
+  // collect from formData
+  const [repeatPass, setRepeatPass] = useState({});
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = async(data) => {
+  const onSubmit = async (formData) => {
+    setRepeatPass(formData);
+    if (formData?.userPass !== formData?.repeatPassword) return;
     setLoading(!loading);
-    setFromData(data);
+    console.log(formData);
     // when function work finished then run userSignUp
-    const photoURL = await imageUpload({image:data?.userImage[0]});
+    const photoURL = await imageUpload({ image: formData?.userImage[0] });
     // userSignUp on fireBase
-       try{
-        await userSignUp(data?.userEmail, data?.userPass)
-        await userProfileUpdate(data?.userName, photoURL);
-       }
-       catch(err){
-           console.log(err);
-       }finally{
-        setLoading(loading);
-       }
+    try {
+      await userSignUp(formData?.userEmail, formData?.userPass);
+      await userProfileUpdate(formData?.userName, photoURL);
+      // data sent to db
+        userInfoSaveToDb({
+                 userEmail:formData?.userEmail,
+                 userName:formData?.userName,
+                 userImage:photoURL,
+                 userRole:formData?.userRole,
+                 term:formData?.term
+               });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(loading);
+    }
   };
 
   //
@@ -69,8 +78,8 @@ const SignUp = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-4"
           >
-            <div className="sm:flex justify-between gap-6 truncate">
-              <div className="w-full sm:w-1/2 m-auto mb-4 sm:mb-0">
+            <div className="sm:flex justify-between gap-6 items-start">
+              <div className="w-full sm:w-1/2 mb-4 sm:mb-0">
                 {/* name */}
                 <div className="mb-2 block">
                   <Label htmlFor="email2" value="Your Name" />
@@ -87,7 +96,7 @@ const SignUp = () => {
                   </p>
                 )}
               </div>
-              <div className="w-full sm:w-1/2 m-auto">
+              <div className="w-full sm:w-1/2">
                 {/* email */}
                 <div className="mb-2 block">
                   <Label htmlFor="email2" value="Your email" />
@@ -106,9 +115,9 @@ const SignUp = () => {
               </div>
             </div>
             {/* file and role input */}
-            <div className="sm:flex justify-between items-center gap-6">
+            <div className="sm:flex justify-between items-start gap-6">
               {/* image */}
-              <div className="w-full sm:w-1/2 m-auto mb-4 sm:mb-0">
+              <div className="w-full sm:w-1/2 mb-4 sm:mb-0">
                 <div className="mb-2 block">
                   <Label htmlFor="file" value="Upload file" />
                 </div>
@@ -125,17 +134,15 @@ const SignUp = () => {
                 )}
               </div>
               {/* user role */}
-              <div className="w-full sm:w-1/2 m-auto">
+              <div className="w-full sm:w-1/2">
                 <div className="mb-2 block">
                   <Label htmlFor="countries" value="Choose your role" />
                 </div>
                 <Select
-                  defaultValue={"default"}
                   {...register("userRole", { required: true })}
                   id="countries"
-                  required
                 >
-                  <option disabled value="default">
+                  <option value="">
                     Select Your Role
                   </option>
                   <option value="hr">HR</option>
@@ -149,8 +156,8 @@ const SignUp = () => {
               </div>
             </div>
             {/* password */}
-            <div className="sm:flex justify-between items-center gap-6">
-              <div className="w-full sm:w-1/2 m-auto mb-4 sm:mb-0 reletive">
+            <div className="sm:flex justify-between items-start gap-6 truncate">
+              <div className="w-full sm:w-1/2 mb-4 sm:mb-0 reletive block">
                 <div className="mb-2 block">
                   <Label htmlFor="password2" value="Your password" />
                 </div>
@@ -186,7 +193,7 @@ const SignUp = () => {
                 </p>
               </div>
               {/* repeat-password */}
-              <div className="w-full sm:w-1/2 m-auto mx-auto">
+              <div className="w-full sm:w-1/2  mx-auto truncate">
                 <div className="mb-2 block">
                   <Label htmlFor="" value="Repeat password" />
                 </div>
@@ -211,15 +218,16 @@ const SignUp = () => {
                   )}
                 </div>
                 {/* error */}
-                {errors.userPass?.type === "required" ||
-                  (fromData?.userPass !== fromData?.repeatPassword && (
-                    <p
-                      role="alert"
-                      className="text-sm text-red-600 font-roboto"
-                    >
-                      Password doesnt match
-                    </p>
-                  ))}
+                {errors?.repeatPassword?.type === "required" && (
+                  <p role="alert" className="text-sm text-red-600 font-roboto">
+                    Password is required
+                  </p>
+                )}
+                {repeatPass?.userPass !== repeatPass?.repeatPassword && (
+                  <p role="alert" className="text-sm text-red-600 font-roboto">
+                    Password doesnt match
+                  </p>
+                )}
               </div>
             </div>
 

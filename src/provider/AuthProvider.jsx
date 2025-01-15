@@ -68,9 +68,9 @@ const AuthProvider = ({children}) => {
     return () => unsubscribe();
   }, []);
 
+  
   // transporter
   const authInfo = {
-    name:"ridoy",
     userSignUp,
     userSignIn,
     userProfileUpdate,
