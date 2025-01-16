@@ -1,9 +1,9 @@
-import { Space, Table } from "antd";
+import {Table } from "antd";
 import React from "react";
 import PropTypes from "prop-types";
 import Spinner from "../shared/loader/Spinner";
 
-const EmployeeWorksTable = ({allEmployeeWorks, isLoading, refetch}) => {
+const EmployeeWorksTable = ({allEmployeeWorks, isLoading}) => {
   //
   const columns = [
     {

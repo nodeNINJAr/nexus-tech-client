@@ -1,28 +1,15 @@
 import React from 'react';
 import EmployeeListTable from '../../../components/table/EmployeeListTable';
-import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from '../../../components/hooks/useAxiosSecure';
+import useUser from '../../../components/hooks/useUser';
 
 const EmployeeList = () => {
-//    
-const axiosSecure = useAxiosSecure();
 // 
-  const {data:employee =[], isLoading, refetch} = useQuery({
-    queryKey:["employee-list"],
-    queryFn:async()=>{
-        const {data} = await axiosSecure("/employee-list")
-        return data;
-    }
-  })
-
-
-
-    
+const [Allemployee,isLoading,refetch] = useUser();
 
     // 
     return (
         <div className='overflow-x-scroll'>
-           <EmployeeListTable employee={employee} isLoading={isLoading} refetch={refetch}/>
+           <EmployeeListTable employee={Allemployee} isLoading={isLoading} refetch={refetch}/>
         </div>
     );
 };

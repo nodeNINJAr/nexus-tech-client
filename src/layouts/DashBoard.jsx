@@ -8,7 +8,7 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { BiSpreadsheet } from "react-icons/bi";
 import { MdManageHistory } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
@@ -25,6 +25,11 @@ const DashBoard = () => {
   const { userSignOut } = useAuth();
   const [userRole] = useRole();
   console.log(userRole);
+
+const location = useLocation();
+
+
+
   // user logout
   const handleLogout = () => {
     userSignOut();
@@ -81,6 +86,14 @@ const DashBoard = () => {
     },
   ]
 
+
+
+// Find the menu item that matches the current route
+const hrActiveKey = hrMenu.find((item) => location.pathname.includes(item.route))?.key;
+const employeeActiveKey = employeeMenu.find((item) => location.pathname.includes(item.route))?.key;
+
+
+
   // 
   return (
     <Layout className="container mx-auto">
@@ -122,7 +135,7 @@ const DashBoard = () => {
             className="pt-6"
             theme="dark"
             mode="inline"
-            defaultSelectedKeys={["1"]}
+            selectedKeys={[hrActiveKey]}
             onClick={({ key }) => {
               const selectedItem = hrMenu.find((item) => item.key === key);
               if (selectedItem?.route) {
@@ -142,7 +155,7 @@ const DashBoard = () => {
                className="pt-6"
                theme="dark"
                mode="inline"
-               defaultSelectedKeys={["1"]}
+               selectedKeys={[employeeActiveKey]}
                onClick={({ key }) => {
                  const selectedItem = employeeMenu.find((item) => item.key === key);
                  if (selectedItem?.route) {
