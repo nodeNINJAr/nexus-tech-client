@@ -47,7 +47,7 @@ const EmployeeWorksTable = ({allEmployeeWorks, isLoading, refetch}) => {
   return (
     <>
       <Table
-        className="whitespace-nowrap capitalize"
+        className="whitespace-nowrap capitalize text-red-200"
         columns={columns}
         pagination={{
           position: ["bottomRight"],
