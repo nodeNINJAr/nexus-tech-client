@@ -21,7 +21,7 @@ const axiosSecure = useAxiosSecure();
 
     // 
     return (
-        <div>
+        <div className='overflow-x-scroll'>
            <EmployeeListTable employee={employee} isLoading={isLoading} refetch={refetch}/>
         </div>
     );

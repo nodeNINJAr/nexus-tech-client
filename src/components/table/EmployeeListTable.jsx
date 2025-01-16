@@ -3,9 +3,9 @@ import React from "react";
 import Spinner from "../shared/loader/Spinner";
 import PropTypes from "prop-types";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const EmployeeListTable = ({ employee, isLoading, refetch }) => {
-  console.log(employee);
   //
   const columns = [
     {
@@ -40,20 +40,20 @@ const EmployeeListTable = ({ employee, isLoading, refetch }) => {
       ),
     },
     {
-      title: "Action",
-      key: "action",
+      title: "Pay",
+      key: "pay",
       render: (_, record) => (
         <Space size="middle" key={record.key}>
-          <span>Pay</span>
+          <span className="bg-[#F6FFED] text-[#29ec2f] border border- rounded-lg px-4 py-1 font-normal font-rubik">Pay</span>
         </Space>
       ),
     },
     {
-      title: "Action",
-      key: "deleteAction",
+      title: "Employee Details",
+      key: "employee-details",
       render: (_, record) => (
         <Space size="middle" key={record._id}>
-          <span>Details</span>
+           <Link to={`/details/${record?._id}`} className="bg-[#F0F5FF] border border-[#a4d1fb] rounded-lg px-4 py-1 font-normal font-rubik text-[#718bff] hover:text-[#59abf8]">Details</Link>
         </Space>
       ),
     },
@@ -65,7 +65,6 @@ const EmployeeListTable = ({ employee, isLoading, refetch }) => {
   // employee verify user
   const handleVerify = async (id) => {
     const { data } = await axiosSecure.patch(`/employee-verify/${id}`);
-    console.log(data);
     if (data?.modifiedCount === 1) {
       refetch();
       message.success("Employee Verified");
@@ -80,7 +79,7 @@ const EmployeeListTable = ({ employee, isLoading, refetch }) => {
   return (
     <>
       <Table
-        className="whitespace-nowrap "
+        className="whitespace-nowrap"
         columns={columns}
         pagination={{
           position: ["bottomRight"],

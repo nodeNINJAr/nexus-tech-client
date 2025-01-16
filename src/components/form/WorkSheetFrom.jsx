@@ -46,6 +46,7 @@ const WorkSheetFrom = ({ refetch }) => {
     const formattedDate = extractedDate?.format("YYYY-MM-DD");
     //
     const workData = {
+      employeeName: user?.displayName,
       employeeEmail: user?.email,
       taskName: values?.taskName,
       workedHour: parseInt(values?.workedHour),
