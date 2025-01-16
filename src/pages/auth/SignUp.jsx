@@ -13,20 +13,25 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import SocialLogin from "./socialLogin/SocialLogin";
-import useAuth from "../../components/hooks/useAuth";
-import { imageUpload, userInfoSaveToDb } from "../../utilitis/utilitis";
+import { imageUpload } from "../../utilitis/utilitis";
+import EmployeeDetailsModal from "../../components/modal/EmployeeDetailsModal";
 
 // sign up from
 const SignUp = () => {
-  // auth
-  const { userSignUp, userProfileUpdate } = useAuth();
-
+  // show modal
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+  // form data to modal
+  const [userInfo, setUserInfo] = useState({});
   // show hide pass
   const [showPass, setShowPass] = useState(true);
   const [showRepeatPass, setShowRepeatPass] = useState(true);
-  const [loading, setLoading] = useState(true);
-  // collect from formData
+  const [loading, setLoading] = useState(false);
+  // collect from formData for passrecheck
   const [repeatPass, setRepeatPass] = useState({});
+  // useFrom
   const {
     register,
     handleSubmit,
@@ -36,27 +41,24 @@ const SignUp = () => {
     setRepeatPass(formData);
     if (formData?.userPass !== formData?.repeatPassword) return;
     setLoading(!loading);
-    console.log(formData);
     // when function work finished then run userSignUp
     const photoURL = await imageUpload({ image: formData?.userImage[0] });
-    // userSignUp on fireBase
-    try {
-      await userSignUp(formData?.userEmail, formData?.userPass);
-      await userProfileUpdate(formData?.userName, photoURL);
-      // data sent to db
-        userInfoSaveToDb({
-                 userEmail:formData?.userEmail,
-                 userName:formData?.userName,
-                 userImage:photoURL,
-                 userRole:formData?.userRole,
-                 term:formData?.term
-               });
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(loading);
-    }
+    //
+    const userInfo = {
+      userEmail: formData?.userEmail,
+      userPass:formData?.userPass,
+      userName: formData?.userName,
+      userImage: photoURL,
+      userRole: formData?.userRole,
+      term: formData?.term,
+    };
+    //send to modal
+    setUserInfo(userInfo);
+    showModal();
   };
+
+
+
 
   //
   return (
@@ -142,9 +144,7 @@ const SignUp = () => {
                   {...register("userRole", { required: true })}
                   id="countries"
                 >
-                  <option value="">
-                    Select Your Role
-                  </option>
+                  <option value="">Select Your Role</option>
                   <option value="hr">HR</option>
                   <option value="employee">Employee</option>
                 </Select>
@@ -246,7 +246,7 @@ const SignUp = () => {
             </div>
             <Button type="submit">
               {" "}
-              {!loading && (
+              {loading && (
                 <Spinner aria-label="Spinner button example" size="sm" />
               )}
               <span className="pl-3"> Register new account</span>
@@ -260,6 +260,14 @@ const SignUp = () => {
           </p>
           {/* social login */}
           <SocialLogin />
+          {/* modal */}
+          <EmployeeDetailsModal
+            isModalVisible={isModalVisible}
+            setIsModalVisible={setIsModalVisible}
+            userInfo={userInfo}
+            loading={loading}
+            setLoading={setLoading}
+          />
         </div>
       </div>
     </div>
