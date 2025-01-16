@@ -7,8 +7,10 @@ import {
   message,
   notification,
   Select,
+  Spin,
 } from "antd";
 import dayjs from "dayjs";
+import PropTypes from "prop-types";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import useAuth from "../hooks/useAuth";
 // toast notification config
@@ -20,13 +22,12 @@ notification.config({
 });
 
 //
-const WorkSheetFrom = () => {
+const WorkSheetFrom = ({ refetch }) => {
   //custom axios
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   //handle min max value check
   const [value, setValue] = useState(0);
-
   const handleChange = (val) => {
     if (val < 1 || val > 10) {
       message.error("Value must be between 1 and 10!");
@@ -34,9 +35,11 @@ const WorkSheetFrom = () => {
     }
     setValue(val);
   };
-
+  // button spinner
+  const [loading, setLoading] = useState(false);
   //func for submit the form
   const onSubmit = async (values) => {
+    setLoading(!loading);
     //convert to date format
     const extractedDate = dayjs(values?.workedDate?.$d);
     // Format the date for the database
@@ -48,10 +51,12 @@ const WorkSheetFrom = () => {
       workedHour: parseInt(values?.workedHour),
       workedDate: formattedDate,
     };
-    console.log(formattedDate, workData);
     //send to db
     try {
       await axiosSecure.post("/daily-work", workData);
+      //
+      refetch();
+      setLoading(loading);
       //
       notification.success({
         message: "Work Submited Successfully",
@@ -59,6 +64,7 @@ const WorkSheetFrom = () => {
         placement: "topRight",
       });
     } catch (err) {
+      setLoading(loading);
       notification.error({
         message: "Error Occurred",
         description: `${err.response?.data?.message}`,
@@ -145,12 +151,16 @@ const WorkSheetFrom = () => {
             htmlType="submit"
             style={{ width: "100%" }}
           >
-            Submit
+            {loading && <Spin size="small" />} Submit
           </Button>
         </Form.Item>
       </Form>
     </div>
   );
 };
+WorkSheetFrom.propTypes = {
+  refetch: PropTypes.func.isRequired,
+};
 
 export default WorkSheetFrom;
+
