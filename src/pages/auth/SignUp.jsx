@@ -156,7 +156,7 @@ const SignUp = () => {
               </div>
             </div>
             {/* password */}
-            <div className="sm:flex justify-between items-start gap-6 truncate">
+            <div className="sm:flex justify-between items-start gap-6">
               <div className="w-full sm:w-1/2 mb-4 sm:mb-0 reletive block">
                 <div className="mb-2 block">
                   <Label htmlFor="password2" value="Your password" />

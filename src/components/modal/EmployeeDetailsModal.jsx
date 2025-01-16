@@ -12,28 +12,86 @@ import {
 } from "antd";
 import { userInfoSaveToDb } from "../../utilitis/utilitis";
 import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
 
-
-// modal
 const EmployeeDetailsModal = ({
   isModalVisible,
   setIsModalVisible,
   userInfo,
   loading,
   setLoading,
+  authMethod,
 }) => {
   // auth
-  const { userSignUp, userProfileUpdate } = useAuth();
+  const {
+    userSignUp,
+    userProfileUpdate,
+    userSignInByGoogle,
+    userSignInByGithub,
+  } = useAuth();
+  // navigate
+  const navigate = useNavigate();
   // modal btn loading
   const [btnLoading, setBtnLoading] = useState(true);
-
+  // modal data
+  console.log("Auth Method--->", authMethod);
   // submit firebase and db
   const handleSubmit = async (values) => {
-    // 
-    setBtnLoading(!btnLoading)
-    // user info obj 
+    // for
+    if (authMethod === "github") {
+      userSignInByGithub()
+        .then((result) => {
+          userInfoSaveToDb({
+            userEmail: result?.user?.email,
+            userName: result?.user?.displayName,
+            userImage: result?.user?.photoURL,
+            userRole: "employee",
+          });
+          notification.success({
+            message: (
+              <p className="text-base font-medium font-rubik text-green-500">
+                Successfully logged in using GitHub!
+              </p>
+            ),
+            placement: "topRight",
+          });
+          navigate("/dashboard");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      return;
+    }
+    if (authMethod === "google") {
+      userSignInByGoogle()
+        .then((result) => {
+          userInfoSaveToDb({
+            userEmail: result?.user?.email,
+            userName: result?.user?.displayName,
+            userImage: result?.user?.photoURL,
+            userRole: "employee",
+          });
+          notification.success({
+            message: (
+              <p className="text-base font-medium font-rubik text-green-500">
+                Successfully SignIn using Google!
+              </p>
+            ),
+            placement: "topRight",
+          });
+          navigate("/dashboard");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      return;
+    }
+
+    //
+    setBtnLoading(!btnLoading);
+    // user info obj
     const userData = {
       ...userInfo,
       bank_account_no: values?.bank_account_no,
@@ -46,17 +104,16 @@ const EmployeeDetailsModal = ({
       await userProfileUpdate(userData?.userName, userData?.userImage);
       // data sent to db
       await userInfoSaveToDb(userData);
-       //toast
       notification.success({
         message: (
           <p className="text-base font-medium font-rubik text-green-500">
-            Congrats! Your Account Succesfully created
+            🎉 Congrats! Your account has been successfully created!
           </p>
         ),
         placement: "topRight",
       });
+      navigate("/dashboard");
     } catch (err) {
-      //toast
       notification.error({
         message: (
           <p className="text-base font-medium font-rubik text-red-500">
@@ -78,7 +135,7 @@ const EmployeeDetailsModal = ({
   const handleCancel = () => {
     setIsModalVisible(false);
     setLoading(!loading);
-    setBtnLoading(btnLoading)  
+    setBtnLoading(btnLoading);
   };
 
   //
@@ -161,9 +218,14 @@ const EmployeeDetailsModal = ({
               htmlType="submit"
               style={{ marginRight: 10 }}
             >
-              {!btnLoading &&  <Spin size="small" />} Submit
+              {!btnLoading && <Spin size="small" />} Submit
             </Button>
-            <Button className="text-sm font-normal font-rubik" onClick={handleCancel}>Cancel</Button>
+            <Button
+              className="text-sm font-normal font-rubik"
+              onClick={handleCancel}
+            >
+              Cancel
+            </Button>
           </Form.Item>
         </Form>
       </Modal>
@@ -176,6 +238,7 @@ EmployeeDetailsModal.propTypes = {
   setIsModalVisible: PropTypes.func.isRequired,
   userInfo: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
+  authMethod: PropTypes.string.isRequired,
 };
 
 export default EmployeeDetailsModal;

@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 
 import { Button, Checkbox, Label, Spinner, TextInput } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import SocialLogin from "./socialLogin/SocialLogin";
 import useAuth from "../../components/hooks/useAuth";
+import { notification } from "antd";
 
 const Login = () => {
   // auth
   const {userSignIn } = useAuth();
   // show hide pass
   const [showPass, setShowPass] = useState(true);
-  const [loading , setLoading] = useState(true)
+  const [loading , setLoading] = useState(true);
+   // navigate
+   const navigate = useNavigate();
   // sign in
   const handleUserSignIn = (e) => {
     setLoading(!loading)
@@ -21,7 +24,16 @@ const Login = () => {
     // call the function
     userSignIn(userEmail, userPass)
       .then(() => {
-        setLoading(loading)
+        setLoading(loading);
+        notification.success({
+          message: (
+            <p className="text-base font-medium font-rubik text-green-500">
+              Successfully logged in with your credentials!
+            </p>
+          ),
+          placement: "topRight",
+        });
+        navigate('/dashboard')
       })
       .catch((err) => {
         console.log(err);
