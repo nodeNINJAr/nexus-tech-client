@@ -1,7 +1,8 @@
-import { Space, Table } from "antd";
+import { message, Space, Table } from "antd";
 import React from "react";
 import Spinner from "../shared/loader/Spinner";
 import PropTypes from "prop-types";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const EmployeeListTable = ({ employee, isLoading, refetch }) => {
   console.log(employee);
@@ -28,11 +29,13 @@ const EmployeeListTable = ({ employee, isLoading, refetch }) => {
       key: "salary",
     },
     {
-      title: "Action",
-      key: "action",
+      title: "Is Verified",
+      key: "verified",
       render: (_, record) => (
         <Space size="middle" key={record.key}>
-          <span>❌</span>
+          <span className={`${record?.verified && "pointer-events-none"} cursor-pointer`} onClick={() => handleVerify(record?._id)}>
+            {!record?.verified ? " ❌" : "✅"}
+          </span>
         </Space>
       ),
     },
@@ -56,24 +59,28 @@ const EmployeeListTable = ({ employee, isLoading, refetch }) => {
     },
   ];
 
-  //   // custom axios
-  //   const axiosSecure = useAxiosSecure();
+  // custom axios
+  const axiosSecure = useAxiosSecure();
 
-  //   // handle delete
-  //   const handleDelete = async (record) => {
-  //     const { data } = await axiosSecure.delete(`/worksheet/${record?._id}`);
-  //     if (data?.deletedCount === 1) {
-  //       refetch();
-  //       message.warning("Record deleted from database");
-  //     }
-  //   };
+  // employee verify user
+  const handleVerify = async (id) => {
+    const { data } = await axiosSecure.patch(`/employee-verify/${id}`);
+    console.log(data);
+    if (data?.modifiedCount === 1) {
+      refetch();
+      message.success("Employee Verified");
+    }
+  };
+
+
+
   //
   if (isLoading) return <Spinner />;
   //
   return (
     <>
       <Table
-        className="whitespace-nowrap capitalize"
+        className="whitespace-nowrap "
         columns={columns}
         pagination={{
           position: ["bottomRight"],
