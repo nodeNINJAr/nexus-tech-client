@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Spinner from "../shared/loader/Spinner";
 import { Space, Table } from "antd";
 
-const AllEmpHrListTable = ({users, isLoading ,handleFired}) => {
+const AllEmpHrListTable = ({users, isLoading ,handleFired,handleMakeHr}) => {
 
   //
   const columns = [
@@ -22,7 +22,7 @@ const AllEmpHrListTable = ({users, isLoading ,handleFired}) => {
         key: "hr",
         render: (_, record) => (
           <Space size="middle" key={record.key}>
-              <span className="cursor-pointer bg-[#F6FFED] text-[#29ec2f] border border- rounded-lg px-4 py-1 font-normal font-rubik">Make HR</span>
+              <button onClick={()=>handleMakeHr(record?._id)} className="cursor-pointer bg-[#F6FFED] text-[#29ec2f] border border- rounded-lg px-4 py-1 font-normal font-rubik">Make HR</button>
           </Space>
         ),
       },
@@ -54,6 +54,8 @@ const AllEmpHrListTable = ({users, isLoading ,handleFired}) => {
 AllEmpHrListTable.propTypes = {
   users: PropTypes.array.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  handleFired: PropTypes.func.isRequired,
+  handleMakeHr:PropTypes.func.isRequired,
   refetch: PropTypes.func.isRequired,
 };
 

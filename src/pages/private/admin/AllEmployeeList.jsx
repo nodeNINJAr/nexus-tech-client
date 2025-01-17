@@ -12,6 +12,15 @@ const AllEmployeeList = () => {
             return data;
          }
     })
+
+    //  general employee to make hr by admin
+     const handleMakeHr = async(id)=>{
+        console.log(id);
+        await axiosSecure.patch(`/make-hr/${id}`);
+        refetch();
+    }
+
+
     // employee fired by admin
     const handleFired = async(id)=>{
         await axiosSecure.patch(`/fired/${id}`);
@@ -21,7 +30,7 @@ const AllEmployeeList = () => {
     return (
         <div className='overflow-x-scroll'>
             {/*  */}
-            <AllEmpHrListTable users={users} isLoading={isLoading} handleFired={handleFired}/>
+            <AllEmpHrListTable users={users} isLoading={isLoading} handleMakeHr={handleMakeHr} handleFired={handleFired}/>
         </div>
     );
 };
