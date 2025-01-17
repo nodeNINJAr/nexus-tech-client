@@ -14,6 +14,10 @@ import EmployeeProgress from "../pages/private/hr/EmployeeProgress";
 import PrivateRoute from "./PrivateRoute";
 import Profile from "../pages/profile/Profile";
 import EmployeePrivate from "./EmployeePrivate";
+import HrPrivate from "./HrPrivate";
+import AdminPrivate from "./AdminPrivate";
+import AllEmployeeList from "../pages/private/admin/AllEmployeeList";
+import Payroll from "../pages/private/admin/Payroll";
 
 //
 const Router = () => {
@@ -32,10 +36,12 @@ const Router = () => {
         <Route path="work-sheet" element={<EmployeePrivate><WorkSheet /></EmployeePrivate>} />
         <Route path="payment-history" element={<EmployeePrivate><PaymentHistory /></EmployeePrivate>} />
         {/* hr private routes */}
-        <Route path="employee-list" element={<EmployeeList />} />
-        <Route path="details/:slug" element={<EmployeeDetails />} />
-        <Route path="progress" element={<EmployeeProgress />} />
+        <Route path="employee-list" element={<HrPrivate><EmployeeList /></HrPrivate>} />
+        <Route path="details/:slug" element={<HrPrivate><EmployeeDetails /></HrPrivate>} />
+        <Route path="progress" element={<HrPrivate><EmployeeProgress /></HrPrivate>} />
         {/* admin-private routes */}
+        <Route path="all-employee-list" element={<AdminPrivate><AllEmployeeList/></AdminPrivate>} />
+        <Route path="payroll" element={<AdminPrivate><Payroll/></AdminPrivate>} />
       </Route>
       {/* auth */}
       <Route path="/login" element={<Login />} />
