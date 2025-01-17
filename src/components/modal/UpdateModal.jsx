@@ -75,7 +75,7 @@ const UpdateModal = ({ record, refetch }) => {
     <>
       <Button
         onClick={open}
-        className="font-semibold font-rubik bg-red-200 px-3 py-[3px] text-center  rounded-lg text-sm "
+        className="cursor-pointer bg-[#F6FFED] text-[#29ec2f] border border- rounded-lg px-4 py-1 font-normal font-rubik"
       >
         Update
       </Button>
@@ -164,6 +164,7 @@ UpdateModal.propTypes = {
     workedDate: PropTypes.string,
     taskName: PropTypes.string,
   }).isRequired,
+  refetch: PropTypes.func.isRequired,
 };
 
 export default UpdateModal;

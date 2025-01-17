@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { message, Space, Table } from "antd";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import Spinner from "../shared/loader/Spinner";
-import DeleteModal from "../modal/DeleteModal";
+import ConfirmationModal from "../modal/ConfirmationModal";
 import UpdateModal from "../modal/UpdateModal";
 
 // work sheet table
@@ -26,8 +26,8 @@ const WorkSheetTable = ({empWorkSheet, refetch,  isLoading}) => {
       key: "taskName",
     },
     {
-      title: "Action",
-      key: "action",
+      title: "Update Work",
+      key: "update",
       render: (_, record) => (
         <Space size="middle" key={record.key}>
           <UpdateModal record={record} refetch={refetch}  />
@@ -35,11 +35,11 @@ const WorkSheetTable = ({empWorkSheet, refetch,  isLoading}) => {
       ),
     },
     {
-      title: "Action",
-      key: "deleteAction",
+      title: "Delete Work",
+      key: "deleteWork",
       render: (_, record) => (
         <Space size="middle" key={record._id}>
-          <DeleteModal handleDelete={handleDelete} record={record} text={'Delete'}/>
+          <ConfirmationModal okText={"Delete It"} title={'Confirm Deletion'} content={'Are you sure you want to delete this item? This action cannot be undone'} handleAction={handleDelete} record={record._id} text={'Delete'}/>
         </Space>
       ),
     },
@@ -51,8 +51,8 @@ const WorkSheetTable = ({empWorkSheet, refetch,  isLoading}) => {
   const axiosSecure = useAxiosSecure();
 
   // handle delete
-  const handleDelete = async (record) => {
-    const { data } = await axiosSecure.delete(`/worksheet/${record?._id}`);
+  const handleDelete = async (id) => {
+    const { data } = await axiosSecure.delete(`/worksheet/${id}`);
     if (data?.deletedCount === 1) {
       refetch();
       message.warning("Record deleted from database");

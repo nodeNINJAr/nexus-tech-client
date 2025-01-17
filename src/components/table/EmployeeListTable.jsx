@@ -1,9 +1,10 @@
 import { message, Space, Table } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import Spinner from "../shared/loader/Spinner";
 import PropTypes from "prop-types";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import PayModal from "../modal/PayModal";
 
 const EmployeeListTable = ({ employee, isLoading, refetch }) => {
   //
@@ -25,16 +26,23 @@ const EmployeeListTable = ({ employee, isLoading, refetch }) => {
     },
     {
       title: "Salary",
-      dataIndex: "salary",
       key: "salary",
+      render:(_,record)=>(
+        <p>{record?.salary} $</p>
+      )
     },
     {
       title: "Is Verified",
       key: "verified",
       render: (_, record) => (
         <Space size="middle" key={record.key}>
-          <span className={`${record?.verified && "pointer-events-none"} cursor-pointer`} onClick={() => handleVerify(record?._id)}>
-            {!record?.verified ? " ❌" : "✅"}
+          <span
+            className={`${
+              record?.isVerified && "pointer-events-none"
+            } cursor-pointer`}
+            onClick={() => handleVerify(record?._id)}
+          >
+            {!record?.isVerified ? " ❌" : "✅"}
           </span>
         </Space>
       ),
@@ -44,7 +52,15 @@ const EmployeeListTable = ({ employee, isLoading, refetch }) => {
       key: "pay",
       render: (_, record) => (
         <Space size="middle" key={record.key}>
-          <span className="bg-[#F6FFED] text-[#29ec2f] border border- rounded-lg px-4 py-1 font-normal font-rubik">Pay</span>
+          <button
+            onClick={() => handlePay(record)}
+            disabled={!record?.isVerified}
+            className={`${
+              !record?.isVerified && "text-gray-300"
+            } bg-[#F6FFED] text-[#29ec2f] border border- rounded-lg px-4 py-1 font-normal font-rubik`}
+          >
+            Pay
+          </button>
         </Space>
       ),
     },
@@ -53,7 +69,12 @@ const EmployeeListTable = ({ employee, isLoading, refetch }) => {
       key: "employee-details",
       render: (_, record) => (
         <Space size="middle" key={record._id}>
-           <Link to={`/details/${record?._id}`} className="bg-[#F0F5FF] border border-[#a4d1fb] rounded-lg px-4 py-1 font-normal font-rubik text-[#718bff] hover:text-[#59abf8]">Details</Link>
+          <Link
+            to={`/details/${record?._id}`}
+            className="bg-[#F0F5FF] border border-[#a4d1fb] rounded-lg px-4 py-1 font-normal font-rubik text-[#718bff] hover:text-[#59abf8]"
+          >
+            Details
+          </Link>
         </Space>
       ),
     },
@@ -61,7 +82,6 @@ const EmployeeListTable = ({ employee, isLoading, refetch }) => {
 
   // custom axios
   const axiosSecure = useAxiosSecure();
-
   // employee verify user
   const handleVerify = async (id) => {
     const { data } = await axiosSecure.patch(`/employee-verify/${id}`);
@@ -70,8 +90,14 @@ const EmployeeListTable = ({ employee, isLoading, refetch }) => {
       message.success("Employee Verified");
     }
   };
-
-
+  // pay modal show
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [payDetails, setPayDetails] = useState({});
+  // const handle Pay
+  const handlePay = async (record) => {
+    setPayDetails(record);
+    setIsModalVisible(true);
+  };
 
   //
   if (isLoading) return <Spinner />;
@@ -86,6 +112,13 @@ const EmployeeListTable = ({ employee, isLoading, refetch }) => {
         }}
         dataSource={employee}
         rowKey="_id"
+      />
+      {/* employee pay modal */}
+      <PayModal
+        payDetails={payDetails}
+        setPayDetails={setPayDetails}
+        isModalVisible={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
       />
     </>
   );

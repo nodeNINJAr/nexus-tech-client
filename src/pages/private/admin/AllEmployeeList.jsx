@@ -22,8 +22,8 @@ const AllEmployeeList = () => {
 
 
     // employee fired by admin
-    const handleFired = async(id)=>{
-        await axiosSecure.patch(`/fired/${id}`);
+    const handleFired = async(record)=>{
+        await axiosSecure.patch(`/fired/${record?._id}`);
         refetch();
     }
     // 

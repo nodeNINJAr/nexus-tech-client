@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import Spinner from "../shared/loader/Spinner";
 import { Space, Table } from "antd";
+import ConfirmationModal from "../modal/ConfirmationModal";
 
 const AllEmpHrListTable = ({users, isLoading ,handleFired,handleMakeHr}) => {
 
@@ -31,7 +32,7 @@ const AllEmpHrListTable = ({users, isLoading ,handleFired,handleMakeHr}) => {
         key: "fire",
         render: (_, record) => (
           <Space size="middle" key={record._id}>
-              <button onClick={()=>handleFired(record?._id)} className={`${record?.fired && "pointer-events-none bg-[#f8c69f] text-[#ff9341]"} cursor-pointer bg-[#FFF2E8] border border-[#ffb77f] rounded-lg px-4 py-1 font-normal font-rubik text-[#ffb77f] hover:text-[#ffac6d]`}>{record?.fired?"Fired":"Fire"}</button>
+             <ConfirmationModal title={"Termination Confirmation"} content={'Are you sure you want to terminate this employees account? This action cannot be undone.'} okText={"Confirm Termination"} handleAction={handleFired} text={record?.fired?"Fired":"Fire"} record={record}/>
           </Space>
         ),
       },
@@ -48,6 +49,7 @@ const AllEmpHrListTable = ({users, isLoading ,handleFired,handleMakeHr}) => {
         dataSource={users}
         rowKey="_id"
       />
+     
     </>
   );
 };
