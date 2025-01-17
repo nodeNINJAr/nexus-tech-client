@@ -25,7 +25,7 @@ const WorkSheet = () => {
 
   //
   return (
-    <div className="overflow-x-scroll">
+    <div className="overflow-x-auto">
       <h1 className="text-lg font-poppins font-semibold pb-3 underline">
         Submit Your Daily Work
       </h1>

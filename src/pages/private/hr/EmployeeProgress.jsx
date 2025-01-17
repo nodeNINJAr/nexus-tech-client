@@ -54,7 +54,7 @@ const EmployeeProgress = () => {
         filterData={filterData}
       />
       {/* employees work table */}
-      <div  className="overflow-x-scroll">
+      <div  className="overflow-x-auto">
         <EmployeeWorksTable
           allEmployeeWorks={allEmployeeWorks[0]?.filteredWork}
           isLoading={isLoading}

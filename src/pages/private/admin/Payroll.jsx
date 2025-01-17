@@ -17,7 +17,7 @@ const {data:payRequests = [], isLoading , refetch} = useQuery({
 
     //
     return (
-        <div>
+        <div className='overflow-x-auto'>
            {/*  */}
            <PayRequestsTable payRequests={payRequests} isLoading={isLoading} refetch={refetch}/>
         </div>

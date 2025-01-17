@@ -1,11 +1,10 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import Spinner from "../shared/loader/Spinner";
 import { Space, Table } from "antd";
 import ConfirmationModal from "../modal/ConfirmationModal";
 
-const AllEmpHrListTable = ({users, isLoading ,handleFired,handleMakeHr}) => {
-
+const AllEmpHrListTable = ({ users, isLoading, handleFired, handleMakeHr }) => {
   //
   const columns = [
     {
@@ -15,27 +14,49 @@ const AllEmpHrListTable = ({users, isLoading ,handleFired,handleMakeHr}) => {
     },
     {
       title: "Designation",
-      dataIndex: "userRole",
-      key: "userRole",
+      dataIndex: "designation",
+      key: "designation",
     },
     {
-        title: "Make Employee ---> HR",
-        key: "hr",
-        render: (_, record) => (
-          <Space size="middle" key={record.key}>
-              <button onClick={()=>handleMakeHr(record?._id)} className="cursor-pointer bg-[#F6FFED] text-[#29ec2f] border border- rounded-lg px-4 py-1 font-normal font-rubik">Make HR</button>
-          </Space>
-        ),
-      },
-      {
-        title: "Fire An Employee",
-        key: "fire",
-        render: (_, record) => (
-          <Space size="middle" key={record._id}>
-             <ConfirmationModal title={"Termination Confirmation"} content={'Are you sure you want to terminate this employees account? This action cannot be undone.'} okText={"Confirm Termination"} handleAction={handleFired} text={record?.fired?"Fired":"Fire"} record={record}/>
-          </Space>
-        ),
-      },
+      title: "Salary",
+      key: "salary",
+      render:(_,record)=>(
+        <p>{record?.salary} $</p>
+      )
+    },
+    {
+      title: "Make Employee ---> HR",
+      key: "hr",
+      render: (_, record) => (
+        <Space size="middle" key={record.key}>
+          <button
+            disabled={record?.userRole ==="hr"}
+            onClick={() => handleMakeHr(record?._id)}
+            className={`bg-[#F6FFED] text-[#29ec2f] border border- rounded-lg px-4 py-1 font-normal font-rubik`}
+          >
+            {record?.userRole==="hr"? "HR":"Make HR"}
+          </button>
+        </Space>
+      ),
+    },
+    {
+      title: "Fire An Employee",
+      key: "fire",
+      render: (_, record) => (
+        <Space size="middle" key={record._id}>
+          <ConfirmationModal
+            title={"Termination Confirmation"}
+            content={
+              "Are you sure you want to terminate this employees account? This action cannot be undone."
+            }
+            okText={"Confirm Termination"}
+            handleAction={handleFired}
+            text={record?.fired ? "Fired" : "Fire"}
+            record={record}
+          />
+        </Space>
+      ),
+    },
   ];
   if (isLoading) return <Spinner />;
   return (
@@ -49,17 +70,15 @@ const AllEmpHrListTable = ({users, isLoading ,handleFired,handleMakeHr}) => {
         dataSource={users}
         rowKey="_id"
       />
-     
     </>
   );
 };
 AllEmpHrListTable.propTypes = {
   users: PropTypes.array.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  handleFired: PropTypes.func.isRequired,
-  handleMakeHr:PropTypes.func.isRequired,
-  refetch: PropTypes.func.isRequired,
+  handleFired: PropTypes.func,
+  handleMakeHr: PropTypes.func,
+  refetch: PropTypes.func,
 };
 
 export default AllEmpHrListTable;
-

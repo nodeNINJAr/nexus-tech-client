@@ -43,6 +43,7 @@ const PayModal = ({ isModalVisible, setIsModalVisible, payDetails }) => {
     //
     const payRequestedData = {
       employeeId: payDetails?._id,
+      employeeName: payDetails?.employeeName,
       salary: values?.salary,
       month: values?.month,
       year: values?.year,
@@ -175,6 +176,7 @@ PayModal.propTypes = {
     _id: PropTypes.string,
     salary: PropTypes.number,
     designation: PropTypes.string,
+    employeeName: PropTypes.string,
   }).isRequired,
   userInfo: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,

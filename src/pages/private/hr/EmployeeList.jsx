@@ -8,7 +8,7 @@ const [Allemployee,isLoading,refetch] = useUser();
     
     // 
     return (
-        <div className='overflow-x-scroll'>
+        <div className='overflow-x-auto'>
            <EmployeeListTable employee={Allemployee} isLoading={isLoading} refetch={refetch}/>
         </div>
     );

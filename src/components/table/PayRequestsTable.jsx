@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Spinner from "../shared/loader/Spinner";
 import { Space, Table } from "antd";
 import { Link } from "react-router-dom";
@@ -10,8 +11,8 @@ const PayRequestsTable = ({ payRequests, isLoading, refetch }) => {
   const columns = [
     {
       title: "Name",
-      dataIndex: "userName",
-      key: "userName",
+      dataIndex: "employeeName",
+      key: "employeeName",
     },
     {
       title: "Month Of Salary",
@@ -26,7 +27,7 @@ const PayRequestsTable = ({ payRequests, isLoading, refetch }) => {
     {
       title: "Pay Status",
       key: "status",
-      render: (_, record) => <p>{record?.status}</p>,
+      render: (_, record) => <p className="font-rubik font-normal capitalize">{record?.status==="approved"? "Approved ✅" :record?.status} </p>,
     },
     {
       title: "Pay",
@@ -35,9 +36,9 @@ const PayRequestsTable = ({ payRequests, isLoading, refetch }) => {
         <Space size="middle" key={record.key}>
           <button
             onClick={() => handlePayConfirm(record)}
-            // disabled={!record?.isVerified}
+            disabled={record?.status==="approved"}
             className={`${
-              !record?.isVerified && "text-gray-300"
+              record?.status==="approved" && "text-gray-300"
             } bg-[#F6FFED] text-[#29ec2f] border border- rounded-lg px-4 py-1 font-normal font-rubik`}
           >
             Pay
@@ -51,6 +52,7 @@ const PayRequestsTable = ({ payRequests, isLoading, refetch }) => {
   const handlePayConfirm = async (record) => {
     const { data } = await axiosSecure.post("/approve-pay-request", {paymentRequestId:record?._id});
     console.log(data);
+    refetch()
   };
 
   //
@@ -70,5 +72,11 @@ const PayRequestsTable = ({ payRequests, isLoading, refetch }) => {
     </>
   );
 };
+PayRequestsTable.propTypes = {
+  payRequests: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  refetch: PropTypes.func,
+};
 
 export default PayRequestsTable;
+

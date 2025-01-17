@@ -15,7 +15,6 @@ const AllEmployeeList = () => {
 
     //  general employee to make hr by admin
      const handleMakeHr = async(id)=>{
-        console.log(id);
         await axiosSecure.patch(`/make-hr/${id}`);
         refetch();
     }
@@ -28,7 +27,7 @@ const AllEmployeeList = () => {
     }
     // 
     return (
-        <div className='overflow-x-scroll'>
+        <div className='overflow-x-auto'>
             {/*  */}
             <AllEmpHrListTable users={users} isLoading={isLoading} handleMakeHr={handleMakeHr} handleFired={handleFired}/>
         </div>
