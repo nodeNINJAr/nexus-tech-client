@@ -14,7 +14,7 @@ const EmployeeProgress = () => {
 
   //
   const {
-    data: allEmployeeWorks = [],
+    data:allEmployeeWorks=[],
     isLoading,
     refetch,
   } = useQuery({
@@ -38,6 +38,7 @@ const EmployeeProgress = () => {
 //   
   const handleFilterClear = () => {
     setFilterData({ ...filterData, monthName: "" ,employeeName:""});
+    refetch()
   };
 
 

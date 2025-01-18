@@ -37,7 +37,7 @@ const Router = () => {
         <Route path="payment-history" element={<EmployeePrivate><PaymentHistory /></EmployeePrivate>} />
         {/* hr private routes */}
         <Route path="employee-list" element={<HrPrivate><EmployeeList /></HrPrivate>} />
-        <Route path="details/:slug" element={<HrPrivate><EmployeeDetails /></HrPrivate>} />
+        <Route path="details/:employeeId" element={<HrPrivate><EmployeeDetails /></HrPrivate>} />
         <Route path="progress" element={<HrPrivate><EmployeeProgress /></HrPrivate>} />
         {/* admin-private routes */}
         <Route path="all-employee-list" element={<AdminPrivate><AllEmployeeList/></AdminPrivate>} />

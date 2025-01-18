@@ -63,3 +63,13 @@
   .modal-button{
    background-color: "red"!important;
   }
+
+  /*  */
+  .ant-breadcrumb {
+    white-space: nowrap;
+  }
+  
+  .ant-breadcrumb-link {
+    display: inline-block;
+  }
+  

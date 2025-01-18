@@ -4,22 +4,19 @@ import {
   Modal,
   Button,
   Form,
-  Input,
   InputNumber,
   Select,
   notification,
   Spin,
 } from "antd";
-import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 const { Option } = Select;
 
 const PayModal = ({ isModalVisible, setIsModalVisible, payDetails }) => {
   //  user data from firebase
-  const {user} = useAuth();
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-
 
   // for showing default value on input
   const [form] = Form.useForm();
@@ -35,28 +32,50 @@ const PayModal = ({ isModalVisible, setIsModalVisible, payDetails }) => {
 
   // modal btn loading
   const [btnLoading, setBtnLoading] = useState(true);
-  // modal data
-  console.log("Auth Method--->", payDetails);
   // submit firebase and db
   const handleSubmit = async (values) => {
     setBtnLoading(!btnLoading);
     //
     const payRequestedData = {
       employeeId: payDetails?._id,
-      employeeName: payDetails?.employeeName,
+      employeeName: payDetails?.userName,
       salary: values?.salary,
       month: values?.month,
       year: values?.year,
-      hrEmail:user?.email,
+      hrEmail: user?.email,
     };
-    console.log(payRequestedData);
-  //  pay request send to backend
-  const {data} = await axiosSecure.post('/payment/request', payRequestedData);
-  console.log(data);
-     // 
-     setBtnLoading(btnLoading);
-    //  modal visible
-    setIsModalVisible(false);
+    //  pay request send to backend
+    try {
+      const { data } = await axiosSecure.post(
+        "/payment/request",
+        payRequestedData
+      );
+      if (data?.paymentRequest?.insertedId) {
+        notification.success({
+          message: (
+            <p className="text-base font-medium font-rubik text-green-500">
+              {data?.message}
+            </p>
+          ),
+          placement: "topRight",
+        });
+      }
+    } catch (err) {
+      if (err?.status === 409) {
+        notification.error({
+          message: (
+            <p className="text-base font-medium font-rubik text-green-500">
+              {err?.response?.data?.message}
+            </p>
+          ),
+          placement: "topRight",
+        });
+      }
+    } finally {
+      setBtnLoading(btnLoading);
+      //  modal visible
+      setIsModalVisible(false);
+    }
   };
 
   // hide the modal
@@ -126,7 +145,7 @@ const PayModal = ({ isModalVisible, setIsModalVisible, payDetails }) => {
                 "November",
                 "December",
               ].map((month, index) => (
-                <Option key={index + 1} value={index + 1}>
+                <Option key={index + 1} value={month}>
                   {month}
                 </Option>
               ))}
@@ -169,7 +188,6 @@ const PayModal = ({ isModalVisible, setIsModalVisible, payDetails }) => {
   );
 };
 PayModal.propTypes = {
-  setLoading: PropTypes.func.isRequired,
   isModalVisible: PropTypes.bool.isRequired,
   setIsModalVisible: PropTypes.func.isRequired,
   payDetails: PropTypes.shape({
@@ -177,9 +195,9 @@ PayModal.propTypes = {
     salary: PropTypes.number,
     designation: PropTypes.string,
     employeeName: PropTypes.string,
+    userName: PropTypes.string,
   }).isRequired,
-  userInfo: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired,
+  userInfo: PropTypes.object,
   authMethod: PropTypes.string.isRequired,
 };
 

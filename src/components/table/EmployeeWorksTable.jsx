@@ -29,18 +29,6 @@ const EmployeeWorksTable = ({allEmployeeWorks, isLoading}) => {
   
   ];
 
-//   // custom axios
-//   const axiosSecure = useAxiosSecure();
-
-//   // employee verify user
-//   const handleVerify = async (id) => {
-//     const { data } = await axiosSecure.patch(`/employee-verify/${id}`);
-//     if (data?.modifiedCount === 1) {
-//       refetch();
-//       message.success("Employee Verified");
-//     }
-//   };
-
   //
   if (isLoading) return <Spinner />;
   //
@@ -59,9 +47,8 @@ const EmployeeWorksTable = ({allEmployeeWorks, isLoading}) => {
   );
 };
 EmployeeWorksTable.propTypes = {
-  allEmployeeWorks: PropTypes.array.isRequired,
+  allEmployeeWorks: PropTypes.array,
   isLoading: PropTypes.bool.isRequired,
-  refetch: PropTypes.func.isRequired,
 };
 
 export default EmployeeWorksTable;

@@ -70,7 +70,7 @@ const EmployeeListTable = ({ employee, isLoading, refetch }) => {
       render: (_, record) => (
         <Space size="middle" key={record._id}>
           <Link
-            to={`/details/${record?._id}`}
+            to={`/dashboard/details/${record?._id}`}
             className="bg-[#F0F5FF] border border-[#a4d1fb] rounded-lg px-4 py-1 font-normal font-rubik text-[#718bff] hover:text-[#59abf8]"
           >
             Details

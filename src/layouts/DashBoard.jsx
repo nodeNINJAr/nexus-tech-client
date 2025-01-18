@@ -2,18 +2,26 @@ import React, { useState } from "react";
 import useRole from "../components/hooks/useRole";
 import { SiPayloadcms } from "react-icons/si";
 import {
+  HomeOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Button, Layout, Menu, theme } from "antd";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Breadcrumb, Button, Layout, Menu, theme } from "antd";
+import {
+  Link,
+  Navigate,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { BiSpreadsheet } from "react-icons/bi";
 import { MdManageHistory } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { GiProgression } from "react-icons/gi";
 import { FaRegListAlt } from "react-icons/fa";
 import useAuth from "../components/hooks/useAuth";
+import DynamicBreadcrumb from "../components/shared/breadcrumb/DynamicBreadcrumb";
 
 // import from layouts
 const { Header, Sider, Content } = Layout;
@@ -24,7 +32,6 @@ const DashBoard = () => {
   const { userSignOut } = useAuth();
   const [userRole] = useRole();
   console.log(userRole);
-
   const location = useLocation();
 
   // user logout
@@ -46,7 +53,7 @@ const DashBoard = () => {
       key: "1",
       icon: <FaRegListAlt />,
       label: "All Employee",
-      route: "/dashboard/all-employee-list", // Use "route" instead of "path" to avoid conflicts
+      route: "/dashboard/all-employee-list",
     },
     {
       key: "2",
@@ -68,7 +75,7 @@ const DashBoard = () => {
       key: "1",
       icon: <FaRegListAlt />,
       label: "Employee List",
-      route: "/dashboard/employee-list", // Use "route" instead of "path" to avoid conflicts
+      route: "/dashboard/employee-list",
     },
     {
       key: "2",
@@ -115,7 +122,9 @@ const DashBoard = () => {
   const employeeActiveKey = employeeMenu.find((item) =>
     location.pathname.includes(item.route)
   )?.key;
+  
 
+ 
   //
   return (
     <Layout className="container mx-auto">
@@ -207,6 +216,7 @@ const DashBoard = () => {
       {/* layouts */}
       <Layout>
         <Header
+           className="flex justify-start items-center sm:gap-8"
           style={{
             padding: 0,
             background: colorBgContainer,
@@ -222,6 +232,8 @@ const DashBoard = () => {
               height: 64,
             }}
           />
+          {/*  */}
+           <DynamicBreadcrumb/>
         </Header>
         <Content
           className="min-h-screen"

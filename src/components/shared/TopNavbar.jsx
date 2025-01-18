@@ -7,9 +7,12 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { CgProfile } from "react-icons/cg";
 import { FaSignOutAlt } from "react-icons/fa";
 import { IoLogInOutline } from "react-icons/io5";
+import useRole from "../hooks/useRole";
 
 // 
 const TopNavbar = () => {
+  // 
+  const [userRole] = useRole();
   // user from auth
   const { user, userSignOut } = useAuth();
   // user sign out
@@ -49,7 +52,7 @@ const TopNavbar = () => {
               {user?.email}
             </span>
           </Dropdown.Header>
-          <Dropdown.Item as={Link} to={'/dashboard'} className="flex justify-start items-center gap-1 text-sm font-normal font-roboto"><LuLayoutDashboard />Dashboard</Dropdown.Item>
+          <Dropdown.Item as={Link} to={`${userRole=== "employee" && "/dashboard/work-sheet" || userRole === "hr" && "/dashboard/employee-list"}`} className="flex justify-start items-center gap-1 text-sm font-normal font-roboto"><LuLayoutDashboard />Dashboard</Dropdown.Item>
           <Dropdown.Item as={Link} to={'/profile'} className="flex justify-start items-center gap-1 text-sm font-normal font-roboto"><CgProfile />Profile</Dropdown.Item>
           <Dropdown.Divider />
           
