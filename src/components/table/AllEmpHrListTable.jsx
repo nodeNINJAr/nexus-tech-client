@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Spinner from "../shared/loader/Spinner";
 import { Space, Table } from "antd";
 import ConfirmationModal from "../modal/ConfirmationModal";
+import { CiCirclePlus } from "react-icons/ci";
+import UpdateSalaryModal from "../modal/UpdateSalaryModal";
 
-const AllEmpHrListTable = ({ users, isLoading, handleFired, handleMakeHr }) => {
+const AllEmpHrListTable = ({ users, isLoading, handleFired, handleMakeHr,refetch }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [salary, setSalary] = useState(null);
+
+  //
+  const showModal = (record) => {
+    setSalary(record)
+    setModalOpen(true);
+  };
+
   //
   const columns = [
     {
@@ -20,9 +31,23 @@ const AllEmpHrListTable = ({ users, isLoading, handleFired, handleMakeHr }) => {
     {
       title: "Salary",
       key: "salary",
-      render:(_,record)=>(
-        <p>{record?.salary} $</p>
-      )
+      render: (_, record) => (
+        <Space size="middle" key={record.key}>
+          <p>{record?.salary} $</p>
+          <button
+            onClick={()=>showModal(record)}
+            className={`cursor-pointer bg-[#F6FFED] text-[#ffce47] border border- rounded-full px-1 py-1 font-semibold font-rubik`}
+          >
+            <CiCirclePlus className="font-semibold font-rubik text-gray-600" />
+          </button>
+          <UpdateSalaryModal
+          refetch={refetch}
+            modalOpen={modalOpen}
+            salary={salary}
+            setModalOpen={setModalOpen}
+          />
+        </Space>
+      ),
     },
     {
       title: "Make Employee ---> HR",
@@ -30,11 +55,11 @@ const AllEmpHrListTable = ({ users, isLoading, handleFired, handleMakeHr }) => {
       render: (_, record) => (
         <Space size="middle" key={record.key}>
           <button
-            disabled={record?.userRole ==="hr"}
+            disabled={record?.userRole === "hr"}
             onClick={() => handleMakeHr(record?._id)}
             className={`bg-[#F6FFED] text-[#29ec2f] border border- rounded-lg px-4 py-1 font-normal font-rubik`}
           >
-            {record?.userRole==="hr"? "HR":"Make HR"}
+            {record?.userRole === "hr" ? "HR" : "Make HR"}
           </button>
         </Space>
       ),
@@ -58,6 +83,8 @@ const AllEmpHrListTable = ({ users, isLoading, handleFired, handleMakeHr }) => {
       ),
     },
   ];
+
+  //
   if (isLoading) return <Spinner />;
   return (
     <>

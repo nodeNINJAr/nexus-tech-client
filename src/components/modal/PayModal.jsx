@@ -198,7 +198,7 @@ PayModal.propTypes = {
     userName: PropTypes.string,
   }).isRequired,
   userInfo: PropTypes.object,
-  authMethod: PropTypes.string.isRequired,
+  authMethod: PropTypes.string,
 };
 
 export default PayModal;

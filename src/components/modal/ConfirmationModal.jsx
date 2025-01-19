@@ -37,6 +37,9 @@ const ConfirmationModal = ({ title, content, okText, text, handleAction, record 
 ConfirmationModal.propTypes = {
   title: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
+  record: PropTypes.shape({
+    fired: PropTypes.bool,
+  }).isRequired,
   recordId: PropTypes.string.isRequired,
   handleAction: PropTypes.func.isRequired,
   content: PropTypes.string.isRequired,

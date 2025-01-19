@@ -29,7 +29,7 @@ const AllEmployeeList = () => {
     return (
         <div className='overflow-x-auto'>
             {/*  */}
-            <AllEmpHrListTable users={users} isLoading={isLoading} handleMakeHr={handleMakeHr} handleFired={handleFired}/>
+            <AllEmpHrListTable refetch={refetch} users={users} isLoading={isLoading} handleMakeHr={handleMakeHr} handleFired={handleFired}/>
         </div>
     );
 };

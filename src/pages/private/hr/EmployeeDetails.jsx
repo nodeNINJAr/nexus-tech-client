@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import UserInfoCard from '../../../components/shared/card/UserInfoCard';
 import Chart from '../../../components/shared/chart/Chart';
 import useUser from '../../../components/hooks/useUser';
@@ -11,7 +11,9 @@ const EmployeeDetails = () => {
     const axiosSecure = useAxiosSecure();
     const {employeeId} = useParams();
     // 
-    const [Allemployee , isLoading, refetch] = useUser();
+    const [Allemployee] = useUser();
+    // find the user   
+    const employeeInfo = Allemployee.find(employee=> employee?._id === employeeId)
     // 
     const {data:payHistory = []} = useQuery({
         queryKey:["payment-history" ,employeeId],
@@ -22,10 +24,10 @@ const EmployeeDetails = () => {
     })
     //   
     return (
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-x-6'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
             {/*  */}
            <div className='col-span-1 md:col-span-1'>
-               <UserInfoCard/>
+               <UserInfoCard employeeInfo={employeeInfo}/>
            </div>
            {/*  */}
             <div className='col-span-1 md:col-span-2 overflow-x-auto'>

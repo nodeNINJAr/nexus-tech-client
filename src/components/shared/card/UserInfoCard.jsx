@@ -1,29 +1,27 @@
-import React from 'react';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
-import { Avatar, Card } from 'antd';
+import React from "react";
+import PropTypes from "prop-types";
+import { Card } from "antd";
 const { Meta } = Card;
-const UserInfoCard = () => (
+
+//
+const UserInfoCard = ({ employeeInfo }) => (
   <Card
-    style={{
-      width: 300,
-    }}
-    cover={
-      <img
-        alt="example"
-        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-      />
-    }
-    actions={[
-      <SettingOutlined key="setting" />,
-      <EditOutlined key="edit" />,
-      <EllipsisOutlined key="ellipsis" />,
-    ]}
+    className="w-full "
+    cover={<img alt={employeeInfo?.userName} src={employeeInfo?.userImage} />}
   >
-    <Meta
-      avatar={<Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />}
-      title="Card title"
-      description="This is the description"
-    />
+      <Meta
+        className="capitalize"
+        title={`${employeeInfo?.userName}`}
+        description={employeeInfo?.designation}
+      />
   </Card>
 );
+UserInfoCard.propTypes = {
+  employeeInfo: PropTypes.shape({
+    userImage: PropTypes.string,
+    userName: PropTypes.string,
+    designation: PropTypes.string,
+  }).isRequired,
+};
+
 export default UserInfoCard;

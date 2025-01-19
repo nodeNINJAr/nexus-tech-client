@@ -52,7 +52,7 @@ const TopNavbar = () => {
               {user?.email}
             </span>
           </Dropdown.Header>
-          <Dropdown.Item as={Link} to={`${userRole=== "employee" && "/dashboard/work-sheet" || userRole === "hr" && "/dashboard/employee-list"}`} className="flex justify-start items-center gap-1 text-sm font-normal font-roboto"><LuLayoutDashboard />Dashboard</Dropdown.Item>
+          <Dropdown.Item as={Link} to={`${userRole=== "employee" && "/dashboard/work-sheet" || userRole === "hr" && "/dashboard/employee-list" || userRole === "admin" && "/dashboard"}`} className="flex justify-start items-center gap-1 text-sm font-normal font-roboto"><LuLayoutDashboard />Dashboard</Dropdown.Item>
           <Dropdown.Item as={Link} to={'/profile'} className="flex justify-start items-center gap-1 text-sm font-normal font-roboto"><CgProfile />Profile</Dropdown.Item>
           <Dropdown.Divider />
           
