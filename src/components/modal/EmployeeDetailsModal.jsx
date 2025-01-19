@@ -13,6 +13,7 @@ import {
 import { userInfoSaveToDb } from "../../utilitis/utilitis";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const { Option } = Select;
 
@@ -33,6 +34,8 @@ const EmployeeDetailsModal = ({
     userSignInByGithub,
     userSignOut,
   } = useAuth();
+  // 
+  const axiosPublic = useAxiosPublic();
   // navigate
   const navigate = useNavigate();
   // modal btn loading
@@ -40,13 +43,28 @@ const EmployeeDetailsModal = ({
   // modal data
   // submit firebase and db
   const handleSubmit = async (values) => {
+    setBtnLoading(!btnLoading)
     // for
     if (authMethod === "github") {
-      setBtnLoading(!btnLoading)
       try{
         const {user} = await userSignInByGithub();
+         //  checking if employee fired
+        const { data } = await axiosPublic.get(`/fired/${user?.email}`);
+        if (data?.fired) {
+         notification.info({
+            message: (
+              <p className="text-base font-medium font-rubik text-red-500">
+                 Your employment with NexusTech has been terminated. We wish you the best in your future endeavors.
+              </p>
+            ),
+            placement: "topRight",
+          });
+          userSignOut();
+          setIsModalVisible(false);
+          return 
+        }
           if(user?.email){
-            userInfoSaveToDb({
+           await userInfoSaveToDb({
               userEmail:user?.email,
               userName: user?.displayName,
               userImage: user?.photoURL,
@@ -69,12 +87,13 @@ const EmployeeDetailsModal = ({
            await userSignOut()
              notification.info({
               message: (
-                <p className="text-base font-medium font-rubik text-green-500">
+                <p className="text-base font-medium font-rubik text-red-500">
                    Your github account have no added gmail try other options
                 </p>
               ),
               placement: "topRight",
             });
+            setIsModalVisible(false)
             return 
           }
       }catch(err){
@@ -94,9 +113,23 @@ const EmployeeDetailsModal = ({
     }
     
     if (authMethod === "google") {
-      setBtnLoading(!btnLoading)
       try{
        const {user} =  await userSignInByGoogle();
+           //  checking if employee fired
+            const { data } = await axiosPublic.get(`/fired/${user?.email}`);
+                 if (data?.fired) {
+                  notification.info({
+                     message: (
+                       <p className="text-base font-medium font-rubik text-red-500">
+                          Your employment with NexusTech has been terminated. We wish you the best in your future endeavors.
+                       </p>
+                     ),
+                     placement: "topRight",
+                   });
+                   userSignOut();
+                   setIsModalVisible(false)
+                   return 
+                 }
             if(user?.email){
               userInfoSaveToDb({
                 userEmail:user?.email,
@@ -140,12 +173,13 @@ const EmployeeDetailsModal = ({
       ...userInfo,
       bank_account_no: values?.bank_account_no,
       salary: values?.salary,
-      designation: values?.designation,
+      designation: values?.designation, 
+      userPass:null,
     };
     // userSignUp on fireBase
     try {
-      await userSignUp(userData?.userEmail, userData?.userPass);
-      await userProfileUpdate(userData?.userName, userData?.userImage);
+      await userSignUp(userInfo?.userEmail, userInfo?.userPass);
+      await userProfileUpdate(userInfo?.userName, userInfo?.userImage);
       // data sent to db
       await userInfoSaveToDb(userData);
       notification.success({
@@ -161,13 +195,15 @@ const EmployeeDetailsModal = ({
       notification.error({
         message: (
           <p className="text-base font-medium font-rubik text-red-500">
-            {`${err}`}
+            {`${err.message.split('Firebase:').join(' ')}`}
           </p>
         ),
         placement: "topRight",
       });
     } finally {
+      setBtnLoading(true)
       setLoading(!loading);
+     
     }
 
     //  modal visible
@@ -177,7 +213,7 @@ const EmployeeDetailsModal = ({
   // hide the modal
   const handleCancel = () => {
     setIsModalVisible(false);
-    setLoading(!loading);
+    setLoading(false);
     setBtnLoading(true)
   };
   //
@@ -230,7 +266,7 @@ const EmployeeDetailsModal = ({
               style={{ width: "100%" }}
               placeholder="Enter salary amount"
               max={550}
-              min={0}
+              min={100}
             />
           </Form.Item>
           {/*  */}
@@ -278,8 +314,8 @@ const EmployeeDetailsModal = ({
   );
 };
 EmployeeDetailsModal.propTypes = {
-  setLoading: PropTypes.bool,
-  isModalVisible: PropTypes.func.isRequired,
+  setLoading: PropTypes.func,
+  isModalVisible: PropTypes.bool.isRequired,
   setIsModalVisible: PropTypes.func.isRequired,
   userInfo: PropTypes.object,
   loading: PropTypes.bool,

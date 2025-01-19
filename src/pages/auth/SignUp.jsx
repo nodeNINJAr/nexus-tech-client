@@ -46,6 +46,7 @@ const SignUp = () => {
     //
     const userInfo = {
       userEmail: formData?.userEmail,
+      userPass:formData?.userPass,
       userName: formData?.userName,
       userImage: photoURL,
       userRole: formData?.userRole,
