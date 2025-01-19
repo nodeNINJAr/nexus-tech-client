@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../components/hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import PaymentHistoryTable from "../../../components/table/PaymentHistoryTable";
 import useAuth from "../../../components/hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const PaymentHistory = () => {
   //
@@ -20,6 +21,9 @@ const PaymentHistory = () => {
 
   return (
     <div className="overflow-x-auto">
+      <Helmet>
+        <title>PayHistory || NexusTech</title>
+      </Helmet>
       {/*  */}
       <PaymentHistoryTable payHistory={payHistory} />
     </div>

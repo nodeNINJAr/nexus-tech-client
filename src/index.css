@@ -76,7 +76,7 @@
   /* Change navigation button colors */
 .slick-prev,
 .slick-next {
-  color: #f26161!important; /* Change this to your desired color */
+  color: #00c6ff!important; /* Change this to your desired color */
   z-index: 10; /* Ensures buttons are on top of content */
 }
 

@@ -5,6 +5,7 @@ import AllEmpHrListTable from "../../../components/table/AllEmpHrListtable";
 import { Segmented } from "antd";
 import { AppstoreOutlined, BarsOutlined } from "@ant-design/icons";
 import AllEmployeeGrid from "../../../components/gridview/AllEmployeeGrid";
+import { Helmet } from "react-helmet-async";
 
 const AllEmployeeList = () => {
   const axiosSecure = useAxiosSecure();
@@ -35,7 +36,10 @@ const AllEmployeeList = () => {
 
   //
   return (
-    <div>
+    <>
+      <Helmet>
+        <title>AllEmployee || NexusTech</title>
+      </Helmet>
       <div className="fixed top-6 right-4 z-50">
         <Segmented
           options={[
@@ -70,7 +74,7 @@ const AllEmployeeList = () => {
           <AllEmployeeGrid refetch={refetch} users={users} />
         </>
       )}
-    </div>
+    </>
   );
 };
 

@@ -54,7 +54,7 @@ const contentStyle = {
 
 
 const Testimonial = () => (
-  <div className="font-roboto pt-10">
+  <div className="font-roboto">
       <h2 className="text-3xl font-bold text-center text-gray-800 mb-8 font-poppins">
         What Our Clients Say
       </h2>

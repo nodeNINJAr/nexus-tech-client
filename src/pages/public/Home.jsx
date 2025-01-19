@@ -4,10 +4,14 @@ import Testimonial from "../../components/sections/Home/Testimonial";
 import BannerSlider from "../../components/sections/Home/BannerSlider";
 import KeyFeatures from "../../components/sections/Home/KeyFeatures";
 import CTASection from "../../components/sections/Home/CTASection";
+import {Helmet} from "react-helmet-async"
 
 const Home = () => {
   return (
     <div className=" min-h-screen">
+      <Helmet>
+        <title>Home || NexusTech</title>
+      </Helmet>
       {/* banner slider */}
       <BannerSlider />
       {/* services */}

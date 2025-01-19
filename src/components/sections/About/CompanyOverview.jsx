@@ -1,10 +1,11 @@
 import React from "react";
+import teamImage from "../../../assets/image/meeting.png"
 
 const CompanyOverview = () => {
   return (
     <section className="py-16 bg-gray-100">
       <div className="container mx-auto px-8">
-        <h2 className="text-4xl font-bold text-center mb-8 text-gray-800">
+        <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">
           About NexusTech
         </h2>
         <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -25,7 +26,7 @@ const CompanyOverview = () => {
           </div>
           <div>
             <img
-              src="https://via.placeholder.com/600x400?text=Our+Team"
+              src={teamImage}
               alt="NexusTech Team"
               className="w-full h-[400px] object-cover rounded-lg shadow-lg"
             />

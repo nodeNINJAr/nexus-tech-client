@@ -31,7 +31,7 @@ const services = [
 //   
 const OurServices = () => {
   return (
-    <div className="py-10 px-4 font-roboto">
+    <div className="py-16 px-4 font-roboto">
       <h2 className="text-3xl font-bold text-center text-gray-800 mb-12 font-poppins">
         Our Services
       </h2>

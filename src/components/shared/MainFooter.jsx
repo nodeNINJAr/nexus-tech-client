@@ -1,6 +1,7 @@
 import React from 'react';
 import { Footer } from 'flowbite-react';
 import { BsFacebook, BsGithub, BsLinkedin, BsTwitter } from 'react-icons/bs';
+import logo from "../../assets/image/logo.png"
 
 const MainFooter = () => {
   return (
@@ -8,12 +9,7 @@ const MainFooter = () => {
       <div className="w-full">
         <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
           <div>
-            <Footer.Brand
-              href="https://nexustech.com"
-              src="https://via.placeholder.com/150x50.png?text=NexusTech+Logo"
-              alt="NexusTech Logo"
-              name="NexusTech"
-            />
+             <img className='w-56' src={logo} alt="logo" />
           </div>
           <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
             {/* About Section */}

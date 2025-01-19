@@ -3,6 +3,7 @@ import EmployeeWorksTable from "../../../components/table/EmployeeWorksTable";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../components/hooks/useAxiosSecure";
 import WorkFilterForm from "../../../components/form/WorkFilterForm";
+import { Helmet } from "react-helmet-async";
 
 const EmployeeProgress = () => {
   const axiosSecure = useAxiosSecure();
@@ -14,7 +15,7 @@ const EmployeeProgress = () => {
 
   //
   const {
-    data:allEmployeeWorks=[],
+    data: allEmployeeWorks = [],
     isLoading,
     refetch,
   } = useQuery({
@@ -27,25 +28,24 @@ const EmployeeProgress = () => {
     },
   });
 
-
-
   const handleMonthChanges = async (value) => {
     setFilterData({ ...filterData, monthName: value });
   };
   const handleNameChanges = async (value) => {
     setFilterData({ ...filterData, employeeName: value });
   };
-//   
+  //
   const handleFilterClear = () => {
-    setFilterData({ ...filterData, monthName: "" ,employeeName:""});
-    refetch()
+    setFilterData({ ...filterData, monthName: "", employeeName: "" });
+    refetch();
   };
 
-
-
- //
+  //
   return (
     <>
+      <Helmet>
+        <title>Progress || NexusTech</title>
+      </Helmet>
       {/* employee work filter form */}
       <WorkFilterForm
         handleMonthChanges={handleMonthChanges}
@@ -55,7 +55,7 @@ const EmployeeProgress = () => {
         filterData={filterData}
       />
       {/* employees work table */}
-      <div  className="overflow-x-auto">
+      <div className="overflow-x-auto">
         <EmployeeWorksTable
           allEmployeeWorks={allEmployeeWorks[0]?.filteredWork}
           isLoading={isLoading}

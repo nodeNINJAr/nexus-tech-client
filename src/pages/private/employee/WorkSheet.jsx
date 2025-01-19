@@ -4,6 +4,7 @@ import WorkSheetFrom from "../../../components/form/WorkSheetFrom";
 import useAuth from "../../../components/hooks/useAuth";
 import useAxiosSecure from "../../../components/hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 const WorkSheet = () => {
   // custom axios
@@ -26,13 +27,20 @@ const WorkSheet = () => {
   //
   return (
     <div className="overflow-x-auto">
+      <Helmet>
+        <title>WorkSheet || NexusTech</title>
+      </Helmet>
       <h1 className="text-lg font-poppins font-semibold pb-3 underline">
         Submit Your Daily Work
       </h1>
       {/*  */}
-      <WorkSheetFrom  refetch={refetch}  isLoading={isLoading} />
+      <WorkSheetFrom refetch={refetch} isLoading={isLoading} />
       {/* from table */}
-      <WorkSheetTable empWorkSheet={empWorkSheet}  refetch={refetch}  isLoading={isLoading} />
+      <WorkSheetTable
+        empWorkSheet={empWorkSheet}
+        refetch={refetch}
+        isLoading={isLoading}
+      />
     </div>
   );
 };

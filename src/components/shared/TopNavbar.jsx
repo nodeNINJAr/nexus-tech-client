@@ -8,6 +8,7 @@ import { CgProfile } from "react-icons/cg";
 import { FaSignOutAlt } from "react-icons/fa";
 import { IoLogInOutline } from "react-icons/io5";
 import useRole from "../hooks/useRole";
+import logo from "../../assets/image/logo.png"
 
 // 
 const TopNavbar = () => {
@@ -28,13 +29,10 @@ const TopNavbar = () => {
     <Navbar fluid  className="sticky top-0 z-50">
       <Navbar.Brand>
         <img
-          src="https://flowbite.com/docs/images/logo.svg"
+          src={logo}
           className="mr-3 h-6 sm:h-9"
           alt="Logo"
         />
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          NexusTech
-        </span>
       </Navbar.Brand>
       <div className="flex md:order-2 text-xl font-normal text-gray-800">
         {/* dropdown on profile click */}
@@ -73,9 +71,9 @@ const TopNavbar = () => {
       {/* Navlinks */}
       <Navbar.Collapse>
         <Navbar.Link as={NavLink} to="/">Home</Navbar.Link>
-        <Navbar.Link as={NavLink}  to="/about">About</Navbar.Link>
+        <Navbar.Link as={NavLink}  to="/about">About Us</Navbar.Link>
         <Navbar.Link as={NavLink}  to="/services">Services</Navbar.Link>
-        <Navbar.Link as={NavLink}  to="/contact-us">Contact</Navbar.Link>
+        <Navbar.Link as={NavLink}  to="/contact-us">Contact Us</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   );

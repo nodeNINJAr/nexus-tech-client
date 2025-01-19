@@ -4,8 +4,8 @@ import {Link} from "react-router-dom"
 
 const CTASection = () => {
   return (
-    <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-roboto">
-      <div className="container mx-auto px-4 text-center">
+    <section className="bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-white font-roboto">
+      <div className="px-4 text-center bg-black bg-opacity-50 py-16 ">
         <h2 className="text-4xl font-bold mb-4 font-poppins">Ready to Transform Your Business?</h2>
         <p className="text-lg mb-8">
           Partner with NexusTech for innovative tech solutions that drive growth
