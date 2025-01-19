@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useRole from "../components/hooks/useRole";
 import { SiPayloadcms } from "react-icons/si";
 import {
-  HomeOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Breadcrumb, Button, Layout, Menu, theme } from "antd";
+import { Button, Layout, Menu, theme } from "antd";
 import {
   Link,
-  Navigate,
   Outlet,
   useLocation,
   useNavigate,
@@ -33,6 +31,20 @@ const DashBoard = () => {
   const [userRole] = useRole();
   console.log(userRole);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+       if(userRole === "hr" && location.pathname === "/dashboard"){
+        navigate("/dashboard/employee-list", { replace: true });
+       }
+       else if(userRole === "employee" && location.pathname === "/dashboard"){
+        navigate("/dashboard/work-sheet", { replace: true });
+       }
+  },[location.pathname, navigate, userRole])
+
+
+
+
 
   // user logout
   const handleLogout = () => {
@@ -46,7 +58,7 @@ const DashBoard = () => {
   } = theme.useToken();
   //
 
-  const navigate = useNavigate();
+ 
   // admin menu
   const adminMenu = [
     {
@@ -68,7 +80,6 @@ const DashBoard = () => {
       route: "/dashboard/profile",
     },
   ];
-
   // hr menu
   const hrMenu = [
     {
@@ -113,18 +124,14 @@ const DashBoard = () => {
   ];
 
   // Find the menu item that matches the current route
-  const adminActiveKey = adminMenu.find((item) =>
-    location.pathname.includes(item.route)
-  )?.key;
-  const hrActiveKey = hrMenu.find((item) =>
-    location.pathname.includes(item.route)
-  )?.key;
-  const employeeActiveKey = employeeMenu.find((item) =>
-    location.pathname.includes(item.route)
-  )?.key;
-  
+  const currentMenu =
+    userRole === "admin" ? adminMenu : userRole === "hr" ? hrMenu : employeeMenu;
 
- 
+  const activeKey = currentMenu.find((item) =>
+    location.pathname.includes(item.route)
+  )?.key;
+
+
   //
   return (
     <Layout className="container mx-auto">
@@ -141,7 +148,7 @@ const DashBoard = () => {
             className="pt-6"
             theme="dark"
             mode="inline"
-            selectedKeys={[adminActiveKey]}
+            selectedKeys={[activeKey]}
             onClick={({ key }) => {
               const selectedItem = adminMenu.find((item) => item.key === key);
               if (selectedItem?.route) {
@@ -161,7 +168,7 @@ const DashBoard = () => {
             className="pt-6"
             theme="dark"
             mode="inline"
-            selectedKeys={[hrActiveKey]}
+            selectedKeys={[activeKey]}
             onClick={({ key }) => {
               const selectedItem = hrMenu.find((item) => item.key === key);
               if (selectedItem?.route) {
@@ -181,7 +188,7 @@ const DashBoard = () => {
             className="pt-6"
             theme="dark"
             mode="inline"
-            selectedKeys={[employeeActiveKey]}
+            selectedKeys={[activeKey]}
             onClick={({ key }) => {
               const selectedItem = employeeMenu.find(
                 (item) => item.key === key
@@ -207,7 +214,8 @@ const DashBoard = () => {
             {
               key: "4",
               icon: <FiLogOut style={{ fontSize: "16px" }} />,
-              label: <button onClick={handleLogout}>Logout</button>,
+              label: "Logout",
+              onClick:handleLogout,
             },
           ]}
         />

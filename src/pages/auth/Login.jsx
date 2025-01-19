@@ -6,38 +6,62 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import SocialLogin from "./socialLogin/SocialLogin";
 import useAuth from "../../components/hooks/useAuth";
 import { notification } from "antd";
+import useAxiosPublic from "../../components/hooks/useAxiosPublic";
 
+//
 const Login = () => {
   // auth
-  const {userSignIn } = useAuth();
+  const { userSignIn } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  //
+
   // show hide pass
   const [showPass, setShowPass] = useState(true);
-  const [loading , setLoading] = useState(true);
-   // navigate
-   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  // navigate
+  const navigate = useNavigate();
   // sign in
-  const handleUserSignIn = (e) => {
-    setLoading(!loading)
+  const handleUserSignIn = async (e) => {
+    setLoading(!loading);
     e.preventDefault();
     const userEmail = e.target.userEmail.value;
     const userPass = e.target.userPass.value;
-    // call the function
-    userSignIn(userEmail, userPass)
-      .then(() => {
-        setLoading(loading);
-        notification.success({
+    //
+    try {
+      const { data } = await axiosPublic.get(`/fired/${userEmail}`);
+      if (data?.fired) {
+        return notification.info({
           message: (
-            <p className="text-base font-medium font-rubik text-green-500">
-              Successfully logged in with your credentials!
+            <p className="text-base font-medium font-rubik text-red-500">
+               Your employment with NexusTech has been terminated. We wish you the best in your future endeavors.
             </p>
           ),
           placement: "topRight",
         });
-        navigate('/dashboard')
-      })
-      .catch((err) => {
-        console.log(err);
+      }
+      // call the function
+      await userSignIn(userEmail, userPass);
+      notification.success({
+        message: (
+          <p className="text-base font-medium font-rubik text-green-500">
+            Successfully logged in with your credentials!
+          </p>
+        ),
+        placement: "topRight",
       });
+      navigate("/dashboard");
+    } catch (err) {
+      notification.error({
+        message: (
+          <p className="text-base font-medium font-rubik text-green-500">
+           {err.message.split("Firebase:").join("Check your email--pass --") || "An unexpected error occurred. Please try again."}
+          </p>
+        ),
+        placement: "topRight",
+      });
+    } finally {
+      setLoading(loading);
+    }
   };
 
   //
@@ -110,7 +134,9 @@ const Login = () => {
           </div>
           {/*  */}
           <Button type="submit">
-            {!loading && <Spinner aria-label="Spinner button example" size="sm" />}
+            {!loading && (
+              <Spinner aria-label="Spinner button example" size="sm" />
+            )}
             <span className="pl-3"> Login</span>
           </Button>
         </form>

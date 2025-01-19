@@ -40,7 +40,7 @@ ConfirmationModal.propTypes = {
   record: PropTypes.shape({
     fired: PropTypes.bool,
   }).isRequired,
-  recordId: PropTypes.string.isRequired,
+  recordId: PropTypes.string,
   handleAction: PropTypes.func.isRequired,
   content: PropTypes.string.isRequired,
   okText: PropTypes.string.isRequired,

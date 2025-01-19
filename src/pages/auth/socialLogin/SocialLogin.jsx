@@ -1,17 +1,9 @@
 import React, { useState } from "react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
-import {useNavigate } from "react-router-dom";
 import EmployeeDetailsModal from "../../../components/modal/EmployeeDetailsModal";
-import useAuth from "../../../components/hooks/useAuth";
-// import { userInfoSaveToDb } from "../../../utilitis/utilitis";
-// import { notification } from "antd";
 
+// 
 const SocialLogin = () => {
-  // //
-  // const { userSignInByGoogle, userSignInByGithub } = useAuth();
-
-  // // navigate
-  // const navigate = useNavigate();
   // show modal
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [authMethod, setAuthMethod] = useState(null);
@@ -23,56 +15,12 @@ const SocialLogin = () => {
   const handleGoogleLogin = () => {
     setAuthMethod("google");
     showModal();
-    // // call the function
-    // userSignInByGoogle()
-    //   .then((result) => {
-    //     userInfoSaveToDb({
-    //       userEmail: result?.user?.email,
-    //       userName: result?.user?.displayName,
-    //       userImage: result?.user?.photoURL,
-    //       userRole: "employee",
-    //     });
-    //     notification.success({
-    //       message: (
-    //         <p className="text-base font-medium font-rubik text-green-500">
-    //           Successfully logged in using Google!
-    //         </p>
-    //       ),
-    //       placement: "topRight",
-    //     });
-    //     navigate("/dashboard");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   };
 
   // github login
   const handleGithubSignIn = () => {
     setAuthMethod("github");
     showModal();
-    // call the function
-    // userSignInByGithub()
-    //   .then((result) => {
-    //     userInfoSaveToDb({
-    //       userEmail: result?.user?.email,
-    //       userName: result?.user?.displayName,
-    //       userImage: result?.user?.photoURL,
-    //       userRole: "employee",
-    //     });
-    //     notification.success({
-    //       message: (
-    //         <p className="text-base font-medium font-rubik text-green-500">
-    //           Successfully logged in with your credentials!
-    //         </p>
-    //       ),
-    //       placement: "topRight",
-    //     });
-    //     navigate("/dashboard");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   };
 
   //
