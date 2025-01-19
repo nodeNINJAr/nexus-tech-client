@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout";
 import DashBoard from "../layouts/DashBoard";
 import Home from "../pages/public/Home";
 import About from "../pages/public/About";
-import Contact from "../pages/public/Contact";
+import Contact from "../pages/public/ContactUs";
 import Login from "../pages/auth/Login";
 import SignUp from "../pages/auth/SignUp";
 import WorkSheet from "../pages/private/employee/WorkSheet";
@@ -18,6 +18,8 @@ import HrPrivate from "./HrPrivate";
 import AdminPrivate from "./AdminPrivate";
 import AllEmployeeList from "../pages/private/admin/AllEmployeeList";
 import Payroll from "../pages/private/admin/Payroll";
+import Services from "../pages/public/Services";
+import ContactUs from "../pages/public/ContactUs";
 
 //
 const Router = () => {
@@ -27,7 +29,8 @@ const Router = () => {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="/services" element={<Services />} />
       </Route>
       {/* private layouts */}
       <Route path="dashboard" element={<PrivateRoute><DashBoard /></PrivateRoute>}>

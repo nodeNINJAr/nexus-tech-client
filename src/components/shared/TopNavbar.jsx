@@ -53,7 +53,7 @@ const TopNavbar = () => {
             </span>
           </Dropdown.Header>
           <Dropdown.Item as={Link} to={`${userRole=== "employee" && "/dashboard/work-sheet" || userRole === "hr" && "/dashboard/employee-list" || userRole === "admin" && "/dashboard"}`} className="flex justify-start items-center gap-1 text-sm font-normal font-roboto"><LuLayoutDashboard />Dashboard</Dropdown.Item>
-          <Dropdown.Item as={Link} to={'/profile'} className="flex justify-start items-center gap-1 text-sm font-normal font-roboto"><CgProfile />Profile</Dropdown.Item>
+          <Dropdown.Item as={Link} to={'/dashboard/profile'} className="flex justify-start items-center gap-1 text-sm font-normal font-roboto"><CgProfile />Profile</Dropdown.Item>
           <Dropdown.Divider />
           
             <Dropdown.Item onClick={handleSignOut} className="font-medium flex justify-start items-center  gap-[5px] text-lg font-exo2">
@@ -75,7 +75,7 @@ const TopNavbar = () => {
         <Navbar.Link as={NavLink} to="/">Home</Navbar.Link>
         <Navbar.Link as={NavLink}  to="/about">About</Navbar.Link>
         <Navbar.Link as={NavLink}  to="/services">Services</Navbar.Link>
-        <Navbar.Link as={NavLink}  to="/contact">Contact</Navbar.Link>
+        <Navbar.Link as={NavLink}  to="/contact-us">Contact</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   );
