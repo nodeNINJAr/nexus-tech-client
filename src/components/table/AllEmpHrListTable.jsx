@@ -35,8 +35,9 @@ const AllEmpHrListTable = ({ users, isLoading, handleFired, handleMakeHr,refetch
         <Space size="middle" key={record.key}>
           <p>{record?.salary} $</p>
           <button
+            disabled={record?.fired}
             onClick={()=>showModal(record)}
-            className={`cursor-pointer bg-[#F6FFED] text-[#ffce47] border border- rounded-full px-1 py-1 font-semibold font-rubik`}
+            className={`${record?.fired && "bg-[#efefef]"} bg-[#eeffdd] text-[#ffce47] border border- rounded-full px-1 py-1 font-semibold font-rubik`}
           >
             <CiCirclePlus className="font-semibold font-rubik text-gray-600" />
           </button>

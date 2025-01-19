@@ -244,10 +244,9 @@ const DashBoard = () => {
            <DynamicBreadcrumb/>
         </Header>
         <Content
-          className="min-h-screen"
+          className="min-h-screen p-1 sm:p-6"
           style={{
             margin: "24px 16px",
-            padding: 24,
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
           }}
