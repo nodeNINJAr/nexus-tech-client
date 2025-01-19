@@ -6,11 +6,11 @@ import MainFooter from "../components/shared/MainFooter";
 
 const Layouts = () => {
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto bg-gray-100">
       {/* navbar */}
       <TopNavbar />
       {/*main content */}
-      <main className="mx-auto w-11/12">
+      <main className="mx-auto ">
         <Outlet />
       </main>
       {/* footer */}

@@ -9,8 +9,7 @@ const formatter = (value) => <CountUp end={value} separator="," />;
 //
 const AdminStatistic = ({adminStats}) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4  gap-4">
-     
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4  gap-4 truncate">
         <Card bordered={false}>
           <Statistic
             title="Total Employee"
@@ -22,13 +21,14 @@ const AdminStatistic = ({adminStats}) => {
 
         <Card bordered={false}>
           <Statistic
-            title="Total Earning "
+            className="truncate"
+            title="Total Earning"
             value={2112893}
             valueStyle={{
               color: "#3f8600",
             }}
             precision={2}
-            // formatter={formatter}
+            formatter={formatter}
             prefix={<ArrowDownOutlined />}
              suffix="$"
           />
@@ -42,6 +42,7 @@ const AdminStatistic = ({adminStats}) => {
             valueStyle={{
               color: "#cf1322",
             }}
+            formatter={formatter}
             prefix={<ArrowUpOutlined />}
              suffix="$"
 
@@ -56,7 +57,8 @@ const AdminStatistic = ({adminStats}) => {
             valueStyle={{
               color: "#cf1322",
             }}
-            suffix="H"
+            formatter={formatter}
+            suffix="h"
           />
         </Card>
     

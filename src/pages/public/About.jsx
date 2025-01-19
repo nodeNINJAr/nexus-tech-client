@@ -1,11 +1,16 @@
-import React from 'react';
+import React from "react";
+import CompanyOverview from "../../components/sections/About/CompanyOverview";
+import OurValues from "../../components/sections/About/OurValues";
 
 const About = () => {
-    return (
-        <div>
-            <h1>Hello from about</h1>
-        </div>
-    );
+  return (
+    <div>
+      {/* company overview */}
+      <CompanyOverview />
+      {/* our values */}
+      <OurValues />
+    </div>
+  );
 };
 
 export default About;

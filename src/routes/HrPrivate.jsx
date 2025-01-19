@@ -6,7 +6,6 @@ import Spinner from "../components/shared/loader/Spinner";
 
 const HrPrivate = ({children}) => {
   const [userRole, isLoading] = useRole();
-  console.log(userRole);
   const location = useLocation();
   if (isLoading) return <Spinner />;
   if (userRole === "hr") return children;

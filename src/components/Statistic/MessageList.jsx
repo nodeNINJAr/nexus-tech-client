@@ -32,17 +32,17 @@ const MessageList = () => {
   //
   return (
     <List
-      className="demo-loadmore-list"
+      className="demo-loadmore-list overflow-x-auto"
       loading={isLoading}
       itemLayout="horizontal"
       loadMore={loadMore}
       dataSource={messageInfo}
       renderItem={(item) => (
-        <List.Item actions={[<a key="list-loadmore-edit">Delete</a>]}>
+        <List.Item actions={[<a key="list-loadmore-edit" className="bg-gray-300 rounded-md py-[1px] px-1 text-xs sm:text-sm font-medium">Remove</a>]}>
           <Skeleton avatar title={false} loading={item.loading} active>
             <List.Item.Meta
-              title={<a>Email : {item?.email}</a>}
-              description={<>Message : {item?.message}</>}
+              title={<span className="truncate">Email : {item?.email}</span>}
+              description={<p className="">Message : {item?.message}</p>}
             />
           </Skeleton>
         </List.Item>

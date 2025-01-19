@@ -1,57 +1,66 @@
 import React from 'react';
-import { Footer } from "flowbite-react";
-import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
+import { Footer } from 'flowbite-react';
+import { BsFacebook, BsGithub, BsLinkedin, BsTwitter } from 'react-icons/bs';
+
 const MainFooter = () => {
-    return (
-        <Footer container>
+  return (
+    <Footer container>
       <div className="w-full">
         <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
           <div>
             <Footer.Brand
-              href="https://flowbite.com"
-              src="https://flowbite.com/docs/images/logo.svg"
-              alt="Flowbite Logo"
+              href="https://nexustech.com"
+              src="https://via.placeholder.com/150x50.png?text=NexusTech+Logo"
+              alt="NexusTech Logo"
               name="NexusTech"
             />
           </div>
           <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
+            {/* About Section */}
             <div>
-              <Footer.Title title="about" />
+              <Footer.Title title="About NexusTech" />
               <Footer.LinkGroup col>
-                <Footer.Link href="#">Flowbite</Footer.Link>
-                <Footer.Link href="#">Tailwind CSS</Footer.Link>
+                <Footer.Link href="#">Company Overview</Footer.Link>
+                <Footer.Link href="#">Our Services</Footer.Link>
+                <Footer.Link href="#">Careers</Footer.Link>
+                <Footer.Link href="#">Blog</Footer.Link>
               </Footer.LinkGroup>
             </div>
+
+            {/* Support Section */}
             <div>
-              <Footer.Title title="Follow us" />
+              <Footer.Title title="Support" />
               <Footer.LinkGroup col>
-                <Footer.Link href="#">Github</Footer.Link>
-                <Footer.Link href="#">Discord</Footer.Link>
+                <Footer.Link href="#">Contact Us</Footer.Link>
+                <Footer.Link href="#">Help Center</Footer.Link>
+                <Footer.Link href="#">FAQ</Footer.Link>
               </Footer.LinkGroup>
             </div>
+
+            {/* Legal Section */}
             <div>
               <Footer.Title title="Legal" />
               <Footer.LinkGroup col>
                 <Footer.Link href="#">Privacy Policy</Footer.Link>
-                <Footer.Link href="#">Terms &amp; Conditions</Footer.Link>
+                <Footer.Link href="#">Terms & Conditions</Footer.Link>
+                <Footer.Link href="#">Cookie Policy</Footer.Link>
               </Footer.LinkGroup>
             </div>
           </div>
         </div>
         <Footer.Divider />
         <div className="w-full sm:flex sm:items-center sm:justify-between">
-          <Footer.Copyright href="#" by="Flowbite™" year={2022} />
+          <Footer.Copyright href="https://nexustech.com" by="NexusTech™" year={2025} />
           <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
-            <Footer.Icon href="#" icon={BsFacebook} />
-            <Footer.Icon href="#" icon={BsInstagram} />
-            <Footer.Icon href="#" icon={BsTwitter} />
-            <Footer.Icon href="#" icon={BsGithub} />
-            <Footer.Icon href="#" icon={BsDribbble} />
+            <Footer.Icon href="https://facebook.com/nexustech" icon={BsFacebook} />
+            <Footer.Icon href="https://linkedin.com/company/nexustech" icon={BsLinkedin} />
+            <Footer.Icon href="https://twitter.com/nexustech" icon={BsTwitter} />
+            <Footer.Icon href="https://github.com/nexustech" icon={BsGithub} />
           </div>
         </div>
       </div>
     </Footer>
-    );
+  );
 };
 
 export default MainFooter;

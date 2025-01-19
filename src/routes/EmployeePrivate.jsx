@@ -6,7 +6,6 @@ import useRole from '../components/hooks/useRole';
 
 const EmployeePrivate = ({children}) => {
     const [userRole, isLoading] = useRole();
-    console.log(userRole);
     const location = useLocation();
     if(isLoading) return <Spinner/>
     if(userRole ==="employee") return children;

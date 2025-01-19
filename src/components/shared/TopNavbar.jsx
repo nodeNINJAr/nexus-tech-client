@@ -25,7 +25,7 @@ const TopNavbar = () => {
 
   //
   return (
-    <Navbar fluid rounded className="sticky top-0">
+    <Navbar fluid  className="sticky top-0 z-50">
       <Navbar.Brand>
         <img
           src="https://flowbite.com/docs/images/logo.svg"

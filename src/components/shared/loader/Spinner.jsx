@@ -2,7 +2,7 @@ import React from "react";
 import {Flex, Spin} from "antd"
 const Spinner = () => {
   return (
-    <div>
+    <div className="flex justify-center min-h-dvh">
       <Flex align="center" gap="middle">
         <Spin size="large" />
       </Flex>

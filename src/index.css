@@ -72,4 +72,28 @@
   .ant-breadcrumb-link {
     display: inline-block;
   }
-  
+  /*  */
+  /* Change navigation button colors */
+.slick-prev,
+.slick-next {
+  color: #f26161!important; /* Change this to your desired color */
+  z-index: 10; /* Ensures buttons are on top of content */
+}
+
+/* Optional: Change button hover effect */
+.slick-prev:hover,
+.slick-next:hover {
+  color: #00bcd4; /* Change hover color */
+}
+
+/* Optional: Add custom background */
+.slick-prev,
+.slick-next {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

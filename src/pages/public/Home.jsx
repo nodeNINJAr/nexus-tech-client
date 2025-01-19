@@ -1,13 +1,23 @@
-import { Button } from "flowbite-react";
 import React from "react";
+import OurServices from "../../components/sections/Home/OurServices";
+import Testimonial from "../../components/sections/Home/Testimonial";
+import BannerSlider from "../../components/sections/Home/BannerSlider";
+import KeyFeatures from "../../components/sections/Home/KeyFeatures";
+import CTASection from "../../components/sections/Home/CTASection";
 
 const Home = () => {
   return (
-    <div className="bg-red-400 min-h-screen">
-      <h1>hello from home</h1>
-      <div>
-        <Button>Click me</Button>
-      </div>
+    <div className=" min-h-screen">
+      {/* banner slider */}
+      <BannerSlider />
+      {/* services */}
+      <OurServices />
+      {/* testominial */}
+      <Testimonial />
+      {/*  */}
+      <KeyFeatures/>
+      {/*  */}
+      <CTASection/>
     </div>
   );
 };
