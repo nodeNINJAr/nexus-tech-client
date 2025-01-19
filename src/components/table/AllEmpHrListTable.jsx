@@ -56,9 +56,9 @@ const AllEmpHrListTable = ({ users, isLoading, handleFired, handleMakeHr,refetch
       render: (_, record) => (
         <Space size="middle" key={record.key}>
           <button
-            disabled={record?.userRole === "hr"}
+            disabled={record?.userRole === "hr"|| record?.fired}
             onClick={() => handleMakeHr(record?._id)}
-            className={`bg-[#F6FFED] text-[#29ec2f] border border- rounded-lg px-4 py-1 font-normal font-rubik`}
+            className={`${record?.fired && "text-[#d6d6d6]"} bg-[#F6FFED] text-[#29ec2f] border border- rounded-lg px-4 py-1 font-normal font-rubik`}
           >
             {record?.userRole === "hr" ? "HR" : "Make HR"}
           </button>

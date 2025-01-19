@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useAxiosSecure from "../../../components/hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import AllEmpHrListTable from "../../../components/table/AllEmpHrListtable";
-import { FloatButton, Segmented } from "antd";
+import { Segmented } from "antd";
 import { AppstoreOutlined, BarsOutlined } from "@ant-design/icons";
 import AllEmployeeGrid from "../../../components/gridview/AllEmployeeGrid";
 
