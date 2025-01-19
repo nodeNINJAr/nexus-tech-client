@@ -20,6 +20,7 @@ import AllEmployeeList from "../pages/private/admin/AllEmployeeList";
 import Payroll from "../pages/private/admin/Payroll";
 import Services from "../pages/public/Services";
 import ContactUs from "../pages/public/ContactUs";
+import AdminDashBoard from "../pages/private/admin/AdminDashBoard";
 
 //
 const Router = () => {
@@ -45,6 +46,7 @@ const Router = () => {
         {/* admin-private routes */}
         <Route path="all-employee-list" element={<AdminPrivate><AllEmployeeList/></AdminPrivate>} />
         <Route path="payroll" element={<AdminPrivate><Payroll/></AdminPrivate>} />
+        <Route index element={<AdminPrivate><AdminDashBoard /></AdminPrivate>} />
       </Route>
       {/* auth */}
       <Route path="/login" element={<Login />} />

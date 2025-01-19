@@ -20,6 +20,7 @@ import { GiProgression } from "react-icons/gi";
 import { FaRegListAlt } from "react-icons/fa";
 import useAuth from "../components/hooks/useAuth";
 import DynamicBreadcrumb from "../components/shared/breadcrumb/DynamicBreadcrumb";
+import AdminDashBoard from "../pages/private/admin/AdminDashBoard";
 
 // import from layouts
 const { Header, Sider, Content } = Layout;
@@ -29,7 +30,6 @@ const DashBoard = () => {
   //
   const { userSignOut } = useAuth();
   const [userRole] = useRole();
-  console.log(userRole);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -130,7 +130,7 @@ const DashBoard = () => {
   const activeKey = currentMenu.find((item) =>
     location.pathname.includes(item.route)
   )?.key;
-
+  
 
   //
   return (
