@@ -40,7 +40,7 @@ const TopNavbar = () => {
           arrowIcon={false}
           inline
           label={
-            user ? <Avatar className="mr-2 md:mr-0" img={user?.photoURL} rounded /> : <Avatar rounded />
+            user ? <Avatar className="mr-2 md:mr-0" img={user?.photoURL} rounded stacked /> : <Avatar rounded/>
           }
         >
           {user ? <>

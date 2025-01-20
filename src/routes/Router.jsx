@@ -21,6 +21,7 @@ import Payroll from "../pages/private/admin/Payroll";
 import Services from "../pages/public/Services";
 import ContactUs from "../pages/public/ContactUs";
 import AdminDashBoard from "../pages/private/admin/AdminDashBoard";
+import NotFound from "../pages/error/NotFound";
 
 //
 const Router = () => {
@@ -51,6 +52,8 @@ const Router = () => {
       {/* auth */}
       <Route path="/login" element={<Login />} />
       <Route path="/signUp" element={<SignUp />} />
+      {/*  */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
