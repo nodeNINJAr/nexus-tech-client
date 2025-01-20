@@ -10,14 +10,17 @@ import {
   notification,
   Spin,
 } from "antd";
-import { userInfoSaveToDb } from "../../utilitis/utilitis";
+import {
+  fetchUserRoleFromAPI,
+  userInfoSaveToDb,
+} from "../../utilitis/utilitis";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const { Option } = Select;
 
-// 
+//
 const EmployeeDetailsModal = ({
   isModalVisible,
   setIsModalVisible,
@@ -34,7 +37,7 @@ const EmployeeDetailsModal = ({
     userSignInByGithub,
     userSignOut,
   } = useAuth();
-  // 
+  //
   const axiosPublic = useAxiosPublic();
   // navigate
   const navigate = useNavigate();
@@ -43,128 +46,127 @@ const EmployeeDetailsModal = ({
   // modal data
   // submit firebase and db
   const handleSubmit = async (values) => {
-    setBtnLoading(!btnLoading)
-    // for
+    setBtnLoading(!btnLoading);
+    // for github
     if (authMethod === "github") {
-      try{
-        const {user} = await userSignInByGithub();
-         //  checking if employee fired
+      try {
+        const { user } = await userSignInByGithub();
+        //  checking if employee fired
         const { data } = await axiosPublic.get(`/fired/${user?.email}`);
         if (data?.fired) {
-         notification.info({
+          notification.info({
             message: (
               <p className="text-base font-medium font-rubik text-red-500">
-                 Your employment with NexusTech has been terminated. We wish you the best in your future endeavors.
+                Your employment with NexusTech has been terminated. We wish you
+                the best in your future endeavors.
               </p>
             ),
             placement: "topRight",
           });
           userSignOut();
           setIsModalVisible(false);
-          return 
+          return;
         }
-          if(user?.email){
-           await userInfoSaveToDb({
-              userEmail:user?.email,
-              userName: user?.displayName,
-              userImage: user?.photoURL,
-              userRole: "employee",
-              bank_account_no:values?.bank_account_no,
-              salary:values?.salary,
-              designation:values?.designation,
-              term:true,
-            });
-            notification.success({
-              message: (
-                <p className="text-base font-medium font-rubik text-green-500">
-                  Successfully logged in using GitHub!
-                </p>
-              ),
-              placement: "topRight",
-            });
-            navigate("/dashboard");
-          }else{
-           await userSignOut()
-             notification.info({
-              message: (
-                <p className="text-base font-medium font-rubik text-red-500">
-                   Your github account have no added gmail try other options
-                </p>
-              ),
-              placement: "topRight",
-            });
-            setIsModalVisible(false)
-            return 
-          }
-      }catch(err){
-        notification.error({
-          message: (
-            <p className="text-base font-medium font-rubik text-green-500">
-                Some probem with github login refresh and try again
-            </p>
-          ),
-          placement: "topRight",
-        });
-      }
-      finally{
-        setBtnLoading(true)
-      }
-      return;
-    }
-    
-    if (authMethod === "google") {
-      try{
-       const {user} =  await userSignInByGoogle();
-           //  checking if employee fired
-            const { data } = await axiosPublic.get(`/fired/${user?.email}`);
-                 if (data?.fired) {
-                  notification.info({
-                     message: (
-                       <p className="text-base font-medium font-rubik text-red-500">
-                          Your employment with NexusTech has been terminated. We wish you the best in your future endeavors.
-                       </p>
-                     ),
-                     placement: "topRight",
-                   });
-                   userSignOut();
-                   setIsModalVisible(false)
-                   return 
-                 }
-            if(user?.email){
-              userInfoSaveToDb({
-                userEmail:user?.email,
-                userName: user?.displayName,
-                userImage:user?.photoURL,
-                userRole: "employee",
-                bank_account_no:values?.bank_account_no,
-                salary:values?.salary,
-                designation:values?.designation,
-                term:true,
-              });
-              notification.success({
-                message: (
-                  <p className="text-base font-medium font-rubik text-green-500">
-                    Successfully SignIn using Google!
-                  </p>
-                ),
-                placement: "topRight",
-              });
-              navigate("/dashboard");
-            }
-         }
-        catch(err) {
-          notification.error({
+        if (user?.email) {
+          await userInfoSaveToDb({
+            userEmail: user?.email,
+            userName: user?.displayName,
+            userImage: user?.photoURL,
+            userRole: "employee",
+            bank_account_no: values?.bank_account_no,
+            salary: values?.salary,
+            designation: values?.designation,
+            term: true,
+          });
+          notification.success({
             message: (
               <p className="text-base font-medium font-rubik text-green-500">
-                  Some probem with google login refresh and try again
+                Successfully logged in using GitHub!
               </p>
             ),
             placement: "topRight",
           });
+          navigate("/dashboard/work-sheet");
+        } else {
+          await userSignOut();
+          notification.info({
+            message: (
+              <p className="text-base font-medium font-rubik text-red-500">
+                Your github account have no added gmail try other options
+              </p>
+            ),
+            placement: "topRight",
+          });
+          setIsModalVisible(false);
+          return;
         }
-        finally{
-          setBtnLoading(true)
+      } catch (err) {
+        notification.error({
+          message: (
+            <p className="text-base font-medium font-rubik text-green-500">
+              Some probem with github login refresh and try again
+            </p>
+          ),
+          placement: "topRight",
+        });
+      } finally {
+        setBtnLoading(true);
+      }
+      return;
+    }
+
+    if (authMethod === "google") {
+      try {
+        const { user } = await userSignInByGoogle();
+        //  checking if employee fired
+        const { data } = await axiosPublic.get(`/fired/${user?.email}`);
+        if (data?.fired) {
+          notification.info({
+            message: (
+              <p className="text-base font-medium font-rubik text-red-500">
+                Your employment with NexusTech has been terminated. We wish you
+                the best in your future endeavors.
+              </p>
+            ),
+            placement: "topRight",
+          });
+          userSignOut();
+          setIsModalVisible(false);
+          return;
         }
+        if (user?.email) {
+          userInfoSaveToDb({
+            userEmail: user?.email,
+            userName: user?.displayName,
+            userImage: user?.photoURL,
+            userRole: "employee",
+            bank_account_no: values?.bank_account_no,
+            salary: values?.salary,
+            designation: values?.designation,
+            term: true,
+          });
+          notification.success({
+            message: (
+              <p className="text-base font-medium font-rubik text-green-500">
+                Successfully SignIn using Google!
+              </p>
+            ),
+            placement: "topRight",
+          });
+          navigate("/dashboard/work-sheet");
+        }
+      } catch (err) {
+        notification.error({
+          message: (
+            <p className="text-base font-medium font-rubik text-green-500">
+              Some probem with google login refresh and try again
+            </p>
+          ),
+          placement: "topRight",
+        });
+      } finally {
+        setBtnLoading(true);
+      }
       return;
     }
 
@@ -173,8 +175,8 @@ const EmployeeDetailsModal = ({
       ...userInfo,
       bank_account_no: values?.bank_account_no,
       salary: values?.salary,
-      designation: values?.designation, 
-      userPass:null,
+      designation: values?.designation,
+      userPass: null,
     };
     // userSignUp on fireBase
     try {
@@ -190,22 +192,40 @@ const EmployeeDetailsModal = ({
         ),
         placement: "topRight",
       });
-      navigate("/dashboard");
+
+      // Fetch role dynamically if not already available
+      const userRole = await fetchUserRoleFromAPI(userInfo?.userEmail);
+      // Navigate based on role
+      switch (userRole) {
+        case "admin":
+          navigate("/dashboard");
+          break;
+        case "hr":
+          navigate("/dashboard/employee-list");
+          break;
+        case "employee":
+          navigate("/dashboard/work-sheet");
+          break;
+        default:
+          notification.error({
+            message: "Role not recognized. Contact support.",
+            placement: "topRight",
+          });
+      }
+      //
     } catch (err) {
       notification.error({
         message: (
           <p className="text-base font-medium font-rubik text-red-500">
-            {`${err.message.split('Firebase:').join(' ')}`}
+            {`${err.message.split("Firebase:").join(" ")}`}
           </p>
         ),
         placement: "topRight",
       });
     } finally {
-      setBtnLoading(true)
+      setBtnLoading(true);
       setLoading(!loading);
-     
     }
-
     //  modal visible
     setIsModalVisible(false);
   };
@@ -214,15 +234,23 @@ const EmployeeDetailsModal = ({
   const handleCancel = () => {
     setIsModalVisible(false);
     setLoading(false);
-    setBtnLoading(true)
+    setBtnLoading(true);
   };
   //
   return (
     <>
       <Modal
-        title={<div className="flex justify-between items-start gap-2 truncate text-xl font-roboto">
-        Employee Details {authMethod && <p className="text-[7px] font-semibold font-roboto capitalize text-red-500 mr-4 mt-2 leading-3 whitespace-pre-line">** already have an account ? by {authMethod} don't panic just provide the info</p>}
-        </div>}
+        title={
+          <div className="flex justify-between items-start gap-2 truncate text-xl font-roboto">
+            Employee Details{" "}
+            {authMethod && (
+              <p className="text-[7px] font-semibold font-roboto capitalize text-red-500 mr-4 mt-2 leading-3 whitespace-pre-line">
+                ** already have an account ? by {authMethod} don't panic just
+                provide the info
+              </p>
+            )}
+          </div>
+        }
         open={isModalVisible}
         // onOk={handleSubmit}
         onCancel={handleCancel}
@@ -249,7 +277,10 @@ const EmployeeDetailsModal = ({
               },
             ]}
           >
-            <Input placeholder="Enter bank account number" className="rounded-lg  border-gray-300"/>
+            <Input
+              placeholder="Enter bank account number"
+              className="rounded-lg  border-gray-300"
+            />
           </Form.Item>
           {/*  */}
           <Form.Item

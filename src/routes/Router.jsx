@@ -46,7 +46,7 @@ const Router = () => {
         {/* admin-private routes */}
         <Route path="all-employee-list" element={<AdminPrivate><AllEmployeeList/></AdminPrivate>} />
         <Route path="payroll" element={<AdminPrivate><Payroll/></AdminPrivate>} />
-        <Route index element={<AdminDashBoard />} />
+        <Route index element={<AdminPrivate><AdminDashBoard /></AdminPrivate>} />
       </Route>
       {/* auth */}
       <Route path="/login" element={<Login />} />

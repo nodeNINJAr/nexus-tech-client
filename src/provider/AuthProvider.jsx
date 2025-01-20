@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
   const axiosSecure = useAxiosSecure();
   // store user data
   const [user, setUser] = useState(null);
-  console.log("current user ---->", user);
+  // console.log("current user ---->", user);
   // when user is unvailable
   const [loading, setLoading] = useState(true);
 
@@ -62,21 +62,21 @@ const AuthProvider = ({ children }) => {
         setUser(currentUser);
         setLoading(false);
         try {
-          const { data } = await axiosSecure.post("/login", {
+          await axiosSecure.post("/login", {
             email: currentUser?.email,
           });
-          console.log(data?.message);
-        } catch (err) {
-          console.log(err);
+          
+        } catch(err){
+          // console.log(err);
         }
       } else {
         setUser("");
         setLoading(false);
         try {
-          const { data } = await axiosSecure.post("/logout");
-          console.log(data?.message);
+         await axiosSecure.post("/logout");
+      
         } catch (err) {
-          console.log(err);
+          // console.log(err);
         }
       }
     });

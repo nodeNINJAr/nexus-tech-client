@@ -10,3 +10,14 @@ export const userInfoSaveToDb= async(userInfo)=>{
   const {data} = await axios.post(`${import.meta.env.VITE_base_url}/users`,userInfo);
   return data
 }
+
+
+// 
+export const fetchUserRoleFromAPI = async (email) => {
+  try {
+    const { data } = await axios.get(`${import.meta.env.VITE_base_url}/user/role/${email}`);
+    return data; // Ensure the key matches your backend's response
+  } catch {
+    return null; // Fallback to null or a default role
+  }
+};

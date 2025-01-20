@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { Button, Checkbox, Label, Spinner, TextInput } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -7,13 +6,13 @@ import SocialLogin from "./socialLogin/SocialLogin";
 import useAuth from "../../components/hooks/useAuth";
 import { notification } from "antd";
 import useAxiosPublic from "../../components/hooks/useAxiosPublic";
+import { fetchUserRoleFromAPI } from "../../utilitis/utilitis";
 
 //
 const Login = () => {
   // auth
   const { userSignIn } = useAuth();
   const axiosPublic = useAxiosPublic();
-  //
 
   // show hide pass
   const [showPass, setShowPass] = useState(true);
@@ -33,14 +32,15 @@ const Login = () => {
         return notification.info({
           message: (
             <p className="text-base font-medium font-rubik text-red-500">
-               Your employment with NexusTech has been terminated. We wish you the best in your future endeavors.
+              Your employment with NexusTech has been terminated. We wish you
+              the best in your future endeavors.
             </p>
           ),
           placement: "topRight",
         });
       }
       // call the function
-      await userSignIn(userEmail, userPass);
+      const { user } = await userSignIn(userEmail, userPass);
       notification.success({
         message: (
           <p className="text-base font-medium font-rubik text-green-500">
@@ -49,12 +49,31 @@ const Login = () => {
         ),
         placement: "topRight",
       });
-      navigate("/dashboard");
+      // Fetch role dynamically if not already available
+      const userRole = await fetchUserRoleFromAPI(user?.email); 
+      // Navigate based on role
+      switch (userRole) {
+        case "admin":
+          navigate("/dashboard");
+          break;
+        case "hr":
+          navigate("/dashboard/employee-list");
+          break;
+        case "employee":
+          navigate("/dashboard/work-sheet");
+          break;
+        default:
+          notification.error({
+            message: "Role not recognized. Contact support.",
+            placement: "topRight",
+          });
+      }
     } catch (err) {
       notification.error({
         message: (
           <p className="text-base font-medium font-rubik text-green-500">
-           {err.message.split("Firebase:").join("Check your email--pass --") || "An unexpected error occurred. Please try again."}
+            {err.message.split("Firebase:").join("Check your email--pass --") ||
+              "An unexpected error occurred. Please try again."}
           </p>
         ),
         placement: "topRight",
