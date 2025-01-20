@@ -22,7 +22,7 @@ const EmployeeDetails = () => {
     queryKey: ["payment-history", employeeId],
     queryFn: async () => {
       const { data } = await axiosSecure(`/payment-history/${employeeId}`);
-      return data;
+      return data?.payments;
     },
   });
   //

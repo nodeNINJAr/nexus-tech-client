@@ -54,9 +54,9 @@ const Chart = ({ payHistory }) => {
 Chart.propTypes = {
   payHistory: PropTypes.arrayOf(
     PropTypes.shape({
-      month: PropTypes.string.isRequired,
-      year: PropTypes.string.isRequired,
-      salary: PropTypes.number.isRequired,
+      month: PropTypes.string,
+      year: PropTypes.number,
+      salary: PropTypes.string,
     })
   ).isRequired,
 };

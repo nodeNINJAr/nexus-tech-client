@@ -36,7 +36,7 @@ Nexus Tech is a comprehensive **Employee Management System** (EMS) designed to m
   - View, edit, and delete work entries in a table.
   - Updates and delete reflect immediately without page reload.
 - **/payment-history**:
-  - View salary payment history with pagination/infinite scrolling for more than five rows.
+  - View salary payment history with pagination scrolling for more than five rows.
 
 ### HR Dashboard
 - **/employee-list**:

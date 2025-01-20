@@ -21,7 +21,7 @@ UserInfoCard.propTypes = {
     userImage: PropTypes.string,
     userName: PropTypes.string,
     designation: PropTypes.string,
-  }).isRequired,
+  })
 };
 
 export default UserInfoCard;
