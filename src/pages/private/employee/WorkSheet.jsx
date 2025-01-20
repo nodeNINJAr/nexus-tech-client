@@ -26,7 +26,7 @@ const WorkSheet = () => {
 
   //
   return (
-    <div className="overflow-x-auto">
+    <>
       <Helmet>
         <title>WorkSheet || NexusTech</title>
       </Helmet>
@@ -36,12 +36,14 @@ const WorkSheet = () => {
       {/*  */}
       <WorkSheetFrom refetch={refetch} isLoading={isLoading} />
       {/* from table */}
-      <WorkSheetTable
-        empWorkSheet={empWorkSheet}
-        refetch={refetch}
-        isLoading={isLoading}
-      />
-    </div>
+      <div className="overflow-x-auto">
+        <WorkSheetTable
+          empWorkSheet={empWorkSheet}
+          refetch={refetch}
+          isLoading={isLoading}
+        />
+      </div>
+    </>
   );
 };
 

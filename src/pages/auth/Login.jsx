@@ -7,6 +7,8 @@ import useAuth from "../../components/hooks/useAuth";
 import { notification } from "antd";
 import useAxiosPublic from "../../components/hooks/useAxiosPublic";
 import { fetchUserRoleFromAPI } from "../../utilitis/utilitis";
+import { Helmet } from "react-helmet-async";
+import loginImg from "../../assets/image/login.jpg"
 
 //
 const Login = () => {
@@ -85,12 +87,13 @@ const Login = () => {
 
   //
   return (
-    <div className="py-20 container mx-auto w-11/12 flex flex-col md:flex-row justify-between items-center gap-6 font-roboto">
+    <div className="py-20 container bg-white mx-auto w-11/12 flex flex-col md:flex-row justify-between items-center gap-6 font-roboto">
+      <Helmet><title>Sign In ||  NexusTech</title></Helmet>
       {/* left side */}
-      <div className="w-full md:w-4/12 lg:w-1/2 mx-auto">
-        <img src="" alt="" />
+      <div className="w-full md:w-1/2 mx-auto">
+        <img className="object-cover md:mb-20" src={loginImg} alt="" />
       </div>
-      <div className="w-full md:w-8/12 lg:w-1/2 mx-auto ">
+      <div className="w-full md:w-5/12 lg:w-5/12 mx-auto ">
         <h1 className="text-4xl font-semibold text-black font-orbitron mb-3">
           Sign In
         </h1>

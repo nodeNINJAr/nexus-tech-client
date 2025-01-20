@@ -15,6 +15,8 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import SocialLogin from "./socialLogin/SocialLogin";
 import { imageUpload } from "../../utilitis/utilitis";
 import EmployeeDetailsModal from "../../components/modal/EmployeeDetailsModal";
+import { Helmet } from "react-helmet-async";
+
 
 // sign up from
 const SignUp = () => {
@@ -62,14 +64,11 @@ const SignUp = () => {
 
   //
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-10 bg-white">
+       <Helmet><title>Sign Up ||  NexusTech</title></Helmet>
       <div className="w-11/12 mx-auto flex flex-col md:flex-row justify-between items-center gap-6  font-roboto">
-        {/* left side */}
-        <div className="w-full md:w-4/12 lg:w-1/2 mx-auto">
-          <img src="" alt="" />
-        </div>
-        {/* right side */}
-        <div className="w-full md:w-8/12 lg:w-1/2 mx-auto">
+        {/*  */}
+        <div className="w-full md:w-8/12 xl:w-1/2 mx-auto">
           <h1 className="text-4xl font-semibold text-black font-orbitron mb-3">
             Sign Up
           </h1>

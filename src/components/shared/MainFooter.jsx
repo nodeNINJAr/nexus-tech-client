@@ -8,7 +8,7 @@ const MainFooter = () => {
     <Footer container>
       <div className="w-full">
         <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
-          <div>
+          <div className='mb-8 md:mb-0'>
              <img className='w-56' src={logo} alt="logo" />
           </div>
           <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">

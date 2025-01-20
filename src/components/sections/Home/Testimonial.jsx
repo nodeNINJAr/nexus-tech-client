@@ -61,7 +61,7 @@ const Testimonial = () => (
       {/*  */}
     <Carousel autoplay autoplaySpeed={3000} effect="fade" arrows dotPosition="left" infinite={false}>
       {testimonials.map((testimonial) => (
-        <div key={testimonial.id} className="">
+        <div key={testimonial.id} className="py-8 md:py-2">
           <div style={contentStyle}>
             {/* Avatar */}
             <img

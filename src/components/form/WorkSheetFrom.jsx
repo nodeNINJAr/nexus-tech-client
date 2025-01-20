@@ -103,7 +103,10 @@ const WorkSheetFrom = ({ refetch }) => {
             <Select.Option value="support">Support</Select.Option>
             <Select.Option value="content">Content</Select.Option>
             <Select.Option value="paperWork">Paper work</Select.Option>
-            <Select.Option value="demo">Demo</Select.Option>
+            <Select.Option value="marketing">Marketing</Select.Option>
+            <Select.Option value="development">Development</Select.Option>
+            <Select.Option value="design">Design</Select.Option>
+            <Select.Option value="finance">Finance</Select.Option>
           </Select>
         </Form.Item>
         {/* work hour */}
@@ -164,4 +167,3 @@ WorkSheetFrom.propTypes = {
 };
 
 export default WorkSheetFrom;
-
