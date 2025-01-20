@@ -6,8 +6,8 @@ const { Meta } = Card;
 //
 const UserInfoCard = ({ employeeInfo }) => (
   <Card
-    className="w-full "
-    cover={<img alt={employeeInfo?.userName} src={employeeInfo?.userImage} />}
+    className="w-full"
+    cover={<img className="h-44 lg:h-56 object-cover object-top" alt={employeeInfo?.userName} src={employeeInfo?.userImage} />}
   >
       <Meta
         className="capitalize"

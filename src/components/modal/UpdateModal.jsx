@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { IoChevronDownSharp } from "react-icons/io5";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { notification, Spin } from "antd";
+import { RxCross2 } from "react-icons/rx";
 
 //
 const UpdateModal = ({ record, refetch }) => {
@@ -66,7 +67,7 @@ const UpdateModal = ({ record, refetch }) => {
         });
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -95,9 +96,12 @@ const UpdateModal = ({ record, refetch }) => {
               transition
               className="w-full max-w-md rounded-xl bg-black/5 p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
             >
-              <h1 className="text-lg font-poppins font-semibold pb-3 underline">
-                Update Your Existing Work 
-              </h1>
+              <div className="flex justify-between items-start">
+                <h1 className="text-lg font-poppins font-semibold pb-3 underline">
+                  Update Your Existing Work
+                </h1>
+                <span onClick={close}  className="text-base text-gray-700 hover:text-red-400 cursor-pointer"><RxCross2/></span>
+              </div>
               {/* task */}
               <div className="relative">
                 <Select
