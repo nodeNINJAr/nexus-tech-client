@@ -100,7 +100,12 @@ const UpdateModal = ({ record, refetch }) => {
                 <h1 className="text-lg font-poppins font-semibold pb-3 underline">
                   Update Your Existing Work
                 </h1>
-                <span onClick={close}  className="text-base text-gray-700 hover:text-red-400 cursor-pointer"><RxCross2/></span>
+                <span
+                  onClick={close}
+                  className="text-base text-gray-700 hover:text-red-400 cursor-pointer"
+                >
+                  <RxCross2 />
+                </span>
               </div>
               {/* task */}
               <div className="relative">
@@ -118,7 +123,10 @@ const UpdateModal = ({ record, refetch }) => {
                   <option value="support">Support</option>
                   <option value="content">Content</option>
                   <option value="paperWork">Paper work</option>
-                  <option value="demo">Demo</option>
+                  <option value="marketing">Marketing</option>
+                  <option value="development">Development</option>
+                  <option value="design">Design</option>
+                  <option value="finance">Finance</option>
                 </Select>
                 <IoChevronDownSharp
                   className="group pointer-events-none absolute top-2.5 right-2.5 size-4 fill-black/60"

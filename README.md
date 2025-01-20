@@ -9,7 +9,8 @@ Nexus Tech is a comprehensive **Employee Management System** (EMS) designed to m
 - **Website Name**: Nexus Tech
 - **Admin Email**: suzume99@gmail.com 
 - **Admin Password**: Pa$$w0rd! 
-- **Live Site URL**: [https://nexustech-b3673.web.app](https://nexustech-b3673.web.app)
+- **Live Site URL Firebase**: [https://nexustech-b3673.web.app](https://nexustech-b3673.web.app)
+- **Live Site URL Netlify**: [https://nexustechweb.netlify.app](https://nexustechweb.netlify.app)
 
 ---
 

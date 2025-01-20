@@ -7,12 +7,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
-import {
-  Link,
-  Outlet,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { BiSpreadsheet } from "react-icons/bi";
 import { MdManageHistory } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
@@ -33,18 +28,13 @@ const DashBoard = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(()=>{
-       if(userRole === "hr" && location.pathname === "/dashboard"){
-        navigate("/dashboard/employee-list", { replace: true });
-       }
-       else if(userRole === "employee" && location.pathname === "/dashboard"){
-        navigate("/dashboard/work-sheet", { replace: true });
-       }
-  },[location.pathname, navigate, userRole])
-
-
-
-
+  useEffect(() => {
+    if (userRole === "hr" && location.pathname === "/dashboard") {
+      navigate("/dashboard/employee-list", { replace: true });
+    } else if (userRole === "employee" && location.pathname === "/dashboard") {
+      navigate("/dashboard/work-sheet", { replace: true });
+    }
+  }, [location.pathname, navigate, userRole]);
 
   // user logout
   const handleLogout = () => {
@@ -58,7 +48,6 @@ const DashBoard = () => {
   } = theme.useToken();
   //
 
- 
   // admin menu
   const adminMenu = [
     {
@@ -125,12 +114,15 @@ const DashBoard = () => {
 
   // Find the menu item that matches the current route
   const currentMenu =
-    userRole === "admin" ? adminMenu : userRole === "hr" ? hrMenu : employeeMenu;
+    userRole === "admin"
+      ? adminMenu
+      : userRole === "hr"
+      ? hrMenu
+      : employeeMenu;
 
   const activeKey = currentMenu.find((item) =>
     location.pathname.includes(item.route)
   )?.key;
-  
 
   //
   return (
@@ -215,7 +207,7 @@ const DashBoard = () => {
               key: "4",
               icon: <FiLogOut style={{ fontSize: "16px" }} />,
               label: "Logout",
-              onClick:handleLogout,
+              onClick: handleLogout,
             },
           ]}
         />
@@ -224,7 +216,7 @@ const DashBoard = () => {
       {/* layouts */}
       <Layout>
         <Header
-           className="flex justify-start items-center sm:gap-8"
+          className="flex justify-start items-center sm:gap-8"
           style={{
             padding: 0,
             background: colorBgContainer,
@@ -241,7 +233,7 @@ const DashBoard = () => {
             }}
           />
           {/*  */}
-           <DynamicBreadcrumb/>
+          <DynamicBreadcrumb />
         </Header>
         <Content
           className="min-h-screen p-1 sm:p-6"
