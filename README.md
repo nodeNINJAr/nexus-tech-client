@@ -35,7 +35,6 @@ This application provides powerful tools to manage employee records, track perfo
     - [**Firebase Configuration**](#firebase-configuration)
   - [🛠 Troubleshooting](#-troubleshooting)
   - [🤝 Contributing](#-contributing)
-  - [📄 License](#-license)
 
 ---
 
@@ -87,7 +86,7 @@ This application provides powerful tools to manage employee records, track perfo
 
 1. Clone the repository:  
    ```sh
-   git clone https://github.com/yourusername/nexus-tech-client.git
+   git clone https://github.com/nodeNINJAr/nexus-tech-client
    cd nexus-tech-client
    ```  
 2. Install dependencies:  
@@ -181,12 +180,3 @@ We welcome contributions! Follow these steps:
 4. Push to the branch (`git push origin feature-branch`)  
 5. Open a Pull Request  
 
----
-
-## 📄 License  
-
-This project is licensed under the **MIT License**.  
-
----
-
-This README provides a **detailed overview** of Nexus Tech's Employee Management System. Feel free to update the repository links, descriptions, and configurations based on your actual implementation. 🚀😊
