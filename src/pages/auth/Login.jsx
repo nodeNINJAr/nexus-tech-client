@@ -8,7 +8,9 @@ import { notification } from "antd";
 import useAxiosPublic from "../../components/hooks/useAxiosPublic";
 import { fetchUserRoleFromAPI } from "../../utilitis/utilitis";
 import { Helmet } from "react-helmet-async";
-import loginImg from "../../assets/image/login.jpg"
+import loginImg from "../../assets/image/login.jpg";
+import { IoIosArrowRoundBack } from "react-icons/io";
+import DemoLoginButton from "../../components/button/DemoLoginButtons";
 
 //
 const Login = () => {
@@ -52,7 +54,7 @@ const Login = () => {
         placement: "topRight",
       });
       // Fetch role dynamically if not already available
-      const userRole = await fetchUserRoleFromAPI(user?.email); 
+      const userRole = await fetchUserRoleFromAPI(user?.email);
       // Navigate based on role
       switch (userRole) {
         case "admin":
@@ -84,14 +86,25 @@ const Login = () => {
       setLoading(loading);
     }
   };
-
+  // 
+  const [testInfo, setTestInfo] = useState({})
+  const handleDemoLogin=(loginInfo)=>{
+      setTestInfo(loginInfo)
+  }
   //
   return (
     <div className="py-20 container bg-white mx-auto w-11/12 flex flex-col md:flex-row justify-between items-center gap-6 font-roboto">
-      <Helmet><title>Sign In ||  NexusTech</title></Helmet>
+      <Helmet>
+        <title>Sign In || NexusTech</title>
+      </Helmet>
       {/* left side */}
-      <div className="w-full md:w-1/2 mx-auto">
-        <img className="object-cover md:mb-20" src={loginImg} alt="" />
+      <div className="w-full md:w-1/2 mx-auto pb-24">
+        <Link to={'/'} className="text-blue-600 flex justify-start items-start gap-1 font-roboto font-medium pb-10">
+          {" "}
+          <IoIosArrowRoundBack className="text-2xl font-medium" />
+          Back to Home
+        </Link>
+        <img className="object-cover" src={loginImg} alt="" />
       </div>
       <div className="w-full md:w-5/12 lg:w-5/12 mx-auto ">
         <h1 className="text-4xl font-semibold text-black font-orbitron mb-3">
@@ -103,6 +116,9 @@ const Login = () => {
             Sign Up
           </Link>
         </p>
+        {/*demo login  */}
+         <DemoLoginButton handleDemoLogin={handleDemoLogin}/>
+        {/*  */}
         <form onSubmit={handleUserSignIn} className="flex flex-col gap-4">
           <div>
             <div className="mb-2 block">
@@ -115,6 +131,7 @@ const Login = () => {
               placeholder="example@gmail.com"
               required
               shadow
+              value={testInfo?.email}
             />
           </div>
 
@@ -129,6 +146,7 @@ const Login = () => {
                 type={!showPass ? "text" : "password"}
                 shadow
                 placeholder="Write your password"
+                value={testInfo?.pass}
               />
               {showPass ? (
                 <FaEye

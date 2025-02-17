@@ -51,7 +51,7 @@ const BannerSlider = () => {
             <div className="w-full h-[450px] object-cover bg-gradient-to-r from-[#00c6ff] to-[#0072ff]"></div>
 
             {/* Content Overlay */}
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-start text-white px-4 sm:px-8 md:px-16 lg:px-24">
+            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-start text-white px-4 sm:px-8 md:px-12 ">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 font-poppins">
                 {slide.title}
               </h2>

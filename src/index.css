@@ -97,3 +97,6 @@
   justify-content: center;
   align-items: center;
 }
+.slick-dots button {
+  background-color: #ffffff !important;
+}

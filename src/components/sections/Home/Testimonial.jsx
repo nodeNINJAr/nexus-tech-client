@@ -1,5 +1,6 @@
 import React from "react";
 import { Carousel } from "antd";
+import './css/testimonial.css'
 
 // Testimonial data
 const testimonials = [
@@ -55,7 +56,7 @@ const contentStyle = {
 
 const Testimonial = () => (
   <div className="font-roboto">
-      <h2 className="text-3xl font-bold text-center text-gray-800 mb-8 font-poppins">
+      <h2 className="text-4xl font-bold text-center mb-12 text-gray-800 font-poppins">
         What Our Clients Say
       </h2>
       {/*  */}
