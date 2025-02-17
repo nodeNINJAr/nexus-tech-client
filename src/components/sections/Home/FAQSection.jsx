@@ -59,18 +59,18 @@ const FAQSection = () => {
   ];
 
   return (
-    <div className="faq-section mx-auto pb-16 px-4">
+    <div className="faq-section mx-auto py-16 px-4 font-roboto">
       <h2 className="text-4xl font-bold text-center mb-12 text-gray-800 font-poppins">Frequently Asked Questions</h2>
       {/* Flexbox Layout for Two Columns */}
       <div className="flex flex-col md:flex-row gap-8">
         {/* Left Column */}
         <div className="w-full md:w-1/2">
-          <Collapse accordion items={itemsLeft} className="font-rubik text-lg text-gray-900 font-normal" />
+          <Collapse accordion items={itemsLeft} className="text-lg text-gray-900 font-normal" />
         </div>
         
         {/* Right Column */}
         <div className="w-full md:w-1/2">
-          <Collapse accordion items={itemsRight} className="font-rubik text-lg text-gray-900 font-normal" />
+          <Collapse accordion items={itemsRight} className="text-lg text-gray-900 font-normal" />
         </div>
       </div>
     </div>

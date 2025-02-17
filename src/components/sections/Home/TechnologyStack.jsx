@@ -17,7 +17,7 @@ const techStack = [
 
 const TechnologyStack = () => {
   return (
-    <div className="w-full mx-auto py-12 px-4">
+    <div className="w-full mx-auto px-4 font-roboto">
       <h2 className="text-4xl font-bold text-center mb-12 text-gray-800 font-poppins">Technology Stack</h2>
 
       <Row gutter={[16, 16]} justify="center">

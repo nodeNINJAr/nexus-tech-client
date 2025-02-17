@@ -7,6 +7,7 @@ import CTASection from "../../components/sections/Home/CTASection";
 import {Helmet} from "react-helmet-async"
 import FAQSection from "../../components/sections/Home/FaqSection";
 import TechnologyStack from "../../components/sections/Home/TechnologyStack";
+import OurProcess from "../../components/sections/Home/OurProcess";
 
 
 const Home = () => {
@@ -23,6 +24,8 @@ const Home = () => {
       <Testimonial />
       {/*  */}
       <KeyFeatures/>
+      {/* our process */}
+      <OurProcess/>
       {/* tachnology stack */}
       <TechnologyStack/>
       {/*faq section*/}
