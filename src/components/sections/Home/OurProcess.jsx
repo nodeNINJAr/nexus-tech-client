@@ -11,7 +11,7 @@ const OurProcess = () => {
 
       {/* Horizontal Steps for Large Screens */}
       <div className="hidden md:flex justify-between font-roboto">
-        <Steps current={5} size="large" className="font-roboto">
+        <Steps current={5} size="large" className="font-roboto font-medium">
           <Step title="Consultation" description="Understanding your requirements" icon={<SolutionOutlined />} />
           <Step title="Planning" description="Creating a roadmap" icon={<ProjectOutlined />} />
           <Step title="Development" description="Building the product" icon={<CodeOutlined />} />

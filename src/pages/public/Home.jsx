@@ -8,6 +8,7 @@ import {Helmet} from "react-helmet-async"
 import FAQSection from "../../components/sections/Home/FaqSection";
 import TechnologyStack from "../../components/sections/Home/TechnologyStack";
 import OurProcess from "../../components/sections/Home/OurProcess";
+import MeetOurTeam from "../../components/sections/Home/MeetOurTeam";
 
 
 const Home = () => {
@@ -28,6 +29,8 @@ const Home = () => {
       <OurProcess/>
       {/* tachnology stack */}
       <TechnologyStack/>
+      {/* meet out team section */}
+      <MeetOurTeam/>
       {/*faq section*/}
        <FAQSection/>
       {/*  */}

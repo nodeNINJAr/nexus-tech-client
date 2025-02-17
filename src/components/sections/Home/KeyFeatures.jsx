@@ -24,7 +24,7 @@ const KeyFeatures = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-100 font-roboto">
+    <section className="pt-16 bg-gray-100 font-roboto">
       <div className="px-4">
         <h2 className="text-4xl font-bold text-center mb-12 text-gray-800 font-poppins">
           Why Choose NexusTech?
