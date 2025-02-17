@@ -65,12 +65,12 @@ const FAQSection = () => {
       <div className="flex flex-col md:flex-row gap-8">
         {/* Left Column */}
         <div className="w-full md:w-1/2">
-          <Collapse accordion items={itemsLeft} className="font-rubik text-xl text-gray-900 font-normal" />
+          <Collapse accordion items={itemsLeft} className="font-rubik text-lg text-gray-900 font-normal" />
         </div>
         
         {/* Right Column */}
         <div className="w-full md:w-1/2">
-          <Collapse accordion items={itemsRight} className="font-rubik text-xl text-gray-900 font-normal" />
+          <Collapse accordion items={itemsRight} className="font-rubik text-lg text-gray-900 font-normal" />
         </div>
       </div>
     </div>
