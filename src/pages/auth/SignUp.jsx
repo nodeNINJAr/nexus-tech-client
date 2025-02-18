@@ -64,9 +64,9 @@ const SignUp = () => {
 
   //
   return (
-    <div className="container mx-auto py-10 bg-white">
+    <div className=" py-10 bg-white min-h-screen">
        <Helmet><title>Sign Up ||  NexusTech</title></Helmet>
-      <div className="w-11/12 mx-auto flex flex-col md:flex-row justify-between items-center gap-6  font-roboto">
+      <div className="w-11/12 container mx-auto flex flex-col md:flex-row justify-between items-center gap-6  font-roboto">
         {/*  */}
         <div className="w-full md:w-8/12 xl:w-1/2 mx-auto">
           <h1 className="text-4xl font-semibold text-black font-orbitron mb-3">
@@ -83,7 +83,7 @@ const SignUp = () => {
               <div className="w-full sm:w-1/2 mb-4 sm:mb-0">
                 {/* name */}
                 <div className="mb-2 block">
-                  <Label htmlFor="email2" value="Your Name" />
+                  <Label htmlFor="email2" value="Your Name" className="dark:text-gray-600 text-gray-700"  />
                 </div>
                 <TextInput
                   type="text"
@@ -100,7 +100,7 @@ const SignUp = () => {
               <div className="w-full sm:w-1/2">
                 {/* email */}
                 <div className="mb-2 block">
-                  <Label htmlFor="email2" value="Your email" />
+                  <Label htmlFor="email2" value="Your email" className="dark:text-gray-600 text-gray-700"  />
                 </div>
                 <TextInput
                   type="email"
@@ -120,7 +120,7 @@ const SignUp = () => {
               {/* image */}
               <div className="w-full sm:w-1/2 mb-4 sm:mb-0">
                 <div className="mb-2 block">
-                  <Label htmlFor="file" value="Upload file" />
+                  <Label htmlFor="file" value="Upload file" className="dark:text-gray-600 text-gray-700" />
                 </div>
 
                 <FileInput
@@ -137,7 +137,7 @@ const SignUp = () => {
               {/* user role */}
               <div className="w-full sm:w-1/2">
                 <div className="mb-2 block">
-                  <Label htmlFor="countries" value="Choose your role" />
+                  <Label htmlFor="countries" value="Choose your role" className="dark:text-gray-600 text-gray-700" />
                 </div>
                 <Select
                   {...register("userRole", { required: true })}
@@ -158,7 +158,7 @@ const SignUp = () => {
             <div className="sm:flex justify-between items-start gap-6">
               <div className="w-full sm:w-1/2 mb-4 sm:mb-0 reletive block">
                 <div className="mb-2 block">
-                  <Label htmlFor="password2" value="Your password" />
+                  <Label htmlFor="password2" value="Your password" className="dark:text-gray-600 text-gray-700"  />
                 </div>
                 {/* pass show hide */}
                 <div className="relative">
@@ -194,7 +194,7 @@ const SignUp = () => {
               {/* repeat-password */}
               <div className="w-full sm:w-1/2  mx-auto truncate">
                 <div className="mb-2 block">
-                  <Label htmlFor="" value="Repeat password" />
+                  <Label htmlFor="" value="Repeat password" className="dark:text-gray-600 text-gray-700" />
                 </div>
                 <div className="relative">
                   <TextInput
@@ -233,7 +233,7 @@ const SignUp = () => {
             {/* term and condition */}
             <div className="flex items-center gap-2">
               <Checkbox {...register("term", { required: true })} id="agree" />
-              <Label htmlFor="agree" className="flex">
+              <Label htmlFor="agree" className="flex dark:text-gray-600 text-gray-700">
                 I agree with the&nbsp;
                 <Link
                   to={"/"}

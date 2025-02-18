@@ -12,12 +12,12 @@ const DemoLoginButtons = ({handleDemoLogin}) => {
           Choose Test Your Role
         </Tag>
       </div>
-      <div className="flex justify-between items-start gap-4 mb-4">
+      <div className="flex justify-between items-start gap-4 mb-4 flex-wrap sm:flex-nowrap">
         {/* Employee Login Button */}
         <Button
           onClick={()=>handleDemoLogin({email:'xomiwakoj@mailinator.com', pass:"Pa$$w0rd!"})}
           type="primary"
-          className="bg-blue-500 text-white hover:bg-blue-600 transition duration-300 w-full"
+          className="bg-blue-500 text-white hover:bg-blue-600 transition duration-300 w-full md:w-4/12"
         >
           Login as Employee
         </Button>
@@ -26,7 +26,7 @@ const DemoLoginButtons = ({handleDemoLogin}) => {
         <Button
           onClick={()=>handleDemoLogin({email:'vysefetil@mailinator.com', pass:"Pa$$w0rd!"})}
           type="default"
-          className="bg-green-500 text-white hover:bg-green-600 transition duration-300 w-full"
+          className="bg-green-500 text-white hover:bg-green-600 transition duration-300 w-full md:w-4/12 "
         >
           Login as HR
         </Button>
@@ -35,7 +35,7 @@ const DemoLoginButtons = ({handleDemoLogin}) => {
         <Button
           onClick={()=>handleDemoLogin({email:'suzume99@gmail.com', pass:"Pa$$w0rd!"})}
           type="danger"
-          className="bg-red-500 text-white hover:bg-red-600 transition duration-300 w-full"
+          className="bg-red-500 text-white hover:bg-red-600 transition duration-300 w-full md:w-4/12"
         >
           Login as Admin
         </Button>

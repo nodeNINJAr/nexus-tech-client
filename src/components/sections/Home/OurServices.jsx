@@ -9,6 +9,7 @@ const services = [
     title: "Web Development",
     description:
       "Build scalable and responsive web applications tailored to your needs.",
+      link:"https://web.dev/blog"
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ const services = [
     title: "Mobile App Development",
     description:
       "Create user-friendly mobile applications for iOS and Android platforms.",
+      link:"https://messapps.com/blog/"
   },
   {
     id: 3,
@@ -23,6 +25,7 @@ const services = [
     title: "Cloud Solutions",
     description:
       "Leverage the power of cloud computing to scale your business efficiently.",
+      link:"https://cloud.google.com/blog/products/gcp"
   },
   {
     id: 4,
@@ -30,6 +33,7 @@ const services = [
     title: "Cybersecurity",
     description:
       "Protect your business with state-of-the-art cybersecurity solutions.",
+      link:"https://onlinedegrees.sandiego.edu/top-cyber-security-blogs-websites"
   },
 ];
 

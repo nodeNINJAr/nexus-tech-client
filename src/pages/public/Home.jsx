@@ -20,17 +20,17 @@ const Home = () => {
       {/* banner slider */}
       <BannerSlider />
       {/* services */}
-      <OurServices />
+      <div id="services"><OurServices /></div>
       {/* testominial */}
-      <Testimonial />
+      <div id="testimonial"><Testimonial /></div>
       {/*  */}
       <KeyFeatures/>
       {/* our process */}
       <OurProcess/>
       {/* tachnology stack */}
-      <TechnologyStack/>
+      <div id="technologyStack"><TechnologyStack/></div>
       {/* meet out team section */}
-      <MeetOurTeam/>
+      <div id="meetOurTeam"><MeetOurTeam/></div>
       {/*faq section*/}
        <FAQSection/>
       {/*  */}

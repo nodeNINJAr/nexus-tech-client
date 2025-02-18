@@ -47,6 +47,7 @@ if(isLoading) return <Spinner/>
               Verification Status: {userData.isVerified ? 'Verified' : 'Not Verified'}
             </Text>
             <Button
+              disabled
               type="primary"
               icon={<EditOutlined />}
               style={{ marginTop: 16, width: '100%' }}

@@ -11,6 +11,7 @@ const heroSlides = [
     subtitle: "Serving clients in over 50 countries worldwide.",
     description:
       "We have expanded our reach to over 50 countries, delivering innovative solutions that empower businesses globally.",
+      link:"#services",
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ const heroSlides = [
     subtitle: "Trusted by 10,000+ satisfied clients.",
     description:
       "Our customer-first approach has earned us a 99% satisfaction rate across our diverse client base.",
+      link:"#testimonial",
   },
   {
     id: 3,
@@ -28,6 +30,7 @@ const heroSlides = [
     subtitle: "Pioneering cutting-edge tech solutions.",
     description:
       "We stay ahead of the curve with our cutting-edge technologies, ensuring top-notch solutions for our clients.",
+      link:"#technologyStack",
   },
   {
     id: 4,
@@ -37,6 +40,7 @@ const heroSlides = [
     subtitle: "Recognized by industry leaders.",
     description:
       "Our team has been recognized for excellence and innovation with numerous awards in the tech industry.",
+    link:"#meetOurTeam",
   },
 ];
 
@@ -63,6 +67,7 @@ const BannerSlider = () => {
                 {slide.description}
               </p>
               <Button
+                href={slide?.link}
                 type="primary"
                 shape="round"
                 className="dark:bg-blue-500 dark:border-blue-500"

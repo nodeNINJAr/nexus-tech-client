@@ -23,6 +23,7 @@ const ServiceCard = ({ service }) => {
           </p>
           {/* Button */}
           <Button
+            href={service?.link}
             type="primary"
             shape="round"
             className="dark:bg-blue-500 dark:border-blue-500"
