@@ -35,11 +35,10 @@ const DynamicBreadcrumb = () => {
   ];
 
   return (
-    <div className="overflow-hidden text-ellipsis dark:bg-gray-700 p-4 rounded-lg shadow-md">
+    <div className="w-full overflow-x-auto bg-white dark:bg-gray-700 px-4 py-2 rounded-lg shadow-md ">
       <Breadcrumb
         style={{
           whiteSpace: "nowrap",
-          overflow: "hidden",
           textOverflow: "ellipsis",
         }}
         separator=">"

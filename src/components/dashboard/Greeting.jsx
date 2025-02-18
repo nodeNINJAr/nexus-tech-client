@@ -18,7 +18,7 @@ const Greeting = () => {
   };
 
   return (
-    <div className="flex flex-wrap justify-between items-center p-4 bg-white dark:bg-gray-900 gap-4 rounded-xl mb-10">
+    <div className="w-full mx-auto flex flex-wrap justify-between items-center p-4 bg-white dark:bg-gray-900 gap-4 rounded-xl mb-10">
       {/* Left Side: Greeting and Task Notification */}
       <div>
         <h2 className="text-3xl font-semibold text-gray-700 dark:text-gray-200 font-exo2">
@@ -31,9 +31,9 @@ const Greeting = () => {
 
       {/* Right Side: Current Time */}
       <div className="space-x-2">
-        <span className="text-gray-600 dark:text-gray-400 font-exo2 text-end block font-medium">Current time</span>
-        <div className="flex items-center gap-2">
-          <span className="text-3xl font-exo2 font-semibold text-gray-800 dark:text-white">
+        <span className="text-gray-600 dark:text-gray-400 font-exo2 text-start md:text-end block font-medium">Current time</span>
+        <div className="flex justify-start items-center gap-2">
+          <span className="text-3xl font-exo2 font-semibold text-gray-800 dark:text-white text-left block -ml-2">
             {currentTime}
           </span>
           <button

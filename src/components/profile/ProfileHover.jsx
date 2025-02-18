@@ -29,7 +29,7 @@ const ProfileHover = () => {
       </div>
 
       {/* Profile Card (Hidden by Default) */}
-      <div className="absolute top-14 right-2 transform bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4 w-64 opacity-0 invisible transition-all duration-300 group-hover:opacity-100 group-hover:visible">
+      <div className=" z-50 absolute top-14 right-2 transform bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4 w-64 opacity-0 invisible transition-all duration-300 group-hover:opacity-100 group-hover:visible">
         {/* Profile Image */}
         <div className="flex justify-center mb-4">
           <img

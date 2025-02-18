@@ -11,8 +11,8 @@ const UserInfoCard = ({ employeeInfo }) => (
   >
       <Meta
         className="capitalize"
-        title={`${employeeInfo?.userName}`}
-        description={employeeInfo?.designation}
+        title={<h3 className="text-gray-800 dark:text-gray-200">{employeeInfo?.userName}</h3>}
+        description={<p className="text-gray-600">{employeeInfo?.designation}</p>}
       />
   </Card>
 );

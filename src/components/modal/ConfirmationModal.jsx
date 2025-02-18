@@ -4,7 +4,6 @@ import { Button, Modal } from "antd";
 
 //
 const ConfirmationModal = ({ title, content, okText, text, handleAction, record }) => {
-
     // 
   return (
     <>

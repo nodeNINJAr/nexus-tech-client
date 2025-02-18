@@ -231,7 +231,9 @@ const DashBoard = () => {
               }}
             />
             {/* breadcumb */}
-            <DynamicBreadcrumb />
+            <div className="hidden sm:block">
+              <DynamicBreadcrumb />
+            </div>
           </div>
           {/* darkmode */}
           <div className="flex justify-start gap-1">
@@ -240,6 +242,9 @@ const DashBoard = () => {
             <ProfileHover />
           </div>
         </Header>
+        <div className="sm:hidden m-2">
+              <DynamicBreadcrumb />
+            </div>
         <Content
           className="min-h-screen p-1 sm:p-6 dark:bg-gray-900 "
           style={{
@@ -247,6 +252,7 @@ const DashBoard = () => {
             borderRadius: borderRadiusLG,
           }}
         >
+           
           {location.pathname === "/dashboard" ? (
             <>
               {userRole === "hr" && <HrDashboard />}

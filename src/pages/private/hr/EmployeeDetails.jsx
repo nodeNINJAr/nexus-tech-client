@@ -12,7 +12,7 @@ const EmployeeDetails = () => {
   const axiosSecure = useAxiosSecure();
   const { employeeId } = useParams();
   //
-  const [Allemployee] = useUser();
+  const [Allemployee=[]] = useUser();
   // find the user
   const employeeInfo = Allemployee.find(
     (employee) => employee?._id === employeeId

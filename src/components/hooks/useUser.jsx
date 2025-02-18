@@ -6,7 +6,7 @@ const useUser = () => {
   const axiosSecure = useAxiosSecure();
   //
   const {
-    data: Allemployee = [],
+    data,
     isLoading,
     refetch,
   } = useQuery({
@@ -16,8 +16,10 @@ const useUser = () => {
       return data;
     },
   });
+  const Allemployee = data?.totalEmployee;
+   const employeeCount = data?.employeeCount;
 
-  return [Allemployee, isLoading, refetch];
+  return [Allemployee, isLoading, refetch, employeeCount];
 };
 
 export default useUser;

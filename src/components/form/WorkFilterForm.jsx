@@ -78,7 +78,7 @@ const [employee] = useUser();
         </Form.Item>
         {/*total hours work */}
         <Form.Item className="w-full md:w-5/12 lg:w-3/12">
-          <span className="text-center block border border-[#a4d1fb] py-[5px] px-3 w-full rounded-sm font-semibold ">
+          <span className="text-center block border border-[#a4d1fb] py-[5px] px-3 w-full rounded-sm font-semibold bg-white ">
             Total Worked : {totalWorkedHour || 0} hour
           </span>
         </Form.Item>
