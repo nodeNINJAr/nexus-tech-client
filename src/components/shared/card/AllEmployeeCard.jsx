@@ -14,18 +14,19 @@ const AllEmployeeCard = ({ user }) => {
       }
     >
       <Meta
+     
         title={
           <div className="flex justify-between capitalize flex-wrap ">
-            <span className="text-base font-rubik -mt-[2px]">{user?.userName}</span> <span className="text-sm font-roboto truncate">{user?.designation}</span>
+            <span className="text-base font-rubik -mt-[2px] text-gray-700 dark:text-gray-300">{user?.userName}</span> <span className="text-sm font-roboto truncate text-gray-700 dark:text-gray-400">{user?.designation}</span>
           </div>
         }
         description={
           <div className="flex justify-between items-start gap-1 flex-wrap capitalize text-sm font-roboto font-medium truncate">
-            <span className="bg-[#F6FFED] rounded-full px-1 truncate">
+            <span className="bg-[#F6FFED] rounded-full px-1 truncate dark:bg-gray-600">
               salary : {user?.salary} $
             </span>{" "}
-            <span className="bg-[#F6FFED] rounded-full px-1"> {user?.userRole}</span>{" "}
-            <span className="bg-[#F6FFED] rounded-full px-1">{user?.fired ? "fired" : "Active"}</span>
+            <span className="bg-[#F6FFED] dark:bg-gray-600 rounded-full px-1"> {user?.userRole}</span>{" "}
+            <span className="bg-[#F6FFED] dark:bg-gray-600 rounded-full px-1">{user?.fired ? "fired" : "Active"}</span>
           </div>
         }
       />

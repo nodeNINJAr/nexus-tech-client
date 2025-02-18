@@ -40,8 +40,9 @@ const AllEmployeeList = () => {
       <Helmet>
         <title>AllEmployee || NexusTech</title>
       </Helmet>
-      <div className="fixed top-6 right-4 z-50">
+      <div className="fixed top-20 right-4 z-50">
         <Segmented
+           style={{background:'#6b7280', borderRadius:"4px"}}
           options={[
             {
               value: "List",
