@@ -25,7 +25,7 @@ const Greeting = () => {
           {`${getGreeting()}, ${user?.displayName}!`}
         </h2>
         <p className="text-lg text-gray-600 dark:text-gray-400 mt-1">
-          You have {taskCount} tasks pending.
+          {user?.email==="suzume99@gmail.com" ? "Hey Admin , Pay The Employee First":`You have ${{taskCount} }tasks pending.`}
         </p>
       </div>
 

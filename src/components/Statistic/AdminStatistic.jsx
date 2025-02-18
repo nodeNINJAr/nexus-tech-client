@@ -8,12 +8,19 @@ import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
 const formatter = (value) => <CountUp end={value} separator="," />;
 //
 const AdminStatistic = ({adminStats}) => {
+
+
+  // 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4  gap-4 truncate">
-        <Card bordered={false}>
+        <Card bordered={false} className="shadow-md">
           <Statistic
-            title="Total Employee"
+            title={<p className="text-gray-800 dark:text-gray-400 font-exo2 font-medium text-xl">Total Employee</p>}
             value={adminStats?.totalUsers}
+            valueStyle={{
+              color: "#3f8600",
+              fontFamily:'font-exo2',
+            }}
             formatter={formatter}
             
           />
@@ -22,10 +29,11 @@ const AdminStatistic = ({adminStats}) => {
         <Card bordered={false}>
           <Statistic
             className="truncate"
-            title="Total Earning"
+            title={<p className="text-gray-800 dark:text-gray-400 font-exo2 font-medium text-xl">Total Earning</p>}
             value={2112893}
             valueStyle={{
               color: "#3f8600",
+              fontFamily:'font-exo2',
             }}
             precision={2}
             formatter={formatter}
@@ -36,11 +44,12 @@ const AdminStatistic = ({adminStats}) => {
 
         <Card bordered={false}>
           <Statistic
-            title="Total Expenses"
+            title={<p className="text-gray-800 dark:text-gray-400 font-exo2 font-medium text-xl">Total Expenses</p>}
             value={adminStats?.totalExpenses}
             precision={2}
             valueStyle={{
               color: "#cf1322",
+              fontFamily:'font-exo2',
             }}
             formatter={formatter}
             prefix={<ArrowUpOutlined />}
@@ -51,11 +60,12 @@ const AdminStatistic = ({adminStats}) => {
 
         <Card bordered={false}>
           <Statistic
-            title="Total Worked Hour"
+            title={<p className="text-gray-800 dark:text-gray-400 font-exo2 font-medium text-xl">Total Worked Hour</p>}
             value={adminStats?.totalWorkedHours}
             precision={2}
             valueStyle={{
               color: "#cf1322",
+              fontFamily:'font-exo2',
             }}
             formatter={formatter}
             suffix="h"

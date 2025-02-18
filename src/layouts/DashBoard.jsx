@@ -124,91 +124,93 @@ const DashBoard = () => {
   return (
     <Layout className="w-full mx-auto dark:bg-gray-900">
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className=" bg-slate-300 dark:bg-gray-900 py-4">
-          <Link to="/" className="text-2xl font-orbitron ">
-            <span className="truncate block text-gray-700 dark:text-white">
-              NexusTech
-            </span>
-          </Link>
-        </div>
+        <div className="sticky top-0">
+          <div className=" bg-slate-300 dark:bg-gray-900 py-4 ">
+            <Link to="/" className="text-2xl font-orbitron ">
+              <span className="truncate block text-gray-700 dark:text-white">
+                NexusTech
+              </span>
+            </Link>
+          </div>
 
-        {/* menu for admin */}
-        {userRole === "admin" && (
+          {/* menu for admin */}
+          {userRole === "admin" && (
+            <Menu
+              className="pt-6"
+              theme="dark"
+              mode="inline"
+              selectedKeys={[activeKey]}
+              onClick={({ key }) => {
+                const selectedItem = adminMenu.find((item) => item.key === key);
+                if (selectedItem?.route) {
+                  navigate(selectedItem.route);
+                }
+              }}
+              items={adminMenu.map((item) => ({
+                key: item.key,
+                icon: item.icon,
+                label: item.label,
+              }))}
+            />
+          )}
+          {/* menu for hr role */}
+          {userRole === "hr" && (
+            <Menu
+              className="pt-6"
+              theme="dark"
+              mode="inline"
+              selectedKeys={[activeKey]}
+              onClick={({ key }) => {
+                const selectedItem = hrMenu.find((item) => item.key === key);
+                if (selectedItem?.route) {
+                  navigate(selectedItem.route);
+                }
+              }}
+              items={hrMenu.map((item) => ({
+                key: item.key,
+                icon: item.icon,
+                label: item.label,
+              }))}
+            />
+          )}
+          {/* menu for employee */}
+          {userRole === "employee" && (
+            <Menu
+              className="pt-6"
+              theme="dark"
+              mode="inline"
+              selectedKeys={[activeKey]}
+              onClick={({ key }) => {
+                const selectedItem = employeeMenu.find(
+                  (item) => item.key === key
+                );
+                if (selectedItem?.route) {
+                  navigate(selectedItem.route);
+                }
+              }}
+              items={employeeMenu.map((item) => ({
+                key: item.key,
+                icon: item.icon,
+                label: item.label,
+              }))}
+            />
+          )}
+          {/*public menu */}
           <Menu
-            className="pt-6"
+            className="border-t border-gray-400 mt-2"
             theme="dark"
             mode="inline"
-            selectedKeys={[activeKey]}
-            onClick={({ key }) => {
-              const selectedItem = adminMenu.find((item) => item.key === key);
-              if (selectedItem?.route) {
-                navigate(selectedItem.route);
-              }
-            }}
-            items={adminMenu.map((item) => ({
-              key: item.key,
-              icon: item.icon,
-              label: item.label,
-            }))}
+            defaultSelectedKeys={["1"]}
+            items={[
+              {
+                key: "4",
+                icon: <FiLogOut style={{ fontSize: "16px" }} />,
+                label: "Logout",
+                onClick: handleLogout,
+              },
+            ]}
           />
-        )}
-        {/* menu for hr role */}
-        {userRole === "hr" && (
-          <Menu
-            className="pt-6"
-            theme="dark"
-            mode="inline"
-            selectedKeys={[activeKey]}
-            onClick={({ key }) => {
-              const selectedItem = hrMenu.find((item) => item.key === key);
-              if (selectedItem?.route) {
-                navigate(selectedItem.route);
-              }
-            }}
-            items={hrMenu.map((item) => ({
-              key: item.key,
-              icon: item.icon,
-              label: item.label,
-            }))}
-          />
-        )}
-        {/* menu for employee */}
-        {userRole === "employee" && (
-          <Menu
-            className="pt-6"
-            theme="dark"
-            mode="inline"
-            selectedKeys={[activeKey]}
-            onClick={({ key }) => {
-              const selectedItem = employeeMenu.find(
-                (item) => item.key === key
-              );
-              if (selectedItem?.route) {
-                navigate(selectedItem.route);
-              }
-            }}
-            items={employeeMenu.map((item) => ({
-              key: item.key,
-              icon: item.icon,
-              label: item.label,
-            }))}
-          />
-        )}
-        {/*public menu */}
-        <Menu
-          className="border-t border-gray-400 mt-2"
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          items={[
-            {
-              key: "4",
-              icon: <FiLogOut style={{ fontSize: "16px" }} />,
-              label: "Logout",
-              onClick: handleLogout,
-            },
-          ]}
-        />
+        </div>
       </Sider>
 
       {/* layouts */}
@@ -243,8 +245,8 @@ const DashBoard = () => {
           </div>
         </Header>
         <div className="sm:hidden m-2">
-              <DynamicBreadcrumb />
-            </div>
+          <DynamicBreadcrumb />
+        </div>
         <Content
           className="min-h-screen p-1 sm:p-6 dark:bg-gray-900 "
           style={{
@@ -252,7 +254,6 @@ const DashBoard = () => {
             borderRadius: borderRadiusLG,
           }}
         >
-           
           {location.pathname === "/dashboard" ? (
             <>
               {userRole === "hr" && <HrDashboard />}
