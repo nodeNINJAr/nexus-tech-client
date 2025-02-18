@@ -1,7 +1,6 @@
-import React from "react";
-("use client");
+import React,{useState} from "react";
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { CgProfile } from "react-icons/cg";
@@ -9,6 +8,7 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { IoLogInOutline } from "react-icons/io5";
 import useRole from "../hooks/useRole";
 import logo from "../../assets/image/logo.png"
+import DarkMode from "../darkmode/DarkMode";
 
 // 
 const TopNavbar = () => {
@@ -17,12 +17,16 @@ const TopNavbar = () => {
   // user from auth
   const { user, userSignOut } = useAuth();
   // user sign out
-  const handleSignOut = () => {
+  const handleSignOut = async() => {
     // function call
-    userSignOut()
-      .then(() => {})
-      .catch(() => {});
+   await userSignOut();
   };
+
+  const location = useLocation();
+  console.log(location);
+const [isActive, setIsActive] = useState(location.pathname)
+
+console.log(isActive);
 
   //
   return (
@@ -35,6 +39,9 @@ const TopNavbar = () => {
         />
       </Navbar.Brand>
       <div className="flex md:order-2 text-xl font-normal text-gray-800">
+          <div>
+              <DarkMode/>
+          </div>
         {/* dropdown on profile click */}
         <Dropdown
           arrowIcon={false}
@@ -70,10 +77,9 @@ const TopNavbar = () => {
       </div>
       {/* Navlinks */}
       <Navbar.Collapse>
-        <Navbar.Link as={NavLink} to="/">Home</Navbar.Link>
-        <Navbar.Link as={NavLink}  to="/about">About Us</Navbar.Link>
-        <Navbar.Link as={NavLink}  to="/services">Services</Navbar.Link>
-        <Navbar.Link as={NavLink}  to="/contact-us">Contact Us</Navbar.Link>
+        <Navbar.Link as={NavLink}  to="/"> <span className={`${location.pathname ==='/'&& "text-red-600"}`}>Home</span></Navbar.Link>
+        <Navbar.Link as={NavLink}  to="/about"><span className={`${location.pathname ==='/about'&& "text-red-600"}`}>About Us</span></Navbar.Link>
+        <Navbar.Link as={NavLink}  to="/contact-us"><span className={`${location.pathname ==='/contact-us'&& "text-red-600"}`}>Contact Us</span></Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   );

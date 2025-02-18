@@ -29,7 +29,6 @@ const FAQSection = () => {
       children: <p>Simply contact us through our website, and we’ll discuss your project requirements to provide a custom quote.</p>,
     },
   ];
-
   const itemsRight = [
     {
       key: "6",
@@ -59,18 +58,46 @@ const FAQSection = () => {
   ];
 
   return (
-    <div className="faq-section mx-auto py-16 px-4 font-roboto">
-      <h2 className="text-4xl font-bold text-center mb-12 text-gray-800 font-poppins">Frequently Asked Questions</h2>
+    <div className="faq-section mx-auto py-16 px-4 font-roboto dark:bg-gray-900">
+      <h2 className="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white font-poppins">
+        Frequently Asked Questions
+      </h2>
       {/* Flexbox Layout for Two Columns */}
       <div className="flex flex-col md:flex-row gap-8">
         {/* Left Column */}
         <div className="w-full md:w-1/2">
-          <Collapse accordion items={itemsLeft} className="text-lg text-gray-900 font-normal" />
+          <Collapse
+            accordion
+            items={itemsLeft}
+            className="text-lg text-gray-900 dark:text-gray-200 font-normal"
+            expandIcon={({ isActive }) => (
+              <span
+                className={`text-xl transition-transform duration-300 ${
+                  isActive ? "rotate-90" : ""
+                } dark:text-gray-200`}
+              >
+                {isActive ? ">" : ">"}
+              </span>
+            )}
+          />
         </div>
-        
+
         {/* Right Column */}
         <div className="w-full md:w-1/2">
-          <Collapse accordion items={itemsRight} className="text-lg text-gray-900 font-normal" />
+          <Collapse
+            accordion
+            items={itemsRight}
+            className="text-lg text-gray-900 dark:text-gray-200 font-normal"
+            expandIcon={({ isActive }) => (
+              <span
+                className={`text-xl transition-transform duration-300 ${
+                  isActive ? "rotate-90" : ""
+                } dark:text-gray-200`}
+              >
+                {isActive ? ">" : ">"}
+              </span>
+            )}
+          />
         </div>
       </div>
     </div>

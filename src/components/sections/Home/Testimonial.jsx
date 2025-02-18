@@ -1,6 +1,6 @@
 import React from "react";
 import { Carousel } from "antd";
-import './css/testimonial.css'
+import './css/testimonial.css';
 
 // Testimonial data
 const testimonials = [
@@ -53,14 +53,23 @@ const contentStyle = {
   alignItems: "center",
 };
 
-
 const Testimonial = () => (
-  <div className="font-roboto">
-      <h2 className="text-4xl font-bold text-center mb-12 text-gray-800 font-poppins">
-        What Our Clients Say
-      </h2>
-      {/*  */}
-    <Carousel autoplay autoplaySpeed={3000} effect="fade" arrows dotPosition="left" infinite={false}>
+  <div className="font-roboto dark:bg-gray-900">
+    {/* Heading */}
+    <h2 className="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white font-poppins">
+      What Our Clients Say
+    </h2>
+
+    {/* Carousel */}
+    <Carousel
+      autoplay
+      autoplaySpeed={3000}
+      effect="fade"
+      arrows
+      dotPosition="left"
+      infinite={false}
+      className="dark:[&_.ant-carousel-dot]:bg-gray-700 dark:[&_.ant-carousel-dot-active]:bg-white"
+    >
       {testimonials.map((testimonial) => (
         <div key={testimonial.id} className="py-8 md:py-2">
           <div style={contentStyle}>
@@ -68,16 +77,20 @@ const Testimonial = () => (
             <img
               src={testimonial.avatar}
               alt={testimonial.name}
-              className="w-16 h-16 rounded-full mb-4 shadow-md"
+              className="w-16 h-16 rounded-full mb-4 shadow-md dark:border-gray-600"
             />
             {/* Review */}
-            <p className="text-lg italic text-gray-400">{testimonial.review}</p>
+            <p className="text-lg italic text-gray-400 dark:text-gray-300">
+              {testimonial.review}
+            </p>
             {/* Name */}
-            <h3 className="mt-4 text-lg font-bold text-gray-600 font-rubik">
+            <h3 className="mt-4 text-lg font-bold text-gray-600 dark:text-white font-rubik">
               {testimonial.name}
             </h3>
             {/* Title */}
-            <p className="text-sm italic text-gray-400">{testimonial.title}</p>
+            <p className="text-sm italic text-gray-400 dark:text-gray-500">
+              {testimonial.title}
+            </p>
           </div>
         </div>
       ))}

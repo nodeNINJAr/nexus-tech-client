@@ -10,6 +10,64 @@
     font-family: "Exo 2", serif;
 }
 
+/* General Dark Mode Background */
+.dark {
+  background-color: #1f2937 !important;
+  color: #d1d5db !important;
+}
+
+/* Card Component */
+.dark .ant-card {
+  background-color: #1f2937 !important; /* Dark background */
+  border-color: #374151 !important; /* Dark border */
+}
+
+.dark .ant-card-head {
+  color: #d1d5db !important; /* Light text for card headers */
+}
+
+.dark .ant-card-body {
+  color: #d1d5db !important; /* Light text for card content */
+}
+
+/* Avatar Component */
+.dark .ant-avatar {
+  background-color: #374151 !important; /* Dark background for avatar */
+  border-color: #4b5563 !important; /* Dark border for avatar */
+}
+
+.dark .ant-avatar img {
+  filter: brightness(0.8); /* Adjust image brightness for better visibility */
+}
+
+/* Text Colors */
+.dark .ant-typography,
+.dark h3 {
+  color: #d1d5db !important; /* Light text for headings and paragraphs */
+}
+
+.dark p {
+  color: #9ca3af !important; /* Subtle gray for subtext */
+}
+
+/* Social Icons */
+/* .dark .anticon {
+  color: #d1d5db !important; 
+} */
+ .dark .anticon:hover {
+  color: #fff !important;
+}
+.dark .ant-steps-item-title{
+  color: #d1d5db !important;
+}
+
+.dark .ant-steps-item-description{
+  color: #9ca3af !important;
+}
+
+.ant-timeline .ant-timeline-item-head{
+  background-color: transparent;
+}
 
 
 /* work submit */
@@ -99,4 +157,33 @@
 }
 .slick-dots button {
   background-color: #ffffff !important;
+}
+/*  */
+/* Dark Mode Styles for Ant Design Collapse */
+.dark .ant-collapse {
+  background-color: #1f2937!important; /* Dark background color */
+  border-color: #848484!important; /* Dark border color */
+  border-top: 1px solid #6a6868!important;
+  /* border-bottom: 1px solid #6a6868!important; */
+}
+
+.dark .ant-collapse-header {
+  color: #d1d5db!important; /* Light text color for headers */
+  border-color: #4d4d4d5d!important;
+}
+
+.dark .ant-collapse-content {
+  background-color: #1f2937!important; /* Dark background for content */
+  color: #d1d5db!important; /* Light text color for content */
+}
+
+.dark .ant-collapse-content-box {
+  color: #d1d5db!important; /* Ensure text inside content is visible */
+}
+
+.dark .ant-collapse-arrow {
+  color: #d1d5db!important; /* Light arrow color */
+}
+.dark .ant-collapse .ant-collapse-item {
+  border-color:#828282!important;
 }

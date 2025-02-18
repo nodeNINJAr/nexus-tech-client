@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Row, Col, Avatar } from "antd";
+import { Row, Col, Card, Avatar } from "antd";
 import { LinkedinOutlined, GithubOutlined, TwitterOutlined } from "@ant-design/icons";
 
 const teamMembers = [
@@ -37,11 +37,13 @@ const teamMembers = [
   },
 ];
 
+// 
 const MeetOurTeam = () => {
   return (
-    <div className="w-full mx-auto pt-12 px-4">
-      <h2 className="text-4xl font-bold text-center mb-12 text-gray-800 font-poppins">Meet Our Team</h2>
-
+    <div className="w-full mx-auto pt-12 px-4 dark:bg-gray-900">
+      <h2 className="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white font-poppins">
+        Meet Our Team
+      </h2>
       <Row gutter={[16, 16]} justify="center">
         {teamMembers.map((member, index) => (
           <Col key={index} xs={24} sm={12} md={8} lg={6}>

@@ -42,16 +42,17 @@ const heroSlides = [
 
 const BannerSlider = () => {
   return (
-    <div className="relative w-full font-rubik">
+    <div className="relative w-full font-rubik dark:bg-gray-900">
       {/* Hero Slider */}
-      <Carousel autoplay effect="fade">
+      <Carousel autoplay effect="fade" className="dark:[&_.slick-dots-active]:bg-white">
         {heroSlides.map((slide) => (
           <div key={slide.id} className="relative">
             {/* Background Image */}
-            <div className="w-full h-[450px] object-cover bg-gradient-to-r from-[#00c6ff] to-[#0072ff]"></div>
-
+            <div
+              className="w-full h-[450px] object-cover bg-gradient-to-r from-[#00c6ff] to-[#0072ff] dark:bg-gradient-to-r dark:from-[#1e3a8a] dark:to-[#3b82f6]"
+            ></div>
             {/* Content Overlay */}
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-start text-white px-4 sm:px-8 md:px-12 ">
+            <div className="absolute inset-0 bg-black bg-opacity-50 dark:bg-opacity-70 flex flex-col justify-center items-start text-white px-4 sm:px-8 md:px-12">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 font-poppins">
                 {slide.title}
               </h2>
@@ -61,7 +62,11 @@ const BannerSlider = () => {
               <p className="text-sm md:text-base lg:text-lg max-w-2xl mb-6">
                 {slide.description}
               </p>
-              <Button color="primary" variant="outlined">
+              <Button
+                type="primary"
+                shape="round"
+                className="dark:bg-blue-500 dark:border-blue-500"
+              >
                 Learn More
               </Button>
             </div>
