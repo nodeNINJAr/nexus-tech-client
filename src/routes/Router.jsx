@@ -22,6 +22,8 @@ import Services from "../pages/public/Services";
 import ContactUs from "../pages/public/ContactUs";
 import AdminDashBoard from "../pages/private/admin/AdminDashBoard";
 import NotFound from "../pages/error/NotFound";
+import EmployeeDashboard from "../pages/private/employee/EmployeeDashboard";
+import HrDashboard from "../pages/private/hr/HrDashboard";
 
 //
 const Router = () => {
@@ -38,16 +40,18 @@ const Router = () => {
       <Route path="dashboard" element={<PrivateRoute><DashBoard /></PrivateRoute>}>
         <Route path="profile" element={<Profile />} />
        {/*employee privet routes  */}
+        {/* <Route index element={<EmployeePrivate><EmployeeDashboard /></EmployeePrivate>} /> */}
         <Route path="work-sheet" element={<EmployeePrivate><WorkSheet /></EmployeePrivate>} />
         <Route path="payment-history" element={<EmployeePrivate><PaymentHistory /></EmployeePrivate>} />
         {/* hr private routes */}
+        {/* <Route index element={<HrPrivate><HrDashboard/></HrPrivate>} /> */}
         <Route path="employee-list" element={<HrPrivate><EmployeeList /></HrPrivate>} />
         <Route path="details/:employeeId" element={<HrPrivate><EmployeeDetails /></HrPrivate>} />
         <Route path="progress" element={<HrPrivate><EmployeeProgress /></HrPrivate>} />
         {/* admin-private routes */}
         <Route path="all-employee-list" element={<AdminPrivate><AllEmployeeList/></AdminPrivate>} />
         <Route path="payroll" element={<AdminPrivate><Payroll/></AdminPrivate>} />
-        <Route index element={<AdminPrivate><AdminDashBoard /></AdminPrivate>} />
+        {/* <Route index element={<AdminPrivate><AdminDashBoard /></AdminPrivate>} /> */}
       </Route>
       {/* auth */}
       <Route path="/login" element={<Login />} />

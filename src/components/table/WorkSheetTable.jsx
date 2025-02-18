@@ -64,13 +64,15 @@ const WorkSheetTable = ({empWorkSheet, refetch,  isLoading}) => {
   return (
     <>
       <Table
-        className="whitespace-nowrap capitalize"
+        className="whitespace-nowrap capitalize dark:text-white"
         columns={columns}
         pagination={{
           position: ["bottomRight"],
         }}
         dataSource={empWorkSheet}
         rowKey="_id"
+        headerClassName="dark:bg-gray-800 dark:text-white"
+        rowClassName={() => "dark:bg-gray-800 dark:hover:bg-gray-700"}
       />
     </>
   );

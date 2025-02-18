@@ -1,44 +1,46 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
+import { MdNightsStay } from "react-icons/md";
+import { CiLight } from "react-icons/ci";
 
+
+
+// 
 const DarkMode = () => {
-
-const [isDarkMode, setIsDarkMode] = useState(false);
-// 
-useEffect(()=>{
-    const saveMode = localStorage.getItem('darkMode') === 'true';
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  //
+  useEffect(() => {
+    const saveMode = localStorage.getItem("darkMode") === "true";
     setIsDarkMode(saveMode);
-    // 
-    if(saveMode){
-    document.documentElement.classList.add('dark');
-    }else{
-        document.documentElement.classList.remove('dark');
+    //
+    if (saveMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
     }
-    // 
-},[])
+    //
+  }, []);
 
-// 
-const toggleDarkMode =()=>{
+  //
+  const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
     localStorage.setItem("darkMode", newMode);
-    // 
-    if(newMode){
-        document.documentElement.classList.add('dark')
-    }else{
-        document.documentElement.classList.remove('dark')
+    //
+    if (newMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
     }
-
-}
-
+  };
 
   return (
     <button
-    onClick={toggleDarkMode}
-    className="bg-blue-500 text-white px-4 py-2 rounded"
-  >
-    {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-  </button>
-  )
-}
+      onClick={toggleDarkMode}
+      className="dark:text-white text-gray-600 p-3 text-2xl"
+    >
+      {isDarkMode ? <CiLight /> : <MdNightsStay />}
+    </button>
+  );
+};
 
-export default DarkMode
+export default DarkMode;

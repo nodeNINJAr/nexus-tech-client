@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useRole from "../components/hooks/useRole";
 import { SiPayloadcms } from "react-icons/si";
 import {
@@ -16,6 +16,10 @@ import { FaRegListAlt } from "react-icons/fa";
 import useAuth from "../components/hooks/useAuth";
 import DynamicBreadcrumb from "../components/shared/breadcrumb/DynamicBreadcrumb";
 import AdminDashBoard from "../pages/private/admin/AdminDashBoard";
+import HrDashboard from "../pages/private/hr/HrDashboard";
+import EmployeeDashboard from "../pages/private/employee/EmployeeDashboard";
+import ProfileHover from "../components/profile/ProfileHover";
+import DarkMode from "../components/darkmode/DarkMode";
 
 // import from layouts
 const { Header, Sider, Content } = Layout;
@@ -27,14 +31,6 @@ const DashBoard = () => {
   const [userRole] = useRole();
   const location = useLocation();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (userRole === "hr" && location.pathname === "/dashboard") {
-      navigate("/dashboard/employee-list", { replace: true });
-    } else if (userRole === "employee" && location.pathname === "/dashboard") {
-      navigate("/dashboard/work-sheet", { replace: true });
-    }
-  }, [location.pathname, navigate, userRole]);
 
   // user logout
   const handleLogout = () => {
@@ -126,11 +122,13 @@ const DashBoard = () => {
 
   //
   return (
-    <Layout className="container mx-auto">
+    <Layout className="w-full mx-auto dark:bg-gray-900">
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className=" bg-slate-300 py-4">
+        <div className=" bg-slate-300 dark:bg-gray-900 py-4">
           <Link to="/" className="text-2xl font-orbitron ">
-            <span className="truncate block">NexusTech</span>
+            <span className="truncate block text-gray-700 dark:text-white">
+              NexusTech
+            </span>
           </Link>
         </div>
 
@@ -216,34 +214,48 @@ const DashBoard = () => {
       {/* layouts */}
       <Layout>
         <Header
-          className="flex justify-start items-center sm:gap-8"
+          className="flex justify-between items-center sm:gap-8 bg-white dark:bg-gray-900"
           style={{
             padding: 0,
-            background: colorBgContainer,
           }}
         >
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: "16px",
-              width: 64,
-              height: 64,
-            }}
-          />
-          {/*  */}
-          <DynamicBreadcrumb />
+          <div className="flex justify-start items-center gap-2">
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: "16px",
+                width: 64,
+                height: 64,
+              }}
+            />
+            {/* breadcumb */}
+            <DynamicBreadcrumb />
+          </div>
+          {/* darkmode */}
+          <div className="flex justify-start gap-1">
+            <DarkMode />
+            {/* profile hover */}
+            <ProfileHover />
+          </div>
         </Header>
         <Content
-          className="min-h-screen p-1 sm:p-6"
+          className="min-h-screen p-1 sm:p-6 dark:bg-gray-900 "
           style={{
             margin: "24px 16px",
-            background: colorBgContainer,
             borderRadius: borderRadiusLG,
           }}
         >
-          <Outlet />
+          {location.pathname === "/dashboard" ? (
+            <>
+              {userRole === "hr" && <HrDashboard />}
+              {userRole === "admin" && <AdminDashBoard />}
+              {userRole === "employee" && <EmployeeDashboard />}
+            </>
+          ) : (
+            <Outlet />
+          )}
         </Content>
       </Layout>
     </Layout>

@@ -22,20 +22,20 @@ const DynamicBreadcrumb = () => {
   const items = [
     {
       href: "/",
-      title: <HomeOutlined />,
+      title: <HomeOutlined className="text-gray-800 dark:text-gray-200" />,
     },
     ...breadcrumbItems.map((item, idx) => ({
       href: item.href,
       title: (
         <>
-          <span className="flex flex-nowrap ">{item.title}</span>
+          <span className="flex flex-nowrap text-gray-800 dark:text-gray-200">{item.title}</span>
         </>
       ),
     })),
   ];
 
   return (
-    <div style={{ overflow: "hidden", textOverflow: "ellipsis" }}>
+    <div className="overflow-hidden text-ellipsis dark:bg-gray-700 p-4 rounded-lg shadow-md">
       <Breadcrumb
         style={{
           whiteSpace: "nowrap",
@@ -44,6 +44,7 @@ const DynamicBreadcrumb = () => {
         }}
         separator=">"
         items={items}
+       
       />
     </div>
   ); 

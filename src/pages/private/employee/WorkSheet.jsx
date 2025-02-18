@@ -1,36 +1,19 @@
 import React from "react";
 import WorkSheetTable from "../../../components/table/WorkSheetTable";
 import WorkSheetFrom from "../../../components/form/WorkSheetFrom";
-import useAuth from "../../../components/hooks/useAuth";
-import useAxiosSecure from "../../../components/hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
+import useWorkSheet from "../../../components/hooks/useWorkSheet";
 
 const WorkSheet = () => {
-  // custom axios
-  const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
-  // get data by tanstack query
-  const {
-    data: empWorkSheet = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["empWorkSheet", user?.email],
-    enabled: !!user?.email,
-    queryFn: async () => {
-      const { data } = await axiosSecure(`/worksheet/${user?.email}`);
-      return data;
-    },
-  });
-
+  // 
+ const [empWorkSheet,isLoading,refetch] = useWorkSheet();
   //
   return (
     <>
       <Helmet>
         <title>WorkSheet || NexusTech</title>
       </Helmet>
-      <h1 className="text-lg font-poppins font-semibold pb-3 underline">
+      <h1 className="text-lg font-poppins font-semibold pb-3 underline dark:text-white">
         Submit Your Daily Work
       </h1>
       {/*  */}

@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React from "react";
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
@@ -21,12 +21,7 @@ const TopNavbar = () => {
     // function call
    await userSignOut();
   };
-
   const location = useLocation();
-  console.log(location);
-const [isActive, setIsActive] = useState(location.pathname)
-
-console.log(isActive);
 
   //
   return (
@@ -57,7 +52,7 @@ console.log(isActive);
               {user?.email}
             </span>
           </Dropdown.Header>
-          <Dropdown.Item as={Link} to={`${userRole=== "employee" && "/dashboard/work-sheet" || userRole === "hr" && "/dashboard/employee-list" || userRole === "admin" && "/dashboard"}`} className="flex justify-start items-center gap-1 text-sm font-normal font-roboto"><LuLayoutDashboard />Dashboard</Dropdown.Item>
+          <Dropdown.Item as={Link} to={'/dashboard'} className="flex justify-start items-center gap-1 text-sm font-normal font-roboto"><LuLayoutDashboard />Dashboard</Dropdown.Item>
           <Dropdown.Item as={Link} to={'/dashboard/profile'} className="flex justify-start items-center gap-1 text-sm font-normal font-roboto"><CgProfile />Profile</Dropdown.Item>
           <Dropdown.Divider />
           

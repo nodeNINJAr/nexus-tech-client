@@ -187,3 +187,25 @@
 .dark .ant-collapse .ant-collapse-item {
   border-color:#828282!important;
 }
+
+
+/* for table */
+.dark .ant-btn-variant-text {
+  color: rgb(241 241 241 / 88%)!important;
+  box-shadow: none;
+}
+.dark .ant-table-wrapper .ant-table{
+background-color:#1d2029;
+color: #9ca3af;
+}
+.dark .ant-table-thead > tr> td>{
+  background-color:#1d2029!important;
+  color: #9ca3af;
+}
+.dark .ant-table:hover{
+  background-color:#1d2029!important;
+}
+.dark .ant-pagination-item-link{
+  color: rgb(203, 203, 203)!important;
+  cursor: not-allowed;
+}

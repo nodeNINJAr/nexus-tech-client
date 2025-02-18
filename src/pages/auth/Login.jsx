@@ -54,24 +54,25 @@ const Login = () => {
         placement: "topRight",
       });
       // Fetch role dynamically if not already available
-      const userRole = await fetchUserRoleFromAPI(user?.email);
+      // const userRole = await fetchUserRoleFromAPI(user?.email);
       // Navigate based on role
-      switch (userRole) {
-        case "admin":
-          navigate("/dashboard");
-          break;
-        case "hr":
-          navigate("/dashboard/employee-list");
-          break;
-        case "employee":
-          navigate("/dashboard/work-sheet");
-          break;
-        default:
-          notification.error({
-            message: "Role not recognized. Contact support.",
-            placement: "topRight",
-          });
-      }
+      // switch (userRole) {
+      //   case "admin":
+      //     navigate("/dashboard");
+      //     break;
+      //   case "hr":
+      //     navigate("/dashboard/employee-list");
+      //     break;
+      //   case "employee":
+      //     navigate("/dashboard/work-sheet");
+      //     break;
+      //   default:
+      //     notification.error({
+      //       message: "Role not recognized. Contact support.",
+      //       placement: "topRight",
+      //     });
+      // }
+      navigate('/dashboard')
     } catch (err) {
       notification.error({
         message: (
