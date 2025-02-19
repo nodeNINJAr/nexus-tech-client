@@ -12,15 +12,16 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase/firebaseInit";
 import useAxiosSecure from "../components/hooks/useAxiosSecure";
+import useAxiosPublic from "../components/hooks/useAxiosPublic";
 
 //
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   //
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic()
   // store user data
   const [user, setUser] = useState(null);
-  // console.log("current user ---->", user);
   // when user is unvailable
   const [loading, setLoading] = useState(true);
 
@@ -73,7 +74,7 @@ const AuthProvider = ({ children }) => {
         setUser("");
         setLoading(false);
         try {
-         await axiosSecure.post("/logout");
+         await axiosPublic.post("/logout");
       
         } catch (err) {
           // console.log(err);

@@ -6,7 +6,6 @@ import useUser from '../../../components/hooks/useUser'
 
 const HrDashboard = () => {
  const [, isLoading, ,employeeCount] = useUser();
-  console.log(employeeCount);
 
   // 
   return (

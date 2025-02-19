@@ -193,13 +193,13 @@ html {
   border-color:#828282!important;
 }
 
-
 /* for table */
 .dark .ant-btn-variant-text {
   color: rgb(241 241 241 / 88%)!important;
   box-shadow: none;
 }
-.dark .ant-table-wrapper .ant-table{
+
+.dark .ant-table-wrapper .ant-table {
 background-color:#1d2029;
 color: #9ca3af;
 }
@@ -214,5 +214,3 @@ color: #9ca3af;
   color: rgb(203, 203, 203)!important;
   cursor: not-allowed;
 }
-/*  */
-.w{width: 100%;}
