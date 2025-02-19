@@ -20,6 +20,7 @@ import HrDashboard from "../pages/private/hr/HrDashboard";
 import EmployeeDashboard from "../pages/private/employee/EmployeeDashboard";
 import ProfileHover from "../components/profile/ProfileHover";
 import DarkMode from "../components/darkmode/DarkMode";
+import Spinner from "../components/shared/loader/Spinner";
 
 // import from layouts
 const { Header, Sider, Content } = Layout;
@@ -120,6 +121,9 @@ const DashBoard = () => {
     location.pathname.includes(item.route)
   )?.key;
 
+
+
+  if(!userRole) return <Spinner/>
   //
   return (
     <Layout className="w-full mx-auto dark:bg-gray-900">
